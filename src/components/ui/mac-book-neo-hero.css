@@ -1,0 +1,433 @@
+/* FrameSequenceHero & Featured Services Component Styles */
+.fsh-root {
+  position: relative;
+  width: 100%;
+  background-color: var(--gat-navy-deep, #071521);
+  color: var(--gat-white, #FFFFFF);
+  overflow: clip;
+}
+
+/* Loader */
+.fsh-loader {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  background: rgba(18, 50, 74, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(9, 168, 181, 0.3);
+  border-radius: 12px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 150px;
+  box-shadow: 0 10px 30px rgba(7, 18, 28, 0.8), 0 0 20px rgba(9, 168, 181, 0.2);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+
+.fsh-loader-done {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.fsh-loader-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #B4CAD6;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+}
+
+.fsh-loader-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fsh-loader-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #087F9F, #09A8B5);
+  border-radius: 2px;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 10px rgba(9, 168, 181, 0.8);
+}
+
+/* Pinned Stage — Full viewport handled by GSAP Pin */
+.fsh-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Canvas / Background Frame */
+.fsh-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #071521;
+}
+
+.fsh-canvas {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+  display: block;
+}
+
+.fsh-canvas-overlay {
+  display: none;
+}
+
+/* Copy Header */
+.fsh-copy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fsh-title {
+  font-size: clamp(1.8rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+  text-shadow: none;
+}
+
+.fsh-title-dark {
+  color: #FFFFFF !important;
+  background: linear-gradient(135deg, #09A8B5 0%, #087F9F 100%);
+  padding: 4px 16px;
+  border-radius: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 0 4px 18px rgba(9, 168, 181, 0.35);
+  margin-right: 6px;
+}
+
+.fsh-title-rainbow {
+  background: linear-gradient(135deg, #09A8B5 0%, #2CD8E8 50%, #087F9F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  vertical-align: middle;
+}
+
+.fsh-sub {
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+  color: #5C768D;
+  font-weight: 600;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-shadow: none;
+}
+
+.fsh-sub-hidden {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* Interactive Floating Cards */
+.fsh-cards {
+  position: absolute;
+  bottom: clamp(28px, 6vh, 60px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 90%;
+  max-width: 520px;
+  height: 220px;
+  pointer-events: none;
+}
+
+.fsh-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(24px) scale(0.95);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.fsh-card-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.fsh-card-prev {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.96);
+}
+
+/* Authentic Glassmorphism UI for Step Card */
+.fsh-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(9, 168, 181, 0.08) 40%,
+    rgba(7, 21, 33, 0.55) 100%
+  );
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 24px;
+  padding: 22px 26px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.fsh-card-glow {
+  display: none;
+}
+
+.fsh-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fsh-card-num {
+  font-size: 0.82rem;
+  color: #D5E8EC;
+  font-family: monospace;
+  background: rgba(7, 21, 33, 0.5);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.fsh-card-num strong {
+  color: var(--c, #09A8B5);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--c, rgba(9, 168, 181, 0.5));
+}
+
+.fsh-card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(9, 168, 181, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c, #09A8B5);
+  font-size: 1.1rem;
+  box-shadow: 0 0 16px var(--c, rgba(9, 168, 181, 0.35)), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.fsh-card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 4px 0 2px 0;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+}
+
+.fsh-card-desc {
+  font-size: 0.88rem;
+  color: #E2F2F5;
+  line-height: 1.45;
+  margin-bottom: 4px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+}
+
+.fsh-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.fsh-ticks {
+  display: flex;
+  gap: 6px;
+}
+
+.fsh-tick {
+  width: 28px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 3px;
+  overflow: hidden;
+  display: block;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.fsh-tick:hover {
+  transform: scaleY(1.3);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.fsh-tick span {
+  display: block;
+  height: 100%;
+  background: var(--c, #09A8B5);
+  border-radius: 3px;
+  transform-origin: left;
+  box-shadow: 0 0 8px var(--c, #09A8B5);
+}
+
+.fsh-card-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c, #09A8B5);
+  text-shadow: 0 0 12px var(--c, rgba(9, 168, 181, 0.4));
+}
+
+/* Bottom Scroll Progress Track */
+.fsh-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  z-index: 30;
+}
+
+.fsh-progress-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #087F9F, #09A8B5, #2CD8E8);
+  box-shadow: 0 0 12px rgba(9, 168, 181, 0.9);
+}
+
+/* Spacer for Scroll Distance */
+.fsh-spacer {
+  width: 100%;
+  pointer-events: none;
+}
+
+/* ──── RESPONSIVE MEDIA QUERIES FOR MOBILE ──── */
+@media (max-width: 768px) {
+  .fsh-stage {
+    height: 100vh !important;
+    height: 100svh !important;
+    min-height: 600px;
+    padding: 0 14px !important;
+  }
+
+  .fsh-canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .fsh-copy {
+    top: 45% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: calc(100% - 28px) !important;
+  }
+
+  .fsh-title {
+    font-size: 1.45rem !important;
+    line-height: 1.15 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .fsh-sub {
+    font-size: 0.78rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .fsh-cards {
+    position: absolute !important;
+    bottom: 20px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: calc(100% - 28px) !important;
+    max-width: 440px !important;
+    height: 185px !important;
+    z-index: 25 !important;
+  }
+
+  .fsh-card {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .fsh-card-inner {
+    padding: 15px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .fsh-card-title {
+    font-size: 1.12rem !important;
+    margin: 3px 0 2px 0 !important;
+  }
+
+  .fsh-card-desc {
+    font-size: 0.8rem !important;
+    line-height: 1.35 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .fsh-card-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .fsh-card-foot {
+    padding-top: 8px !important;
+  }
+
+  .fsh-tick {
+    width: 24px !important;
+    height: 5px !important;
+  }
+}

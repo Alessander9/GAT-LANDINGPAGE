@@ -1,0 +1,38 @@
+GAT TECHNOLOGY CONSULTING
+Technology. Strategy. Innovation.
+
+KIT DE MARCA · GUÍA RÁPIDA
+
+LOGOS
+1. GAT_Logo_Fondo_Claro_Transparente_HD.png
+   Uso: fondos blancos, claros y fotografías luminosas.
+   Firma principal: azul oscuro corporativo.
+
+2. GAT_Logo_Fondo_Oscuro_Transparente_HD.png
+   Uso: fondos azul oscuro, negros y fotografías oscuras.
+   Firma principal: blanco para garantizar contraste.
+
+Ambos archivos son PNG HD de 3000 x 3000 px con fondo transparente.
+
+PALETA PRINCIPAL
+Azul oscuro GAT       #12324A
+Azul corporativo      #087F9F
+Cyan tecnológico      #09A8B5
+Blanco                #FFFFFF
+
+PALETA DE APOYO
+Azul muy claro        #E2F2F5
+Gris azulado claro    #F2F6F7
+Separadores           #D5E8EC
+Texto principal       #233745
+Texto secundario      #5C6E78
+
+TIPOGRAFÍA
+Principal: Aptos
+Alternativa para interfaces: Segoe UI
+
+REGLA DE USO
+Usar la versión para fondo claro cuando exista contraste suficiente con
+el azul oscuro. Sobre fondos oscuros, utilizar la versión invertida.
+No añadir sombras, contornos, degradados externos ni modificar las
+proporciones del logotipo.

@@ -1,0 +1,47 @@
+:root {
+  /* GAT Official Brand Kit Palette */
+  --gat-navy: #12324A;
+  --gat-blue: #087F9F;
+  --gat-cyan: #09A8B5;
+  --gat-pale: #E2F2F5;
+  --gat-light: #F2F6F7;
+  --gat-border: #D5E8EC;
+  --gat-text: #233745;
+  --gat-muted: #5C6E78;
+  --gat-white: #FFFFFF;
+
+  /* Derived & Dark Mode Accents */
+  --gat-navy-deep: #0B1E2D;
+  --gat-navy-card: #153954;
+  --gat-navy-surface: #102B40;
+  --gat-cyan-glow: rgba(9, 168, 181, 0.4);
+  --gat-blue-glow: rgba(8, 127, 159, 0.35);
+  --gat-navy-glow: rgba(18, 50, 74, 0.6);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-dark-bg: rgba(18, 50, 74, 0.75);
+  --glass-card-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(213, 232, 236, 0.35);
+  --glass-dark-border: rgba(9, 168, 181, 0.2);
+
+  /* Typography */
+  --font-heading: 'Outfit', 'Segoe UI', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, sans-serif;
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 2px 8px rgba(18, 50, 74, 0.06);
+  --shadow-md: 0 8px 24px rgba(18, 50, 74, 0.1);
+  --shadow-lg: 0 16px 40px rgba(18, 50, 74, 0.15);
+  --shadow-glow: 0 0 30px rgba(9, 168, 181, 0.25);
+  --shadow-blue-glow: 0 0 35px rgba(8, 127, 159, 0.3);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-max: 1280px;
+  --header-height: 80px;
+}

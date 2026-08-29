@@ -1,0 +1,136 @@
+.scroll-expand {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-expand--scroller {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior: contain;
+}
+
+.scroll-expand--scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-expand__track {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-expand__stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  --se-title-size: 3.5rem;
+}
+
+.scroll-expand__frame {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(18% 22% 18% 22% round 24px);
+  will-change: clip-path;
+  border: 1px solid rgba(9, 168, 181, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(9, 168, 181, 0.2);
+}
+
+.scroll-expand__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  transform-origin: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.scroll-expand__custom-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transform-origin: center;
+}
+
+.scroll-expand__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(7, 21, 33, 0.92) 0%, rgba(7, 21, 33, 0.4) 50%, rgba(7, 21, 33, 0.75) 100%);
+  opacity: 0;
+}
+
+.scroll-expand__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4%;
+  opacity: 0;
+  will-change: opacity, transform;
+  z-index: 10;
+}
+
+.scroll-expand__title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 6%;
+  text-align: center;
+  font-size: var(--se-title-size);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(9, 168, 181, 0.4);
+  pointer-events: none;
+  will-change: opacity, transform;
+  z-index: 5;
+}
+
+.scroll-expand__hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9FB5C4;
+  pointer-events: none;
+  will-change: opacity, transform;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 768px) {
+  .scroll-expand__stage {
+    --se-title-size: 2.2rem;
+  }
+
+  .scroll-expand__overlay {
+    padding: 100px 16px 32px 16px;
+    overflow-y: auto;
+  }
+
+  .scroll-expand__frame {
+    clip-path: inset(10% 8% 10% 8% round 20px);
+  }
+}

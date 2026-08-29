@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Página Principal -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Subpágina: Nosotros -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#nosotros</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Subpágina de Servicio: Páginas Web & Landing Pages -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#servicio/landing-page</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Subpágina de Servicio: Aplicativos Web & SaaS -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#servicio/app-web</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Subpágina de Servicio: Apps Android -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#servicio/app-android</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Subpágina de Servicio: Apps iOS -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#servicio/app-ios</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Subpágina de Servicio: Ciberseguridad -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#servicio/ciberseguridad</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Subpágina de Servicio: Automatizaciones con IA -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#servicio/automatizaciones-ia</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Subpágina de Servicio: Asistente IA & Chatbots -->
+  <url>
+    <loc>https://gat-consulting.vercel.app/#servicio/asistente-ia</loc>
+    <lastmod>2025-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
