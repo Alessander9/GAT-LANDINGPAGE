@@ -19,93 +19,93 @@ const METHODOLOGY_STEPS = [
     number: "01",
     watermark: "01",
     icon: Search,
-    title: "Discovery & Diagnóstico Profundo",
-    tagline: "Análisis exhaustivo del estado actual y cuello de botella",
+    title: "1. Te Escuchamos y Entendemos tu Meta",
+    tagline: "Conversamos contigo para conocer tu negocio y qué necesitas",
     description:
-      "Auditamos tu stack tecnológico actual, arquitectura de datos, deuda técnica, vulnerabilidades y costos cloud para identificar las oportunidades de mayor impacto y ROI inmediato.",
+      "Analizamos qué necesita tu empresa, qué problemas deseas resolver y diseñamos un plan claro a tu medida con plazos y costos transparentes.",
     flowingText:
-      "FASE 01: DISCOVERY & DIAGNÓSTICO PROFUNDO · AUDITORÍA FINOPS · MAPA AS-IS & TO-BE",
+      "PASO 01: TE ESCUCHAMOS · ANÁLISIS DE TU NEGOCIO · PLAN A MEDIDA · SIN COMPLICACIONES",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
     marqueeBg:
       "linear-gradient(135deg, rgba(9, 168, 181, 0.82) 0%, rgba(0, 194, 209, 0.76) 50%, rgba(8, 127, 159, 0.86) 100%)",
     accent: "#09A8B5",
     deliverables: [
-      "Mapa de Arquitectura As-Is & To-Be",
-      "Informe de Vulnerabilidades y Cumplimiento",
-      "Auditoría FinOps de Costos Cloud",
-      "Matriz de Priorización de Impacto vs. Esfuerzo",
+      "Comprensión clara de tus objetivos",
+      "Propuesta visual y funcional a tu medida",
+      "Presupuesto y plazos de entrega sin sorpresas",
+      "Recomendaciones personalizadas para tu rubro",
     ],
-    duration: "Semanas 1 - 2",
+    duration: "Paso Inicial",
   },
   {
     number: "02",
     watermark: "02",
     icon: Compass,
-    title: "Diseño de Arquitectura & Estrategia",
-    tagline: "Planificación de soluciones robustas y escalables",
+    title: "2. Te Mostramos el Diseño y la Estructura",
+    tagline: "Visualiza exactamente cómo se verá antes de construir",
     description:
-      "Diseñamos la hoja de ruta tecnológica con especificaciones de grado empresarial: microservicios, seguridad Zero Trust, pipelines de CI/CD y selección de tecnologías óptimas.",
+      "Diseñamos la apariencia visual de tu página web, app o sistema para que la pruebes y des tu visto bueno antes de iniciar la programación.",
     flowingText:
-      "FASE 02: DISEÑO DE ARQUITECTURA & ESTRATEGIA · BLUEPRINT ENTERPRISE · ZERO-DOWNTIME",
+      "PASO 02: DISEÑO VISUAL · ADAPTADO A CELULARES · TU APROBACIÓN · EXPERIENCIA FÁCIL",
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
     marqueeBg:
-      "linear-gradient(135deg, rgba(0, 229, 255, 0.8) 0%, rgba(9, 168, 181, 0.86) 100%)",
-    accent: "#00E5FF",
+      "linear-gradient(135deg, rgba(139, 92, 246, 0.76) 0%, rgba(109, 40, 217, 0.86) 100%)",
+    accent: "#8B5CF6",
     deliverables: [
-      "Blueprint de Arquitectura de Sistemas",
-      "Plan de Migración Zero-Downtime",
-      "Definición de SLAs, SLOs y KPIs de rendimiento",
-      "Estrategia de Seguridad y Gobernanza de Datos",
+      "Diseño gráfico profesional y moderno",
+      "Adaptación perfecta para celulares y PC",
+      "Estructura clara de botones, textos y WhatsApp",
+      "Revisión y aprobación de cada pantalla contigo",
     ],
-    duration: "Semanas 3 - 4",
+    duration: "Diseño & Plan",
   },
   {
     number: "03",
     watermark: "03",
     icon: Cpu,
-    title: "Implementación Ágil & Despliegue",
-    tagline: "Construcción con estándares de ingeniería de élite",
+    title: "3. Construimos tu Plataforma",
+    tagline: "Desarrollo profesional con avances periódicos",
     description:
-      "Nuestros consultores e ingenieros senior ejecutan la solución utilizando metodologías ágiles, pruebas automatizadas, infraestructura como código (IaC) e integración continua.",
+      "Programamos tu proyecto con tecnología moderna, rápida y segura, manteniéndote informado de los avances en todo momento.",
     flowingText:
-      "FASE 03: IMPLEMENTACIÓN ÁGIL & DESPLIEGUE · INFRAESTRUCTURA COMO CÓDIGO · GITOPS",
+      "PASO 03: CONSTRUCCIÓN PROFESIONAL · CONEXIÓN A WHATSAPP · PRUEBAS DE VELOCIDAD",
     image:
       "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
     marqueeBg:
       "linear-gradient(135deg, rgba(44, 216, 232, 0.8) 0%, rgba(9, 168, 181, 0.88) 100%)",
     accent: "#2CD8E8",
     deliverables: [
-      "Infraestructura como Código (Terraform/Pulumi)",
-      "Pipelines GitOps Automatizados",
-      "Despliegues en entornos Staging y Producción",
-      "Capacitación y transferencia al equipo interno",
+      "Desarrollo completo de la web, app o sistema",
+      "Conexión con WhatsApp, pagos y redes sociales",
+      "Pruebas de velocidad y funcionamiento en móviles",
+      "Capacitación sencilla para que lo uses sin esfuerzo",
     ],
-    duration: "Sprints Quincenales",
+    duration: "Construcción",
   },
   {
     number: "04",
     watermark: "04",
     icon: TrendingUp,
-    title: "Optimización Continua & Escalamiento",
-    tagline: "Gobernanza activa, resiliencia y evolución",
+    title: "4. Lanzamiento y Apoyo Continuo",
+    tagline: "Tu proyecto listo con nuestro respaldo constante",
     description:
-      "Monitoreamos en tiempo real la salud de la plataforma, optimizamos el rendimiento, afinamos costos y adaptamos la tecnología conforme tu negocio acelera su crecimiento.",
+      "Publicamos tu proyecto en internet o tiendas de apps y te brindamos soporte, garantía y mejoras continuas cuando las necesites.",
     flowingText:
-      "FASE 04: OPTIMIZACIÓN CONTINUA & ESCALAMIENTO · OBSERVABILIDAD 24/7 · FINOPS",
+      "PASO 04: LANZAMIENTO OFICIAL · APARICIÓN EN GOOGLE · SOPORTE & GARANTÍA CONSTANTE",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
     marqueeBg:
-      "linear-gradient(135deg, rgba(92, 157, 255, 0.82) 0%, rgba(9, 168, 181, 0.88) 100%)",
-    accent: "#5C9DFF",
+      "linear-gradient(135deg, rgba(245, 158, 11, 0.78) 0%, rgba(217, 119, 6, 0.88) 100%)",
+    accent: "#F59E0B",
     deliverables: [
-      "Observabilidad 24/7 (APM, Logs, Tracing)",
-      "Revisiones FinOps periódicas",
-      "Actualizaciones proactivas de seguridad",
-      "Soporte estratégico y evolución continua",
+      "Puesta en marcha oficial en internet",
+      "Aparición en Google y buscadores",
+      "Garantía de funcionamiento y copias de seguridad",
+      "Soporte rápido para dudas o cambios futuros",
     ],
-    duration: "Acompañamiento Continuo",
+    duration: "Lanzamiento & Soporte",
   },
 ];
 
@@ -263,17 +263,21 @@ export default function Methodology({ onStartProject }) {
         padding: "clamp(80px, 11vh, 130px) 0 clamp(40px, 6vh, 60px) 0",
       }}
     >
+      <div className="ambient-glow-orb orb-cyan" style={{ top: "10%", left: "-5%", width: "450px", height: "450px" }} />
+      <div className="ambient-glow-orb orb-ai" style={{ top: "45%", right: "-5%", width: "380px", height: "380px" }} />
+      <div className="ambient-glow-orb orb-amber" style={{ bottom: "5%", left: "20%", width: "300px", height: "300px" }} />
+
       <div className="container">
         {/* Section Header */}
         <div style={{ textAlign: "center", maxWidth: "780px", margin: "0 auto 60px auto" }}>
           <div className="section-tag" style={{ justifyContent: "center" }}>
-            Nuestra Metodología
+            Nuestra Forma de Trabajar
           </div>
           <h2 className="section-title">
-            El Método GAT: <span className="text-gradient-brand">Precisión, Velocidad y Cero Fricción</span>
+            Tu Proyecto en 4 Pasos: <span className="text-gradient-brand">Claro, Rápido y sin Complicaciones</span>
           </h2>
           <p className="section-subtitle" style={{ margin: "0 auto" }}>
-            Un marco de trabajo probado en proyectos de alta criticidad para asegurar que cada entrega genere valor medible desde el primer sprint.
+            Un proceso transparente y ordenado para que siempre sepas en qué etapa está tu proyecto y obtengas resultados que hagan crecer tu negocio.
           </p>
         </div>
 
@@ -288,39 +292,41 @@ export default function Methodology({ onStartProject }) {
             marginBottom: "48px",
           }}
         >
-          {steps.map((step, idx) => (
-            <button
-              key={step.number}
-              className="method-pill-btn"
-              onClick={() => setActiveStep(idx)}
-              style={{
-                padding: "12px 20px",
-                borderRadius: "14px",
-                background:
-                  activeStep === idx
-                    ? "linear-gradient(135deg, #09A8B5, #087F9F)"
+          {steps.map((step, idx) => {
+            const isSel = activeStep === idx;
+            const acc = step.accent || "#09A8B5";
+            return (
+              <button
+                key={step.number}
+                className="method-pill-btn"
+                onClick={() => setActiveStep(idx)}
+                style={{
+                  padding: "12px 20px",
+                  borderRadius: "14px",
+                  background: isSel
+                    ? `linear-gradient(135deg, ${acc}, ${acc === "#8B5CF6" ? "#6D28D9" : acc === "#F59E0B" ? "#D97706" : "#087F9F"})`
                     : "rgba(255, 255, 255, 0.05)",
-                border:
-                  activeStep === idx
-                    ? "1px solid #09A8B5"
+                  border: isSel
+                    ? `1px solid ${acc}`
                     : "1px solid rgba(213, 232, 236, 0.15)",
-                color: activeStep === idx ? "#FFFFFF" : "#B4CAD6",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                transition: "all 0.3s ease",
-                boxShadow: activeStep === idx ? "0 8px 24px rgba(9, 168, 181, 0.35)" : "none",
-                cursor: "pointer",
-              }}
-            >
-              <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800 }}>
-                {step.number}
-              </span>
-              <span>{step.title.split("&")[0]}</span>
-            </button>
-          ))}
+                  color: isSel ? "#FFFFFF" : "#B4CAD6",
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  transition: "all 0.3s ease",
+                  boxShadow: isSel ? `0 8px 24px ${acc}45` : "none",
+                  cursor: "pointer",
+                }}
+              >
+                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 800 }}>
+                  {step.number}
+                </span>
+                <span>{step.title.split("&")[0]}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Active Step Feature Box */}
@@ -328,10 +334,10 @@ export default function Methodology({ onStartProject }) {
           className="glass-card methodology-active-box"
           style={{
             padding: "44px 36px",
-            border: "1px solid rgba(9, 168, 181, 0.35)",
+            border: `1px solid ${steps[activeStep].accent || "#09A8B5"}40`,
             background:
               "linear-gradient(145deg, rgba(18, 50, 74, 0.9) 0%, rgba(11, 30, 45, 0.95) 100%)",
-            boxShadow: "0 20px 50px rgba(7, 18, 28, 0.7)",
+            boxShadow: `0 20px 50px rgba(7, 18, 28, 0.7), 0 0 25px ${steps[activeStep].accent || "#09A8B5"}20`,
             marginBottom: "60px",
           }}
         >
@@ -351,8 +357,9 @@ export default function Methodology({ onStartProject }) {
                     fontSize: "2.5rem",
                     fontFamily: "var(--font-heading)",
                     fontWeight: 900,
-                    color: "#09A8B5",
+                    color: steps[activeStep].accent || "#09A8B5",
                     lineHeight: 1,
+                    textShadow: `0 0 20px ${steps[activeStep].accent || "#09A8B5"}50`,
                   }}
                 >
                   {steps[activeStep].number}
@@ -361,9 +368,10 @@ export default function Methodology({ onStartProject }) {
                   <div
                     style={{
                       fontSize: "0.82rem",
-                      color: "#8CA5B5",
+                      color: steps[activeStep].accent || "#8CA5B5",
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
+                      fontWeight: 700,
                     }}
                   >
                     Fase de Ejecución · {steps[activeStep].duration}
@@ -392,7 +400,7 @@ export default function Methodology({ onStartProject }) {
             <div
               style={{
                 background: "rgba(7, 18, 28, 0.6)",
-                border: "1px solid rgba(9, 168, 181, 0.2)",
+                border: `1px solid ${steps[activeStep].accent || "#09A8B5"}30`,
                 borderRadius: "16px",
                 padding: "28px",
               }}
@@ -400,10 +408,11 @@ export default function Methodology({ onStartProject }) {
               <h4
                 style={{
                   fontSize: "1rem",
-                  color: "#09A8B5",
+                  color: steps[activeStep].accent || "#09A8B5",
                   textTransform: "uppercase",
                   letterSpacing: "0.06em",
                   marginBottom: "18px",
+                  fontWeight: 700,
                 }}
               >
                 Entregables Clave de Esta Fase:
@@ -414,7 +423,7 @@ export default function Methodology({ onStartProject }) {
                   <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
                     <CheckCircle
                       size={18}
-                      color="#09A8B5"
+                      color={steps[activeStep].accent || "#09A8B5"}
                       style={{ flexShrink: 0, marginTop: "2px" }}
                     />
                     <span style={{ color: "#D5E8EC", fontSize: "0.92rem", fontWeight: 500 }}>

@@ -7,44 +7,47 @@ export default function CaseStudies({ onSelectCase }) {
   const cases = [
     {
       id: 'fintech',
-      client: 'Grupo Financiero & FinTech Regional',
-      industry: 'Banca Digital & Pagos',
-      title: 'Modernización de Core Transaccional a Kubernetes Multi-Cloud con Zero-Downtime',
-      challenge: 'Un sistema monolítico heredado sufría de picos de inactividad durante promociones masivas, con costos de infraestructura inflados y ciclos de despliegue manuales de 3 semanas.',
-      solution: 'GAT rediseñó la arquitectura hacia microservicios desacoplados sobre AWS EKS y GCP con GitOps automatizado, bases de datos particionadas y observabilidad distribuida 24/7.',
+      client: 'Empresa Financiera y de Pagos',
+      industry: 'Servicios Financieros',
+      title: 'Plataforma de Pagos Ultra Rápida con Cero Caídas en Días de Alta Demanda',
+      challenge: 'El sistema anterior se caía en fechas festivas y promociones por exceso de visitas, perdiendo ventas y generando quejas de clientes.',
+      solution: 'GAT modernizó la plataforma con servidores automáticos en la nube, logrando que atienda a miles de pagos simultáneos de forma instantánea y sin interrupciones.',
+      accent: '#09A8B5',
       metrics: [
-        { label: 'Disponibilidad Post-Lanzamiento', value: '99.999%', sub: 'Cero caídas en Black Friday' },
-        { label: 'Reducción de Latencia', value: '-54%', sub: 'De 320ms a 145ms de respuesta' },
-        { label: 'Ahorro Anual FinOps', value: '$420,000 USD', sub: 'Optimización de recursos' },
-        { label: 'Velocidad de Despliegue', value: '15 Minutos', sub: 'De 3 semanas a diario' },
+        { label: 'Disponibilidad de Pagos', value: '100%', sub: 'Cero caídas en días de alta venta', color: '#22C55E' },
+        { label: 'Velocidad de Respuesta', value: '< 1 seg', sub: 'Pagos procesados al instante', color: '#F59E0B' },
+        { label: 'Ahorro Operativo', value: '$420,000', sub: 'Reducción de costos de servidores', color: '#F59E0B' },
+        { label: 'Nuevas Funciones', value: 'En Horas', sub: 'Actualizaciones rápidas sin pausas', color: '#09A8B5' },
       ],
     },
     {
       id: 'logistics',
-      client: 'Operador Logístico & Retail Omnicanal',
-      industry: 'Supply Chain & E-Commerce',
-      title: 'Plataforma de IA Predictiva para Enrutamiento y Gestión de Inventarios en Tiempo Real',
-      challenge: 'Falta de visibilidad de inventarios entre 45 centros de distribución con desabastecimientos recurrentes y sobrecostos por rutas logísticas ineficientes.',
-      solution: 'Implementamos un Data Lake en Snowflake orquestado con Apache Kafka y modelos de machine learning adaptativos para predecir demanda y balancear rutas dinámicamente.',
+      client: 'Cadena de Tiendas y Comercio Electrónico',
+      industry: 'Ventas Online y Logística',
+      title: 'Asistente con Inteligencia Artificial para Pedidos y Envíos en Tiempo Real',
+      challenge: 'Tenían dificultades para controlar el stock entre almacenes y demoras en responder a los clientes por WhatsApp.',
+      solution: 'Implementamos un sistema con IA que sincroniza el inventario en vivo y atiende consultas de compras automáticamente por WhatsApp las 24 horas.',
+      accent: '#8B5CF6',
       metrics: [
-        { label: 'Precisión de Pronóstico', value: '96.8%', sub: '+31% frente a métodos previos' },
-        { label: 'Reducción de Costos de Envío', value: '-22%', sub: 'Optimización de rutas con IA' },
-        { label: 'Eventos Procesados / Día', value: '12.5M+', sub: 'Flujo en streaming continuo' },
-        { label: 'Tiempo de Decisión', value: '< 2 Segundos', sub: 'Automatización completa' },
+        { label: 'Precisión de Inventario', value: '98%', sub: 'Control total de stock en vivo', color: '#8B5CF6' },
+        { label: 'Ahorro en Envíos', value: '-22%', sub: 'Rutas de entrega más eficientes', color: '#8B5CF6' },
+        { label: 'Consultas Atendidas', value: '10,000+', sub: 'Mensajes resueltos por día con IA', color: '#F59E0B' },
+        { label: 'Tiempo de Respuesta', value: '< 2 seg', sub: 'Atención inmediata al cliente', color: '#8B5CF6' },
       ],
     },
     {
       id: 'healthtech',
-      client: 'Consorcio Hospitalario & HealthTech',
-      industry: 'Salud Digital & Telemedicina',
-      title: 'Arquitectura Segura y Resiliente con Cumplimiento HIPAA y Certificación ISO 27001',
-      challenge: 'Riesgos de seguridad en el intercambio de registros médicos electrónicos entre clínicas aliadas y tiempos de auditoría de meses para licitaciones públicas.',
-      solution: 'Diseño e implementación de arquitectura Zero-Trust con cifrado en tránsito/reposo, gestión de identidades federadas y pipelines de auditoría automatizada en tiempo real.',
+      client: 'Clínica Médica y Servicios de Salud',
+      industry: 'Salud y Citas Médicas',
+      title: 'Sistema de Citas Médicas Online y Protección Total de Historias Clínicas',
+      challenge: 'Las reservas de citas colapsaban las líneas telefónicas y se requería máxima seguridad para la información privada de los pacientes.',
+      solution: 'Desarrollamos una plataforma web fácil de usar para agendar citas desde el celular, con blindaje de seguridad y copias de respaldo automáticas.',
+      accent: '#087F9F',
       metrics: [
-        { label: 'Aprobación de Auditoría', value: '100%', sub: 'Certificación SOC2 & ISO 27001' },
-        { label: 'Reducción Tiempo Auditoría', value: '-75%', sub: 'Reportes automáticos en 1 clic' },
-        { label: 'Incidentes de Fuga', value: '0 Incidentes', sub: 'Monitoreo proactivo SIEM' },
-        { label: 'Usuarios Médicos Activos', value: '45,000+', sub: 'Acceso seguro multi-sede' },
+        { label: 'Seguridad y Privacidad', value: '100%', sub: 'Cumplimiento normativo estricto', color: '#22C55E' },
+        { label: 'Citas por Internet', value: '+350%', sub: 'Pacientes reservando en línea', color: '#F59E0B' },
+        { label: 'Incidentes de Seguridad', value: '0', sub: 'Protección activa 24/7', color: '#09A8B5' },
+        { label: 'Pacientes Atendidos', value: '45,000+', sub: 'Uso diario rápido y sencillo', color: '#087F9F' },
       ],
     },
   ];
@@ -58,18 +61,20 @@ export default function CaseStudies({ onSelectCase }) {
       }}
     >
       <div className="ambient-glow-orb orb-cyan" style={{ top: '10%', right: '10%', width: '400px', height: '400px' }} />
+      <div className="ambient-glow-orb orb-ai" style={{ bottom: '20%', left: '5%', width: '300px', height: '300px' }} />
+      <div className="ambient-glow-orb orb-amber" style={{ top: '50%', right: '30%', width: '250px', height: '250px' }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         {/* Section Header */}
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 60px auto' }}>
           <div className="section-tag" style={{ justifyContent: 'center' }}>
-            Resultados Comprobados
+            Resultados Reales
           </div>
           <h2 className="section-title">
-            Casos de Éxito: <span className="text-gradient-brand">Impacto Estratégico Medible</span>
+            Casos de Éxito: <span className="text-gradient-brand">Empresas que Ya Están Creciendo con Nosotros</span>
           </h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            Transformaciones tecnológicas reales que han generado ahorros millonarios, blindado la seguridad y acelerado la escalabilidad de nuestros clientes.
+            Soluciones aplicadas en negocios reales que lograron aumentar sus ventas, automatizar su atención y ahorrar costos operativos.
           </p>
         </div>
 
@@ -92,8 +97,10 @@ export default function CaseStudies({ onSelectCase }) {
               style={{
                 padding: '12px 24px',
                 borderRadius: '12px',
-                background: activeCase === idx ? 'linear-gradient(135deg, #09A8B5, #087F9F)' : 'rgba(255, 255, 255, 0.05)',
-                border: activeCase === idx ? '1px solid #09A8B5' : '1px solid rgba(213, 232, 236, 0.15)',
+                background: activeCase === idx
+                  ? `linear-gradient(135deg, ${c.accent || '#09A8B5'}, ${c.accent === '#8B5CF6' ? '#7C3AED' : c.accent === '#087F9F' ? '#065F8A' : '#087F9F'})`
+                  : 'rgba(255, 255, 255, 0.05)',
+                border: activeCase === idx ? `1px solid ${c.accent || '#09A8B5'}` : '1px solid rgba(213, 232, 236, 0.15)',
                 color: '#FFFFFF',
                 fontWeight: 600,
                 fontSize: '0.9rem',
@@ -101,10 +108,10 @@ export default function CaseStudies({ onSelectCase }) {
                 alignItems: 'center',
                 gap: '8px',
                 transition: 'all 0.3s ease',
-                boxShadow: activeCase === idx ? '0 8px 24px rgba(9, 168, 181, 0.3)' : 'none',
+                boxShadow: activeCase === idx ? `0 8px 24px ${c.accent || '#09A8B5'}40` : 'none',
               }}
             >
-              <Building2 size={16} color={activeCase === idx ? '#FFFFFF' : '#09A8B5'} />
+              <Building2 size={16} color={activeCase === idx ? '#FFFFFF' : (c.accent || '#09A8B5')} />
               <span>{c.industry}</span>
             </button>
           ))}
@@ -120,19 +127,19 @@ export default function CaseStudies({ onSelectCase }) {
             boxShadow: '0 25px 60px rgba(7, 18, 28, 0.7)',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '24px', paddingBottom: '20px', borderBottom: '1px solid rgba(213, 232, 236, 0.12)' }}>
-            <div>
-              <div style={{ fontSize: '0.82rem', color: '#09A8B5', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                {cases[activeCase].client}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '24px', paddingBottom: '20px', borderBottom: `1px solid ${cases[activeCase].accent || '#09A8B5'}30` }}>
+              <div>
+                <div style={{ fontSize: '0.82rem', color: cases[activeCase].accent || '#09A8B5', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  {cases[activeCase].client}
+                </div>
+                <h3 style={{ fontSize: '1.6rem', color: '#FFFFFF', fontWeight: 700, marginTop: '4px' }}>
+                  {cases[activeCase].title}
+                </h3>
               </div>
-              <h3 style={{ fontSize: '1.6rem', color: '#FFFFFF', fontWeight: 700, marginTop: '4px' }}>
-                {cases[activeCase].title}
-              </h3>
+              <div className="tech-badge" style={{ padding: '6px 16px', borderColor: `${cases[activeCase].accent || '#09A8B5'}50`, color: cases[activeCase].accent || '#09A8B5' }}>
+                Caso Auditado
+              </div>
             </div>
-            <div className="tech-badge" style={{ padding: '6px 16px' }}>
-              Caso Auditado
-            </div>
-          </div>
 
           <div
             style={{
@@ -144,7 +151,7 @@ export default function CaseStudies({ onSelectCase }) {
             className="case-details-grid"
           >
             <div>
-              <h4 style={{ fontSize: '1rem', color: '#EF4444', fontWeight: 700, marginBottom: '8px' }}>
+              <h4 style={{ fontSize: '1rem', color: '#F59E0B', fontWeight: 700, marginBottom: '8px' }}>
                 El Desafío:
               </h4>
               <p style={{ fontSize: '0.94rem', color: '#B4CAD6', lineHeight: 1.6, marginBottom: '24px' }}>
@@ -172,13 +179,14 @@ export default function CaseStudies({ onSelectCase }) {
                 <div
                   key={i}
                   style={{
-                    background: 'rgba(7, 18, 28, 0.65)',
-                    border: '1px solid rgba(9, 168, 181, 0.25)',
+                    background: `linear-gradient(135deg, rgba(7, 18, 28, 0.8) 0%, ${m.color}12 100%)`,
+                    border: `1px solid ${m.color}35`,
                     borderRadius: '14px',
                     padding: '18px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
+                    boxShadow: `0 4px 16px ${m.color}18`,
                   }}
                 >
                   <div
@@ -186,9 +194,10 @@ export default function CaseStudies({ onSelectCase }) {
                       fontFamily: 'var(--font-heading)',
                       fontSize: '1.75rem',
                       fontWeight: 800,
-                      color: '#09A8B5',
+                      color: m.color,
                       lineHeight: 1.1,
                       marginBottom: '4px',
+                      textShadow: `0 0 20px ${m.color}50`,
                     }}
                   >
                     {m.value}

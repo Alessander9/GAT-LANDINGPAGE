@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, MenuItem, HoveredLink, ProductItem } from './ui/navbar-menu';
 import {
   Globe,
@@ -19,6 +19,30 @@ export default function Navbar({ onNavigate, className = '' }) {
   const [active, setActive] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [isInFeaturedSection, setIsInFeaturedSection] = useState(false);
+
+  useEffect(() => {
+    const checkFeaturedSection = () => {
+      const section = document.getElementById('servicios-destacados');
+      if (!section) {
+        setIsInFeaturedSection(false);
+        return;
+      }
+      const rect = section.getBoundingClientRect();
+      // Section is active in viewport when its top has reached near top and bottom has not passed above
+      const isInside = rect.top <= 60 && rect.bottom > 80;
+      setIsInFeaturedSection(isInside);
+    };
+
+    window.addEventListener('scroll', checkFeaturedSection, { passive: true });
+    window.addEventListener('resize', checkFeaturedSection);
+    checkFeaturedSection();
+
+    return () => {
+      window.removeEventListener('scroll', checkFeaturedSection);
+      window.removeEventListener('resize', checkFeaturedSection);
+    };
+  }, []);
 
   const handleNav = (targetId) => {
     setActive(null);
@@ -41,10 +65,13 @@ export default function Navbar({ onNavigate, className = '' }) {
           justifyContent: 'center',
           padding: '0 16px',
           pointerEvents: 'none',
+          opacity: isInFeaturedSection ? 0 : 1,
+          transform: isInFeaturedSection ? 'translateY(-110px)' : 'translateY(0)',
+          transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         className={className}
       >
-        <div style={{ pointerEvents: 'auto', width: '100%', maxWidth: '1150px' }}>
+        <div style={{ pointerEvents: isInFeaturedSection ? 'none' : 'auto', width: '100%', maxWidth: '1150px' }}>
           <Menu setActive={setActive}>
             {/* Logo Section */}
             <a

@@ -23,18 +23,18 @@ export default function ContactSection({ prefilledService, prefilledData }) {
   }, [prefilledService]);
 
   const serviceOptions = [
-    'Arquitectura Cloud & DevOps',
-    'Inteligencia Artificial & Data',
-    'Ciberseguridad & Zero Trust',
-    'Transformación & Modernización',
-    'Ingeniería de Software a Medida',
-    'Consultoría Estratégica & vCTO',
+    'Página Web / Landing Page que Venda',
+    'Asistentes de IA & Chatbot WhatsApp',
+    'Aplicación Móvil (Android / iPhone)',
+    'Sistema o Plataforma Web a Medida',
+    'Seguridad y Protección Digital',
+    'Asesoría y Renovación Tecnológica',
   ];
 
   const companySizes = [
-    'Scale-up (20 - 50 colab.)',
-    'Mid-Market (50 - 200 colab.)',
-    'Enterprise (200+ colaboradores)',
+    'Emprendedor / Negocio en Crecimiento (1 - 10 personas)',
+    'Pequeña / Mediana Empresa (10 - 50 personas)',
+    'Empresa Consolidada (50+ personas)',
   ];
 
   const budgetRanges = [
@@ -58,7 +58,7 @@ export default function ContactSection({ prefilledService, prefilledData }) {
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
-          colors: ['#09A8B5', '#087F9F', '#FFFFFF', '#E2F2F5'],
+          colors: ['#09A8B5', '#8B5CF6', '#F59E0B', '#22C55E', '#FFFFFF'],
         });
       } catch (err) {
         // fallback if confetti not loaded
@@ -77,18 +77,20 @@ export default function ContactSection({ prefilledService, prefilledData }) {
     >
       <div className="ambient-glow-orb orb-cyan" style={{ top: '15%', left: '-5%', width: '500px', height: '500px' }} />
       <div className="ambient-glow-orb orb-blue" style={{ bottom: '15%', right: '-5%', width: '500px', height: '500px' }} />
+      <div className="ambient-glow-orb orb-ai" style={{ top: '40%', left: '30%', width: '300px', height: '300px' }} />
+      <div className="ambient-glow-orb orb-amber" style={{ bottom: '30%', left: '10%', width: '200px', height: '200px' }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         {/* Section Header */}
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 60px auto' }}>
           <div className="section-tag" style={{ justifyContent: 'center' }}>
-            Inicia Tu Transformación
+            Hablemos de tu Proyecto
           </div>
           <h2 className="section-title">
-            Agenda tu Sesión de <span className="text-gradient-brand">Diagnóstico Estratégico</span>
+            Solicita tu <span className="text-gradient-brand">Asesoría Gratuita</span>
           </h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            Nuestros arquitectos senior analizarán tus desafíos técnicos y prepararán una propuesta con hoja de ruta y estimación de ROI sin costo inicial.
+            Conversa con nuestro equipo. Analizaremos tu idea y te prepararemos una propuesta clara con plan de trabajo y presupuesto sin ningún compromiso.
           </p>
         </div>
 
@@ -104,7 +106,7 @@ export default function ContactSection({ prefilledService, prefilledData }) {
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <h3 style={{ fontSize: '1.8rem', color: '#FFFFFF', fontWeight: 800, marginBottom: '20px' }}>
-                ¿Qué sucederá en tu sesión de diagnóstico?
+                ¿Qué recibirás en tu asesoría gratuita?
               </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '40px' }}>
@@ -114,12 +116,12 @@ export default function ContactSection({ prefilledService, prefilledData }) {
                       width: '40px',
                       height: '40px',
                       borderRadius: '12px',
-                      background: 'rgba(9, 168, 181, 0.15)',
-                      border: '1px solid rgba(9, 168, 181, 0.3)',
+                      background: 'rgba(245, 158, 11, 0.12)',
+                      border: '1px solid rgba(245, 158, 11, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#09A8B5',
+                      color: '#F59E0B',
                       flexShrink: 0,
                     }}
                   >
@@ -127,10 +129,10 @@ export default function ContactSection({ prefilledService, prefilledData }) {
                   </div>
                   <div>
                     <h4 style={{ fontSize: '1.05rem', color: '#FFFFFF', fontWeight: 700, marginBottom: '4px' }}>
-                      1. Sesión Ejecutiva de 45 Minutos
+                      1. Conversación Directa y Personalizada
                     </h4>
                     <p style={{ fontSize: '0.88rem', color: '#9FB5C4' }}>
-                      Reunión directa con un Principal Cloud Architect y Lead Strategist, sin intermediarios comerciales.
+                      Hablamos sobre tus metas, dudas y necesidades para recomendarte la solución exacta para tu negocio.
                     </p>
                   </div>
                 </div>
@@ -154,10 +156,10 @@ export default function ContactSection({ prefilledService, prefilledData }) {
                   </div>
                   <div>
                     <h4 style={{ fontSize: '1.05rem', color: '#FFFFFF', fontWeight: 700, marginBottom: '4px' }}>
-                      2. Acuerdo de Confidencialidad (NDA)
+                      2. Privacidad y Confidencialidad Total
                     </h4>
                     <p style={{ fontSize: '0.88rem', color: '#9FB5C4' }}>
-                      Toda tu información arquitectónica y de negocio queda formalmente blindada bajo estricta reserva.
+                      Toda la información y las ideas de tu negocio quedan protegidas bajo estricta reserva y confianza.
                     </p>
                   </div>
                 </div>
@@ -168,12 +170,12 @@ export default function ContactSection({ prefilledService, prefilledData }) {
                       width: '40px',
                       height: '40px',
                       borderRadius: '12px',
-                      background: 'rgba(9, 168, 181, 0.15)',
-                      border: '1px solid rgba(9, 168, 181, 0.3)',
+                      background: 'rgba(139, 92, 246, 0.12)',
+                      border: '1px solid rgba(139, 92, 246, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: '#09A8B5',
+                      color: '#8B5CF6',
                       flexShrink: 0,
                     }}
                   >
@@ -181,10 +183,10 @@ export default function ContactSection({ prefilledService, prefilledData }) {
                   </div>
                   <div>
                     <h4 style={{ fontSize: '1.05rem', color: '#FFFFFF', fontWeight: 700, marginBottom: '4px' }}>
-                      3. Hoja de Ruta & Estimación de ROI
+                      3. Plan de Trabajo y Presupuesto Claro
                     </h4>
                     <p style={{ fontSize: '0.88rem', color: '#9FB5C4' }}>
-                      Recibirás un documento preliminar con arquitectura recomendada, cronograma de sprints y ahorros proyectados.
+                      Recibirás una propuesta detallada con los pasos a seguir, plazos de entrega y costos transparentes.
                     </p>
                   </div>
                 </div>
@@ -249,7 +251,7 @@ export default function ContactSection({ prefilledService, prefilledData }) {
                   ¡Solicitud Recibida con Éxito!
                 </h3>
                 <p style={{ fontSize: '1rem', color: '#B4CAD6', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto 30px auto' }}>
-                  Gracias <strong style={{ color: '#FFFFFF' }}>{formData.name || 'por tu interés'}</strong>. Un Principal Partner de <strong style={{ color: '#09A8B5' }}>GAT Technology Consulting</strong> se pondrá en contacto en menos de 2 horas hábiles.
+                  Gracias <strong style={{ color: '#FFFFFF' }}>{formData.name || 'por tu interés'}</strong>. Un especialista de <strong style={{ color: '#09A8B5' }}>GAT Technology Consulting</strong> se pondrá en contacto contigo a la brevedad para asesorarte.
                 </p>
                 <button
                   onClick={() => {

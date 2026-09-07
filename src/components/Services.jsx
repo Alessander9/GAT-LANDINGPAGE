@@ -17,25 +17,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 // 5 Core Services filling 100% screen width and 100% screen height (100vw x 100vh)
 const BENTO_SERVICES = [
-  // 1. Top Left (Col span 7) - Páginas Web Corporativas
+  // 1. Top Left (Col span 7) - Páginas Web Corporativas (Live Video)
   {
     id: "card-web",
     slug: "landing-page",
     gridClass: "bento-col-7",
     watermark: "PW",
     num: "01",
-    tag: "Diseño & Conversión",
-    title: "Páginas Web Corporativas",
+    tag: "Presencia & Ventas",
+    title: "Páginas Web que Venden",
     icon: Globe,
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
-    shortDesc: "Sitios web de ultra alto rendimiento, diseño UI/UX premium a medida, SEO técnico indexable y conversión CRO de alto impacto.",
-    flowingText: "PÁGINAS WEB CORPORATIVAS · DISEÑO UI/UX EXCLUSIVO · SEO TÉCNICO · CORE WEB VITALS",
+    video: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051397/landing_page.mp4",
+    shortDesc: "Diseñamos sitios web modernos, rápidos y atractivos que transmiten confianza y convierten visitantes en clientes reales.",
+    flowingText: "PÁGINAS WEB QUE VENDEN · DISEÑO A MEDIDA · BOTÓN DE WHATSAPP · APARICIÓN EN GOOGLE",
     marqueeBg: "linear-gradient(135deg, rgba(9, 168, 181, 0.78) 0%, rgba(0, 194, 209, 0.72) 50%, rgba(8, 127, 159, 0.82) 100%)",
     marqueeTextColor: "#FFFFFF",
     accent: "#09A8B5",
     speed: "22s",
   },
-  // 2. Top Right (Col span 5) - Automatizaciones con IA (Vivid Neural AI Image)
+  // 2. Top Right (Col span 5) - Automatizaciones con IA & Agentes Autónomos (Live Video)
   {
     id: "card-ai",
     slug: "automatizaciones-ia",
@@ -43,65 +44,69 @@ const BENTO_SERVICES = [
     watermark: "IA",
     num: "02",
     tag: "Inteligencia Artificial",
-    title: "Automatizaciones con IA",
+    title: "Asistentes con IA & Automatizaciones",
     icon: Brain,
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1000&q=80",
-    shortDesc: "Modelos generativos (LLMs/RAG) conectados a tus datos, chatbots cognitivos y agentes autónomos para multiplicar la productividad.",
-    flowingText: "AUTOMATIZACIONES CON IA · MODELOS RAG · AGENTES AUTÓNOMOS · CHATBOTS LLM",
-    marqueeBg: "linear-gradient(135deg, rgba(0, 229, 255, 0.75) 0%, rgba(9, 168, 181, 0.82) 100%)",
+    video: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051624/AI_business_automation_commercia__202608282006.mp4",
+    shortDesc: "Chatbots inteligentes que atienden a tus clientes por WhatsApp 24/7 y automatizan tareas para que ahorres horas de trabajo.",
+    flowingText: "ASISTENTES CON IA · CHATBOT WHATSAPP 24/7 · AHORRO DE TIEMPO · AUTOMATIZACIÓN",
+    marqueeBg: "linear-gradient(135deg, rgba(139, 92, 246, 0.72) 0%, rgba(109, 40, 217, 0.82) 100%)",
     marqueeTextColor: "#FFFFFF",
-    accent: "#00E5FF",
+    accent: "#8B5CF6",
     speed: "20s",
   },
-  // 3. Bottom Left (Col span 4) - Aplicativos Web
+  // 3. Bottom Left (Col span 4) - Aplicativos Web & SaaS (Live Video)
   {
     id: "card-webapp",
     slug: "app-web",
     gridClass: "bento-col-4",
     watermark: "AW",
     num: "03",
-    tag: "Software & SaaS",
-    title: "Aplicativos Web & SaaS",
+    tag: "Sistemas & Control",
+    title: "Programas y Plataformas Web",
     icon: Layers,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    shortDesc: "Plataformas cloud a medida, paneles de control ejecutivos (dashboards), sistemas transaccionales y portales escalables.",
-    flowingText: "APLICATIVOS WEB · PLATAFORMAS SAAS · DASHBOARDS EN TIEMPO REAL · APIS MODULARES",
+    video: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051881/Developer_building_web_applicati__202608281943.mp4",
+    shortDesc: "Sistemas en la nube para gestionar tus ventas, clientes, inventarios y operaciones desde cualquier computadora o celular.",
+    flowingText: "SISTEMAS A MEDIDA · CONTROL DE VENTAS · PANELES EN VIVO · ACCESO DESDE CUALQUIER LUGAR",
     marqueeBg: "linear-gradient(135deg, rgba(44, 216, 232, 0.76) 0%, rgba(9, 168, 181, 0.84) 100%)",
     marqueeTextColor: "#FFFFFF",
     accent: "#2CD8E8",
     speed: "24s",
   },
-  // 4. Bottom Center (Col span 4) - Apps Android
+  // 4. Bottom Center (Col span 4) - Apps Android & Móviles (Live Video)
   {
     id: "card-mobile",
     slug: "app-android",
     gridClass: "bento-col-4",
     watermark: "AP",
     num: "04",
-    tag: "Mobile Engineering",
-    title: "Apps Android & Móviles",
+    tag: "Aplicaciones Móviles",
+    title: "Apps para Celulares (Android & iOS)",
     icon: Smartphone,
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
-    shortDesc: "Aplicaciones móviles nativas e híbridas de alto desempeño para Android, diseñadas para máxima retención y Google Play.",
-    flowingText: "APPS ANDROID & MÓVILES · GOOGLE PLAY STORE · UX NATIVO · SINCRONIZACIÓN OFFLINE",
-    marqueeBg: "linear-gradient(135deg, rgba(92, 157, 255, 0.78) 0%, rgba(9, 168, 181, 0.84) 100%)",
+    video: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051987/Building_Android_mobile_applicat__202608281944.mp4",
+    shortDesc: "Crea tu propia app para que tus clientes compren, reserven y se comuniquen con tu negocio directamente desde su móvil.",
+    flowingText: "APPS PARA CELULARES · ANDROID & IPHONE · FÁCIL DE USAR · TU MARCA EN GOOGLE PLAY",
+    marqueeBg: "linear-gradient(135deg, rgba(245, 158, 11, 0.72) 0%, rgba(217, 119, 6, 0.84) 100%)",
     marqueeTextColor: "#FFFFFF",
-    accent: "#5C9DFF",
+    accent: "#F59E0B",
     speed: "22s",
   },
-  // 5. Bottom Right (Col span 4) - Ciberseguridad Zero Trust
+  // 5. Bottom Right (Col span 4) - Ciberseguridad Zero Trust (Live Video)
   {
     id: "card-security",
     slug: "ciberseguridad",
     gridClass: "bento-col-4",
     watermark: "CS",
     num: "05",
-    tag: "Blindaje & Zero Trust",
-    title: "Ciberseguridad Zero Trust",
+    tag: "Seguridad Digital",
+    title: "Seguridad y Protección Digital",
     icon: Shield,
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
-    shortDesc: "Protección perimetral de grado bancario, pentesting ético, hardening de servidores y cumplimiento normativo ISO 27001 / SOC 2.",
-    flowingText: "CIBERSEGURIDAD ZERO TRUST · AUDITORÍAS PENTESTING · BLINDAJE CLOUD · CUMPLIMIENTO ISO 27001",
+    video: "https://res.cloudinary.com/piun1mwb/video/upload/v1787990632/Cybersecurity_system_blocking_cy__202608282025.mp4",
+    shortDesc: "Protegemos la información de tu empresa, contraseñas y datos de clientes contra virus, robos informáticos y pérdidas.",
+    flowingText: "SEGURIDAD DIGITAL · PROTECCIÓN DE DATOS · COPIAS DE SEGURIDAD · TRANQUILIDAD TOTAL",
     marqueeBg: "linear-gradient(135deg, rgba(8, 127, 159, 0.82) 0%, rgba(7, 21, 33, 0.9) 100%)",
     marqueeTextColor: "#FFFFFF",
     accent: "#087F9F",
@@ -175,13 +180,26 @@ function FlowingBentoCard({ card, onSelectService, onNavigateToServiceSubpage })
     >
       {/* ──── BASE DEFAULT CONTENT ──── */}
       <div className="gat-card-base">
-        {/* Ambient Base Image Texture */}
-        {card.image && (
+        {/* Ambient Base Video or Image Texture */}
+        {card.video ? (
+          <div className="gat-card-bg-img-wrap">
+            <video
+              src={card.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="gat-card-bg-img"
+              style={{ objectFit: "cover", width: "100%", height: "100%", opacity: 0.72 }}
+            />
+            <div className="gat-card-bg-overlay" />
+          </div>
+        ) : card.image ? (
           <div className="gat-card-bg-img-wrap">
             <img src={card.image} alt={card.title} className="gat-card-bg-img" />
             <div className="gat-card-bg-overlay" />
           </div>
-        )}
+        ) : null}
 
         {/* Top Header Row */}
         <div className="gat-card-top-row">
@@ -220,7 +238,7 @@ function FlowingBentoCard({ card, onSelectService, onNavigateToServiceSubpage })
           <h3 className="gat-card-title">{card.title}</h3>
           <p className="gat-card-desc">{card.shortDesc}</p>
           <div className="gat-card-footer">
-            <span className="gat-card-hint">Ver Subpágina Detallada</span>
+            <span className="gat-card-hint">Conocer más detalles</span>
             <div
               className="gat-card-arrow-circle"
               style={{ background: `${card.accent}20`, borderColor: `${card.accent}40` }}
@@ -233,12 +251,24 @@ function FlowingBentoCard({ card, onSelectService, onNavigateToServiceSubpage })
 
       {/* ──── TRANSLUCENT CHROMATIC FLOWING MARQUEE HOVER LAYER ──── */}
       <div className="gat-flowing-marquee" ref={marqueeRef}>
-        {/* Translucent Background Image */}
-        {card.image && (
+        {/* Translucent Background Video / Image */}
+        {card.video ? (
+          <div className="gat-hover-bg-img-wrap">
+            <video
+              src={card.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="gat-hover-bg-img"
+              style={{ objectFit: "cover", width: "100%", height: "100%", opacity: 0.85 }}
+            />
+          </div>
+        ) : card.image ? (
           <div className="gat-hover-bg-img-wrap">
             <img src={card.image} alt="" className="gat-hover-bg-img" />
           </div>
-        )}
+        ) : null}
 
         {/* Translucent Chromatic Tint */}
         <div
@@ -362,6 +392,14 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
         className="ambient-glow-orb orb-blue"
         style={{ bottom: "10%", left: "-8%", width: "500px", height: "500px" }}
       />
+      <div
+        className="ambient-glow-orb orb-ai"
+        style={{ top: "30%", left: "20%", width: "350px", height: "350px" }}
+      />
+      <div
+        className="ambient-glow-orb orb-amber"
+        style={{ bottom: "25%", right: "20%", width: "280px", height: "280px" }}
+      />
 
       {/* Header Bar */}
       <div
@@ -379,7 +417,7 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
       >
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div className="section-tag" style={{ margin: 0, padding: "4px 12px" }}>
-            Nuestras Capacidades
+            Soluciones para tu Negocio
           </div>
           <h2
             className="section-title"
@@ -389,22 +427,57 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
               lineHeight: 1.15,
             }}
           >
-            Ecosistema de <span className="text-gradient-brand">Soluciones Tecnológicas</span>
+            Todo lo que tu Empresa Necesita para <span className="text-gradient-brand">Crecer en Internet</span>
           </h2>
         </div>
 
-        <p
-          style={{
-            margin: 0,
-            fontSize: "0.85rem",
-            color: "#B4CAD6",
-            maxWidth: "480px",
-            lineHeight: 1.35,
-          }}
-          className="header-subtitle-desktop"
-        >
-          Haz clic en cualquier servicio para acceder a su subpágina con arquitectura, stack y cotización directa.
-        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+          <p
+            style={{
+              margin: 0,
+              fontSize: "0.85rem",
+              color: "#B4CAD6",
+              maxWidth: "420px",
+              lineHeight: 1.35,
+            }}
+            className="header-subtitle-desktop"
+          >
+            Haz clic en cualquier servicio para conocer cómo podemos ayudarte y cotizar sin compromiso.
+          </p>
+
+          <button
+            type="button"
+            onClick={() => {
+              window.location.hash = "#servicios-todos";
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "8px 16px",
+              borderRadius: "12px",
+              background: "rgba(9, 168, 181, 0.15)",
+              border: "1px solid rgba(9, 168, 181, 0.4)",
+              color: "#2CD8E8",
+              fontSize: "0.82rem",
+              fontWeight: 700,
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(9, 168, 181, 0.28)";
+              e.currentTarget.style.borderColor = "#2CD8E8";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(9, 168, 181, 0.15)";
+              e.currentTarget.style.borderColor = "rgba(9, 168, 181, 0.4)";
+            }}
+          >
+            <span>Ver Catálogo Completo (8)</span>
+            <ArrowRight size={14} />
+          </button>
+        </div>
       </div>
 
       {/* 100% Full-Screen Stretched Bento Grid */}

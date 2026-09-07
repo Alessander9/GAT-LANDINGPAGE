@@ -4,7 +4,8 @@
   width: 100%;
   background-color: var(--gat-navy-deep, #071521);
   color: var(--gat-white, #FFFFFF);
-  overflow: clip;
+  overflow: visible;
+  touch-action: pan-y;
 }
 
 /* Loader */
@@ -58,18 +59,21 @@
   box-shadow: 0 0 10px rgba(9, 168, 181, 0.8);
 }
 
-/* Pinned Stage — Full viewport handled by GSAP Pin */
+/* Pinned Stage — Container pinned by GSAP ScrollTrigger */
 .fsh-stage {
   position: relative;
   width: 100%;
   height: 100vh;
   height: 100svh;
-  min-height: 640px;
+  height: 100dvh;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 2;
+  touch-action: pan-y;
 }
 
 /* Canvas / Background Frame */
@@ -84,6 +88,8 @@
   justify-content: center;
   overflow: hidden;
   background: #071521;
+  pointer-events: none !important;
+  touch-action: pan-y;
 }
 
 .fsh-canvas {
@@ -92,6 +98,7 @@
   user-select: none;
   -webkit-user-drag: none;
   display: block;
+  pointer-events: none !important;
 }
 
 .fsh-canvas-overlay {
@@ -101,9 +108,9 @@
 /* Copy Header */
 .fsh-copy {
   position: absolute;
-  top: 50%;
+  top: clamp(24px, 4.5vh, 48px);
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 10;
   text-align: center;
   width: 90%;
@@ -156,13 +163,13 @@
 /* Interactive Floating Cards */
 .fsh-cards {
   position: absolute;
-  bottom: clamp(28px, 6vh, 60px);
+  bottom: clamp(18px, 3.5vh, 36px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
   width: 90%;
-  max-width: 520px;
-  height: 220px;
+  max-width: 440px;
+  height: 180px;
   pointer-events: none;
 }
 
@@ -170,7 +177,7 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transform: translateY(24px) scale(0.95);
+  transform: translateY(20px) scale(0.96);
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
@@ -183,7 +190,7 @@
 
 .fsh-card-prev {
   opacity: 0;
-  transform: translateY(-20px) scale(0.96);
+  transform: translateY(-16px) scale(0.97);
 }
 
 /* Authentic Glassmorphism UI for Step Card */
@@ -195,14 +202,14 @@
     135deg,
     rgba(255, 255, 255, 0.12) 0%,
     rgba(9, 168, 181, 0.08) 40%,
-    rgba(7, 21, 33, 0.55) 100%
+    rgba(7, 21, 33, 0.65) 100%
   );
   backdrop-filter: blur(28px) saturate(190%);
   -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-top: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 24px;
-  padding: 22px 26px;
+  border-radius: 20px;
+  padding: 16px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -222,12 +229,12 @@
 }
 
 .fsh-card-num {
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   color: #D5E8EC;
   font-family: monospace;
   background: rgba(7, 21, 33, 0.5);
-  padding: 4px 12px;
-  border-radius: 12px;
+  padding: 3px 10px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -235,15 +242,15 @@
 
 .fsh-card-num strong {
   color: var(--c, #09A8B5);
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   font-weight: 700;
   text-shadow: 0 0 10px var(--c, rgba(9, 168, 181, 0.5));
 }
 
 .fsh-card-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(9, 168, 181, 0.2) 100%);
   border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
@@ -252,24 +259,24 @@
   align-items: center;
   justify-content: center;
   color: var(--c, #09A8B5);
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   box-shadow: 0 0 16px var(--c, rgba(9, 168, 181, 0.35)), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .fsh-card-title {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #FFFFFF;
-  margin: 4px 0 2px 0;
-  letter-spacing: -0.025em;
+  margin: 2px 0 1px 0;
+  letter-spacing: -0.02em;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
 }
 
 .fsh-card-desc {
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   color: #E2F2F5;
-  line-height: 1.45;
-  margin-bottom: 4px;
+  line-height: 1.38;
+  margin-bottom: 2px;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
 }
 
@@ -277,22 +284,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .fsh-ticks {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  align-items: center;
 }
 
 .fsh-tick {
-  width: 28px;
+  position: relative;
+  width: 24px;
   height: 6px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border: none;
-  border-radius: 3px;
-  overflow: hidden;
+  border-radius: 4px;
+  overflow: visible;
   display: block;
   padding: 0;
   cursor: pointer;
@@ -300,22 +309,29 @@
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
+.fsh-tick::before {
+  content: '';
+  position: absolute;
+  inset: -14px -6px;
+  background: transparent;
+}
+
 .fsh-tick:hover {
   transform: scaleY(1.3);
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .fsh-tick span {
   display: block;
   height: 100%;
   background: var(--c, #09A8B5);
-  border-radius: 3px;
+  border-radius: 4px;
   transform-origin: left;
   box-shadow: 0 0 8px var(--c, #09A8B5);
 }
 
 .fsh-card-label {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -341,53 +357,43 @@
   box-shadow: 0 0 12px rgba(9, 168, 181, 0.9);
 }
 
-/* Spacer for Scroll Distance */
-.fsh-spacer {
-  width: 100%;
-  pointer-events: none;
-}
-
 /* ──── RESPONSIVE MEDIA QUERIES FOR MOBILE ──── */
 @media (max-width: 768px) {
   .fsh-stage {
     height: 100vh !important;
     height: 100svh !important;
-    min-height: 600px;
-    padding: 0 14px !important;
-  }
-
-  .fsh-canvas {
-    width: 100% !important;
-    height: 100% !important;
+    height: 100dvh !important;
+    min-height: 520px !important;
+    padding: 0 16px !important;
   }
 
   .fsh-copy {
-    top: 45% !important;
+    top: clamp(20px, 3.5vh, 36px) !important;
     left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: calc(100% - 28px) !important;
+    transform: translateX(-50%) !important;
+    width: calc(100% - 32px) !important;
   }
 
   .fsh-title {
-    font-size: 1.45rem !important;
-    line-height: 1.15 !important;
-    margin-bottom: 2px !important;
+    font-size: clamp(1.35rem, 5.5vw, 1.75rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 4px !important;
   }
 
   .fsh-sub {
     font-size: 0.78rem !important;
-    line-height: 1.3 !important;
+    line-height: 1.32 !important;
   }
 
   .fsh-cards {
     position: absolute !important;
-    bottom: 20px !important;
+    bottom: calc(clamp(60px, 9.5vh, 85px) + env(safe-area-inset-bottom, 0px)) !important;
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%) !important;
-    width: calc(100% - 28px) !important;
-    max-width: 440px !important;
-    height: 185px !important;
+    width: calc(100% - 32px) !important;
+    max-width: 390px !important;
+    height: 155px !important;
     z-index: 25 !important;
   }
 
@@ -399,17 +405,17 @@
   }
 
   .fsh-card-inner {
-    padding: 15px 18px !important;
-    border-radius: 20px !important;
+    padding: 12px 16px !important;
+    border-radius: 18px !important;
   }
 
   .fsh-card-title {
-    font-size: 1.12rem !important;
-    margin: 3px 0 2px 0 !important;
+    font-size: 1.02rem !important;
+    margin: 2px 0 2px 0 !important;
   }
 
   .fsh-card-desc {
-    font-size: 0.8rem !important;
+    font-size: 0.78rem !important;
     line-height: 1.35 !important;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -418,16 +424,18 @@
   }
 
   .fsh-card-icon {
-    width: 32px !important;
-    height: 32px !important;
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.85rem !important;
   }
 
   .fsh-card-foot {
-    padding-top: 8px !important;
+    padding-top: 6px !important;
   }
 
   .fsh-tick {
-    width: 24px !important;
+    width: 22px !important;
     height: 5px !important;
   }
 }
+

@@ -2,105 +2,40 @@
 
 import React from "react";
 import {
-  ArrowLeft,
-  ArrowRight,
   Shield,
   Zap,
   Target,
-  Eye,
-  Award,
-  Sparkles,
-  Users,
-  CheckCircle2,
+  ArrowRight,
   Code2,
   Lock,
   Cloud,
   Brain,
   MessageCircle,
+  Eye,
+  Award,
+  Users,
+  Sparkles,
 } from "lucide-react";
+import { getWhatsAppUrl } from "../config/contact";
 
 export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelectService }) {
   const handleWhatsApp = () => {
-    const text = encodeURIComponent(
+    const url = getWhatsAppUrl(
       "¡Hola GAT Technology Consulting! He visto su video institucional y me gustaría agendar una reunión de asesoría."
     );
-    window.open(`https://wa.me/51925229293?text=${text}`, "_blank", "noopener,noreferrer");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
     <div className="about-page-root" style={{ minHeight: "100vh", background: "transparent", color: "#FFFFFF" }}>
-      {/* ──── STICKY TOP NAV ──── */}
-      <nav
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-          background: "rgba(7, 21, 33, 0.85)",
-          backdropFilter: "blur(24px) saturate(180%)",
-          WebkitBackdropFilter: "blur(24px) saturate(180%)",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-          padding: "14px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <button
-            type="button"
-            onClick={onNavigateHome}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(255, 255, 255, 0.08)",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              borderRadius: "12px",
-              padding: "8px 14px",
-              color: "#FFFFFF",
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(9, 168, 181, 0.2)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)")}
-          >
-            <ArrowLeft size={16} />
-            <span>Volver al Inicio</span>
-          </button>
-
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#09A8B5" }} />
-            <span style={{ fontSize: "0.84rem", color: "#B4CAD6", fontWeight: 600 }}>
-              GAT Technology Consulting · Nosotros
-            </span>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={onNavigateContact}
-          className="btn-primary"
-          style={{
-            padding: "8px 18px",
-            fontSize: "0.84rem",
-            borderRadius: "9999px",
-          }}
-        >
-          <span>Agendar Diagnóstico</span>
-          <ArrowRight size={14} />
-        </button>
-      </nav>
-
       {/* ──── HERO SECTION: 50% TEXTO / 50% VIDEO CUADRADO ──── */}
       <section
         style={{
           position: "relative",
           width: "100%",
-          padding: "clamp(18px, 3vh, 36px) clamp(20px, 5vw, 64px) clamp(40px, 6vh, 60px) clamp(20px, 5vw, 64px)",
+          padding: "clamp(88px, 11vh, 120px) clamp(16px, 4vw, 56px) clamp(24px, 4vh, 40px) clamp(16px, 4vw, 56px)",
           boxSizing: "border-box",
-          maxWidth: "1400px",
+          maxWidth: "1360px",
           margin: "0 auto",
         }}
       >
@@ -108,35 +43,35 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "clamp(28px, 4vw, 56px)",
+            gap: "clamp(24px, 3.5vw, 48px)",
             alignItems: "center",
           }}
         >
           {/* ──── LEFT COLUMN: TEXTO & PROPUESTA ──── */}
-          <div style={{ maxWidth: "640px" }}>
-            <div className="tech-badge" style={{ marginBottom: "14px" }}>
+          <div style={{ maxWidth: "620px" }}>
+            <div className="tech-badge" style={{ marginBottom: "10px" }}>
               <span className="tech-badge-dot" />
               <span>SOBRE NOSOTROS · GAT TECHNOLOGY CONSULTING</span>
             </div>
 
             <h1
               style={{
-                fontSize: "clamp(2.1rem, 3.8vw, 3.4rem)",
+                fontSize: "clamp(1.75rem, 2.7vw, 2.75rem)",
                 fontWeight: 800,
-                lineHeight: 1.15,
+                lineHeight: 1.14,
                 letterSpacing: "-0.03em",
-                marginBottom: "14px",
+                marginBottom: "12px",
               }}
             >
-              Impulsamos la <span className="text-gradient-brand">Evolución Digital</span> de Empresas de Misión Crítica
+              Elevamos la <span className="text-gradient-brand">Solución Digital</span> de tu Empresa
             </h1>
 
             <p
               style={{
-                fontSize: "clamp(0.95rem, 1.2vw, 1.08rem)",
+                fontSize: "clamp(0.88rem, 1.05vw, 0.98rem)",
                 color: "#B4CAD6",
-                lineHeight: 1.65,
-                marginBottom: "22px",
+                lineHeight: 1.55,
+                marginBottom: "18px",
               }}
             >
               Somos un equipo especializado en consultoría tecnológica, ingeniería de software a medida, arquitecturas cloud resilientes e Inteligencia Artificial aplicada. Construimos herramientas digitales de alto impacto preparadas para escalar.
@@ -147,9 +82,9 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "14px",
+                gap: "12px",
                 alignItems: "center",
-                marginBottom: "28px",
+                marginBottom: "20px",
               }}
             >
               <button
@@ -157,13 +92,13 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                 onClick={onNavigateContact}
                 className="btn-primary"
                 style={{
-                  padding: "13px 28px",
-                  fontSize: "0.92rem",
+                  padding: "11px 24px",
+                  fontSize: "0.88rem",
                   borderRadius: "9999px",
                 }}
               >
                 <span>Solicitar Diagnóstico</span>
-                <ArrowRight size={15} />
+                <ArrowRight size={14} />
               </button>
 
               <button
@@ -173,12 +108,12 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  padding: "13px 24px",
+                  padding: "11px 20px",
                   borderRadius: "9999px",
                   background: "rgba(34, 197, 94, 0.15)",
                   border: "1px solid rgba(34, 197, 94, 0.4)",
                   color: "#22C55E",
-                  fontSize: "0.9rem",
+                  fontSize: "0.86rem",
                   fontWeight: 700,
                   cursor: "pointer",
                   transition: "all 0.2s ease",
@@ -192,39 +127,40 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                <MessageCircle size={17} />
-                <span>WhatsApp: +51 925 229 293</span>
+                <MessageCircle size={15} />
+                <span>Contactar por WhatsApp</span>
               </button>
             </div>
 
-            {/* Mini Trust Badges Grid */}
+            {/* Mini Trust Badges in Single Compact Row */}
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: "14px",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: "10px",
               }}
             >
               {[
-                { num: "+50", label: "Proyectos Entregados", accent: "#09A8B5" },
-                { num: "99.9%", label: "Disponibilidad Cloud", accent: "#2CD8E8" },
-                { num: "100%", label: "Propiedad de Código", accent: "#5C9DFF" },
-                { num: "ISO 27001", label: "Estándares de Seguridad", accent: "#087F9F" },
+                { num: "+50", label: "Proyectos", accent: "#09A8B5" },
+                { num: "99.9%", label: "Cloud SLA", accent: "#2CD8E8" },
+                { num: "100%", label: "Código Propio", accent: "#5C9DFF" },
+                { num: "ISO 27001", label: "Seguridad", accent: "#087F9F" },
               ].map((stat, i) => (
                 <div
                   key={i}
                   style={{
                     background: "rgba(255, 255, 255, 0.04)",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
-                    borderRadius: "14px",
-                    padding: "12px 16px",
+                    borderRadius: "12px",
+                    padding: "8px 10px",
                     backdropFilter: "blur(12px)",
+                    textAlign: "center",
                   }}
                 >
                   <div
                     style={{
                       fontFamily: "var(--font-heading)",
-                      fontSize: "1.4rem",
+                      fontSize: "1.15rem",
                       fontWeight: 800,
                       color: stat.accent,
                       lineHeight: 1.1,
@@ -233,7 +169,7 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                   >
                     {stat.num}
                   </div>
-                  <div style={{ fontSize: "0.78rem", color: "#8CA5B5", fontWeight: 500 }}>
+                  <div style={{ fontSize: "0.72rem", color: "#8CA5B5", fontWeight: 500, whiteSpace: "nowrap" }}>
                     {stat.label}
                   </div>
                 </div>
@@ -241,12 +177,12 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
             </div>
           </div>
 
-          {/* ──── RIGHT COLUMN: VIDEO CUADRADO CON CONTROLES (WIDER) ──── */}
+          {/* ──── RIGHT COLUMN: VIDEO PANORÁMICO CON GLOW ──── */}
           <div
             style={{
               position: "relative",
               width: "100%",
-              maxWidth: "620px",
+              maxWidth: "560px",
               margin: "0 auto",
             }}
           >
@@ -256,8 +192,8 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
               style={{
                 top: "10%",
                 left: "10%",
-                width: "420px",
-                height: "420px",
+                width: "360px",
+                height: "360px",
                 opacity: 0.65,
                 zIndex: 0,
               }}
@@ -269,13 +205,13 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                 position: "relative",
                 zIndex: 2,
                 width: "100%",
-                aspectRatio: "4 / 3",
-                borderRadius: "28px",
+                aspectRatio: "16 / 10",
+                borderRadius: "24px",
                 overflow: "hidden",
                 background: "linear-gradient(145deg, rgba(18, 50, 74, 0.9) 0%, rgba(7, 21, 33, 0.95) 100%)",
                 border: "1px solid rgba(9, 168, 181, 0.45)",
                 borderTop: "1px solid rgba(44, 216, 232, 0.7)",
-                boxShadow: "0 25px 60px rgba(0, 0, 0, 0.75), 0 0 45px rgba(9, 168, 181, 0.25)",
+                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(9, 168, 181, 0.25)",
               }}
             >
               <video
@@ -477,6 +413,10 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
           margin: "0 auto",
         }}
       >
+        <div className="ambient-glow-orb orb-cyan" style={{ top: "5%", left: "10%", width: "400px", height: "400px" }} />
+        <div className="ambient-glow-orb orb-blue" style={{ bottom: "10%", right: "5%", width: "450px", height: "450px" }} />
+        <div className="ambient-glow-orb orb-ai" style={{ top: "35%", right: "15%", width: "350px", height: "350px" }} />
+        <div className="ambient-glow-orb orb-amber" style={{ bottom: "30%", left: "5%", width: "260px", height: "260px" }} />
         <div style={{ textAlign: "center", marginBottom: "40px" }}>
           <div className="section-tag" style={{ margin: "0 auto 12px auto" }}>
             ADN GAT
@@ -498,19 +438,19 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
               icon: Zap,
               title: "Excelencia sin Excusas",
               desc: "No aceptamos código mediocre ni soluciones improvisadas. Construimos con estándares de grado enterprise.",
-              accent: "#09A8B5",
+              accent: "#F59E0B",
             },
             {
               icon: Shield,
               title: "Seguridad por Diseño",
               desc: "La privacidad y protección de datos son la base de cada arquitectura, desde el primer wireframe.",
-              accent: "#2CD8E8",
+              accent: "#09A8B5",
             },
             {
               icon: Sparkles,
               title: "Innovación Pragmática",
               desc: "Adoptamos IA y tecnologías emergentes solo cuando aportan valor cuantificable y ROI tangible para el negocio.",
-              accent: "#5C9DFF",
+              accent: "#8B5CF6",
             },
             {
               icon: Users,

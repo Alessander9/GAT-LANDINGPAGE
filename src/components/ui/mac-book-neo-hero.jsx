@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./mac-book-neo-hero.css";
@@ -9,25 +9,11 @@ import "./mac-book-neo-hero.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const cx = (...c) => c.filter(Boolean).join(" ");
-const drawCover = (ctx, img, width, height) => {
-  const scale = Math.max(width / img.naturalWidth, height / img.naturalHeight);
-  const drawWidth = img.naturalWidth * scale;
-  const drawHeight = img.naturalHeight * scale;
-
-  ctx.drawImage(
-    img,
-    (width - drawWidth) * 0.5,
-    (height - drawHeight) * 0.5,
-    drawWidth,
-    drawHeight
-  );
-};
 
 export function FrameSequenceHero({
   frameCount = 941,
   framePath,
-  eagerCount = 140,
-  scrollDistance = 2600,
+  eagerCount = 100,
   brand,
   navLinks = [],
   ctaLabel,
@@ -37,277 +23,249 @@ export function FrameSequenceHero({
   steps = [],
   className = "",
 }) {
-  const rootRef = useRef(null);
+  const containerRef = useRef(null);
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
-  const triggerRef = useRef(null);
-  const touchStartXRef = useRef(0);
-  const touchStartYRef = useRef(0);
 
-  const cacheRef = useRef(new Array(frameCount));
-  const loadedRef = useRef(0);
-  const currentFrameRef = useRef(-1);
+  const imagesRef = useRef([]);
+  const targetFrameRef = useRef(0);
+  const currentFrameRef = useRef(0);
   const rafIdRef = useRef(null);
+  const scrollTriggerRef = useRef(null);
 
   const [loadPct, setLoadPct] = useState(0);
   const [loaderDone, setLoaderDone] = useState(false);
-  const [navScrolled, setNavScrolled] = useState(false);
-  const [subHidden, setSubHidden] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [progress, setProgress] = useState(0);
   const [stepLocal, setStepLocal] = useState(0);
 
-  // Render a specific frame to the high-performance HTML5 canvas
-  const renderFrameToCanvas = useCallback(
-    (frameIndex) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d", { alpha: false });
-      if (!ctx) return;
-
-      const img = cacheRef.current[frameIndex];
-      if (img && img.complete && img.naturalWidth > 0) {
-        currentFrameRef.current = frameIndex;
-
-        const cw = canvas.width;
-        const ch = canvas.height;
-        drawCover(ctx, img, cw, ch);
-      } else if (framePath) {
-        // Fallback eager load on demand if not ready
-        const fallbackImg = new Image();
-        fallbackImg.decoding = "async";
-        fallbackImg.src = framePath(frameIndex + 1);
-        fallbackImg.onload = () => {
-          cacheRef.current[frameIndex] = fallbackImg;
-          if (currentFrameRef.current === frameIndex) {
-            renderFrameToCanvas(frameIndex);
-          }
-        };
-      }
-    },
-    [framePath]
-  );
-
-  // Initialize canvas resolution matching display dimensions & DPR
-  const resizeCanvas = useCallback(() => {
+  // Render a specific frame onto the canvas
+  const renderFrame = (idx) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    canvas.width = Math.round(rect.width * dpr);
-    canvas.height = Math.round(rect.height * dpr);
-
-    if (currentFrameRef.current >= 0) {
-      renderFrameToCanvas(currentFrameRef.current);
-    } else {
-      renderFrameToCanvas(0);
+    const img = imagesRef.current[idx];
+    if (!img || !img.complete || img.naturalWidth === 0) {
+      // If current frame isn't ready, find nearest loaded frame
+      let nearest = null;
+      for (let offset = 1; offset < 30; offset++) {
+        if (imagesRef.current[idx - offset]?.complete) {
+          nearest = imagesRef.current[idx - offset];
+          break;
+        }
+        if (imagesRef.current[idx + offset]?.complete) {
+          nearest = imagesRef.current[idx + offset];
+          break;
+        }
+      }
+      if (!nearest) return;
+      drawCover(ctx, canvas, nearest);
+      return;
     }
-  }, [renderFrameToCanvas]);
 
-  // Eager preloading in background with prioritised first batch
+    drawCover(ctx, canvas, img);
+  };
+
+  // Draw image to cover canvas while keeping aspect ratio
+  const drawCover = (ctx, canvas, img) => {
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const iw = img.naturalWidth;
+    const ih = img.naturalHeight;
+
+    ctx.clearRect(0, 0, cw, ch);
+
+    const isMobile = window.innerWidth < 768;
+    // On mobile, scale and shift laptop position up nicely
+    const scale = Math.max(cw / iw, ch / ih) * (isMobile ? 0.88 : 1.0);
+    const nw = iw * scale;
+    const nh = ih * scale;
+    const nx = (cw - nw) / 2;
+    // On mobile, position higher up so bottom card doesn't cover laptop
+    const ny = isMobile ? (ch - nh) / 2 - ch * 0.16 : (ch - nh) / 2;
+
+    ctx.drawImage(img, nx, ny, nw, nh);
+  };
+
+  // Resize canvas according to device pixel ratio
+  const resizeCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    renderFrame(Math.round(currentFrameRef.current));
+  };
+
+  // Image preloading
   useEffect(() => {
     if (!framePath) return;
-    let isMounted = true;
-    const eager = Math.min(eagerCount, frameCount);
 
-    const loadOne = (i) => {
-      if (cacheRef.current[i]) return;
+    const isMobile = window.innerWidth < 768;
+    const initialEager = isMobile ? Math.min(45, frameCount) : Math.min(eagerCount, frameCount);
+    let loadedCount = 0;
+
+    imagesRef.current = new Array(frameCount);
+
+    const preloadImage = (index, onFinish) => {
+      if (imagesRef.current[index]) return;
       const img = new Image();
       img.decoding = "async";
-      img.src = framePath(i + 1);
-      const onSettle = () => {
-        if (!isMounted) return;
-        loadedRef.current += 1;
-        const pct = Math.round((loadedRef.current / frameCount) * 100);
-        setLoadPct(pct);
+      img.src = framePath(index + 1);
 
-        if (i === 0 && currentFrameRef.current === -1) {
-          renderFrameToCanvas(0);
+      const handleLoad = () => {
+        loadedCount++;
+        const pct = Math.round((loadedCount / initialEager) * 100);
+        setLoadPct(Math.min(100, pct));
+
+        if (index === 0) {
+          renderFrame(0);
         }
 
-        if (loadedRef.current === eager) {
+        if (loadedCount >= initialEager) {
           setLoaderDone(true);
-          // Load remaining frames with idle priority
-          for (let j = eager; j < frameCount; j++) {
-            if (!cacheRef.current[j]) loadOne(j);
+          // Preload remaining frames with step intervals to save memory on mobile
+          const stepSize = isMobile ? 2 : 1;
+          for (let j = initialEager; j < frameCount; j += stepSize) {
+            preloadImage(j);
           }
         }
+        if (onFinish) onFinish();
       };
-      img.onload = onSettle;
-      img.onerror = onSettle;
-      cacheRef.current[i] = img;
+
+      img.onload = handleLoad;
+      img.onerror = handleLoad;
+      imagesRef.current[index] = img;
     };
 
-    for (let i = 0; i < eager; i++) loadOne(i);
-
-    return () => {
-      isMounted = false;
-    };
-  }, [frameCount, eagerCount, framePath, renderFrameToCanvas]);
-
-  // Resize listener
-  useEffect(() => {
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas, { passive: true });
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, [resizeCanvas]);
-
-  // Ultra-Smooth GSAP ScrollTrigger Scrubbing
-  useEffect(() => {
-    if (!stageRef.current) return;
-
-    const getScrollDistance = () =>
-      window.innerWidth < 768 ? Math.min(scrollDistance, 1900) : scrollDistance;
-
-    // Smooth scrub parameter for fluid momentum
-    const trigger = ScrollTrigger.create({
-      trigger: stageRef.current,
-      start: "top top",
-      end: () => `+=${getScrollDistance()}`,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      scrub: 0.65,
-      fastScrollEnd: true,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        const targetFrame = Math.max(
-          0,
-          Math.min(frameCount - 1, Math.round(p * (frameCount - 1)))
-        );
-
-        if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = requestAnimationFrame(() => {
-          renderFrameToCanvas(targetFrame);
-        });
-
-        setProgress(p);
-        setNavScrolled(p > 0.02);
-        setSubHidden(p > 0.06);
-
-        let idx = 0;
-        let local = 0;
-        for (let i = 0; i < steps.length; i++) {
-          const s = steps[i];
-          if (p >= s.from && (p < s.to || (i === steps.length - 1 && p <= s.to))) {
-            idx = i;
-            local = (p - s.from) / Math.max(0.001, s.to - s.from);
-            break;
-          }
-        }
-        setActiveIdx(idx);
-        setStepLocal(Math.max(0, Math.min(1, local)));
-      },
-    });
-
-    triggerRef.current = trigger;
-    ScrollTrigger.refresh();
-
-    return () => {
-      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-      if (trigger) trigger.kill();
-    };
-  }, [steps, frameCount, scrollDistance, renderFrameToCanvas]);
-
-  // Jump to specific step on click/tap with smooth scroll
-  const goToStep = (index) => {
-    if (!steps[index] || !triggerRef.current) return;
-    const targetP = (steps[index].from + steps[index].to) / 2;
-    const scrollPos =
-      triggerRef.current.start +
-      targetP * (triggerRef.current.end - triggerRef.current.start);
-
-    window.scrollTo({
-      top: scrollPos,
-      behavior: "smooth",
-    });
-
-    setActiveIdx(index);
-    const targetFrame = Math.round(targetP * (frameCount - 1));
-    renderFrameToCanvas(targetFrame);
-  };
-
-  // Touch swipe gestures on mobile
-  const handleTouchStart = (e) => {
-    touchStartXRef.current = e.touches[0].clientX;
-    touchStartYRef.current = e.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (e) => {
-    const diffX = touchStartXRef.current - e.changedTouches[0].clientX;
-    const diffY = touchStartYRef.current - e.changedTouches[0].clientY;
-
-    if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY) * 1.3) {
-      if (diffX > 0 && activeIdx < steps.length - 1) {
-        goToStep(activeIdx + 1);
-      } else if (diffX < 0 && activeIdx > 0) {
-        goToStep(activeIdx - 1);
-      }
+    // Eagerly load initial batch
+    for (let i = 0; i < initialEager; i++) {
+      preloadImage(i);
     }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, [frameCount, eagerCount, framePath]);
+
+  // GSAP ScrollTrigger setup for robust pinning and scrubbing
+  useEffect(() => {
+    if (!containerRef.current || !stageRef.current) return;
+
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
+    const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 768;
+      // Mobile scroll distance: 160vh for snappy responsive feel. Desktop: 300vh.
+      const scrollDistance = isMobile ? window.innerHeight * 1.6 : window.innerHeight * 3.0;
+
+      const st = ScrollTrigger.create({
+        trigger: containerRef.current,
+        pin: stageRef.current,
+        pinSpacing: true,
+        start: "top top",
+        end: () => `+=${scrollDistance}`,
+        scrub: isMobile ? true : 0.2,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const p = self.progress;
+          setProgress(p);
+
+          const frameIdx = Math.max(0, Math.min(frameCount - 1, Math.round(p * (frameCount - 1))));
+          currentFrameRef.current = frameIdx;
+          renderFrame(frameIdx);
+
+          // Compute active step based on progress
+          let idx = 0;
+          let local = 0;
+          for (let i = 0; i < steps.length; i++) {
+            const s = steps[i];
+            if (p >= s.from && (p < s.to || i === steps.length - 1)) {
+              idx = i;
+              local = (p - s.from) / Math.max(0.001, s.to - s.from);
+              break;
+            }
+          }
+          setActiveIdx(idx);
+          setStepLocal(Math.max(0, Math.min(1, local)));
+        },
+      });
+
+      scrollTriggerRef.current = st;
+    }, containerRef);
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
+  }, [frameCount, steps]);
+
+  // Click on indicator dot to scroll directly to step
+  const scrollToStep = (idx) => {
+    const st = scrollTriggerRef.current;
+    if (!st || !steps[idx]) return;
+    const targetProgress = (steps[idx].from + steps[idx].to) / 2;
+    const targetScrollY = st.start + targetProgress * (st.end - st.start);
+    window.scrollTo({ top: targetScrollY, behavior: "smooth" });
   };
 
   return (
-    <div
-      ref={rootRef}
-      className={cx("fsh-root", className)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* Loader */}
+    <div ref={containerRef} className={cx("fsh-root", className)}>
+      {/* Loading Progress Bar */}
       <div aria-hidden className={cx("fsh-loader", loaderDone && "fsh-loader-done")}>
         <div className="fsh-loader-text">
-          {loadPct < 100 ? `Cargando · ${loadPct}%` : "Listo"}
+          {loadPct < 100 ? `Loading 3D · ${loadPct}%` : "Ready"}
         </div>
         <div className="fsh-loader-track">
           <span className="fsh-loader-fill" style={{ width: `${loadPct}%` }} />
         </div>
       </div>
 
-      {/* Nav header if specified */}
-      {(brand || navLinks.length > 0 || ctaLabel) && (
-        <nav className={cx("fsh-nav", navScrolled && "fsh-nav-scrolled")}>
-          <div className="fsh-brand">{brand}</div>
-          {navLinks.length > 0 && (
-            <div className="fsh-nav-links">
-              {navLinks.map((l) => (
-                <a key={l.label} href={l.href}>
-                  {l.label}
-                </a>
-              ))}
-            </div>
-          )}
-          {ctaLabel && (
-            <a href={ctaHref} className="fsh-cta">
-              {ctaLabel}
-            </a>
-          )}
-        </nav>
-      )}
+      {/* Navigation Top Brand Bar */}
+      <nav className="fsh-nav">
+        <div className="fsh-brand">{brand}</div>
+        {navLinks.length > 0 && (
+          <div className="fsh-nav-links">
+            {navLinks.map((l) => (
+              <a key={l.label} href={l.href}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
+        {ctaLabel && (
+          <a href={ctaHref} className="fsh-cta">
+            {ctaLabel}
+          </a>
+        )}
+      </nav>
 
-      {/* GSAP Pinned Stage */}
+      {/* Pinned Stage Container */}
       <div ref={stageRef} className="fsh-stage">
+        {/* Hardware accelerated HTML5 Canvas */}
         <div className="fsh-canvas-wrap">
-          {/* High-Performance Hardware-Accelerated HTML5 Canvas */}
-          <canvas
-            ref={canvasRef}
-            className="fsh-canvas"
-            style={{ width: "100%", height: "100%", display: "block" }}
-          />
-          {/* Seamless Overlay */}
-          <div className="fsh-canvas-overlay" />
+          <canvas ref={canvasRef} className="fsh-canvas" />
         </div>
 
-        {/* Copy Header */}
+        {/* Section Header Copy */}
         <div className="fsh-copy">
           <h2 className="fsh-title">{title}</h2>
           {subtitle && (
-            <p className={cx("fsh-sub", subHidden && "fsh-sub-hidden")}>{subtitle}</p>
+            <p className={cx("fsh-sub", progress > 0.08 && "fsh-sub-hidden")}>{subtitle}</p>
           )}
         </div>
 
-        {/* Floating Steps Cards (Glassmorphism UI) */}
+        {/* Floating Solution Cards */}
         <div className="fsh-cards">
           {steps.map((s, i) => {
             const isActive = activeIdx === i;
@@ -315,7 +273,7 @@ export function FrameSequenceHero({
             return (
               <article
                 key={i}
-                style={{ ["--c"]: s.color }}
+                style={{ "--c": s.color }}
                 className={cx(
                   "fsh-card",
                   isActive && "fsh-card-active",
@@ -343,15 +301,14 @@ export function FrameSequenceHero({
                           <button
                             key={j}
                             type="button"
+                            onClick={() => scrollToStep(j)}
                             className="fsh-tick"
-                            onClick={() => goToStep(j)}
-                            title={`Ver ${stepItem.label}`}
-                            aria-label={`Paso ${j + 1}: ${stepItem.label}`}
+                            title={`Ir a ${stepItem.label || stepItem.title}`}
                           >
                             <span
                               style={{
                                 transform: `scaleX(${done ? 1 : cur ? stepLocal : 0})`,
-                                transition: done ? "none" : "transform 140ms ease-out",
+                                transition: done ? "none" : "transform 140ms linear",
                               }}
                             />
                           </button>
@@ -366,7 +323,7 @@ export function FrameSequenceHero({
           })}
         </div>
 
-        {/* Progress bar */}
+        {/* Bottom Scroll Progress Bar */}
         <div className="fsh-progress">
           <span className="fsh-progress-fill" style={{ width: `${progress * 100}%` }} />
         </div>

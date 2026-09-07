@@ -29,6 +29,12 @@ const PAGE_META = {
       'Conoce al equipo de GAT Consulting, consultoría tecnológica en Lima, Perú. Nuestra misión, visión y valores que impulsan la transformación digital de empresas peruanas.',
     canonical: `${SITE_URL}/#nosotros`,
   },
+  servicios: {
+    title: 'Catálogo de Servicios Tecnológicos & Software | GAT Consulting Lima',
+    description:
+      'Catálogo completo de servicios: desarrollo web, aplicaciones móviles iOS y Android, agentes de inteligencia artificial, chatbots, ciberseguridad y cloud computing en Lima, Perú.',
+    canonical: `${SITE_URL}/#servicios-todos`,
+  },
   services: {
     'landing-page': {
       title: 'Páginas Web Corporativas y Landing Pages en Lima | GAT Consulting',
@@ -67,6 +73,12 @@ const PAGE_META = {
       canonical: `${SITE_URL}/#servicio/automatizaciones-ia`,
     },
     'asistente-ia': {
+      title: 'Chatbots con IA y Asistentes Virtuales para Empresas | GAT Consulting Lima',
+      description:
+        'Chatbots cognitivos con IA para WhatsApp, web e Instagram. Atención al cliente 24/7 y calificación de leads para negocios en Lima y Perú. Solicita demo gratuita.',
+      canonical: `${SITE_URL}/#servicio/asistente-ia`,
+    },
+    asistente: {
       title: 'Chatbots con IA y Asistentes Virtuales para Empresas | GAT Consulting Lima',
       description:
         'Chatbots cognitivos con IA para WhatsApp, web e Instagram. Atención al cliente 24/7 y calificación de leads para negocios en Lima y Perú. Solicita demo gratuita.',

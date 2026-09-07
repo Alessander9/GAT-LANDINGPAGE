@@ -1,0 +1,465 @@
+/* ── StaggeredMenu — GAT Technology Consulting brand adaptation ── */
+
+.staggered-menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ── Fullscreen Backdrop Blur Layer ── */
+.sm-backdrop-blur {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(7, 21, 33, 0.65);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+  z-index: 5;
+}
+
+.staggered-menu-wrapper[data-open] .sm-backdrop-blur {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.staggered-menu-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: transparent;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.staggered-menu-header > * {
+  pointer-events: auto;
+}
+
+/* ── Logo ── */
+.sm-logo {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.sm-logo-hidden {
+  opacity: 0 !important;
+  transform: translateY(-16px) scale(0.92) !important;
+  pointer-events: none !important;
+}
+
+.sm-logo-img {
+  display: block;
+  height: clamp(60px, 6.5vw, 76px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 16px rgba(9, 168, 181, 0.5));
+  transition: filter 0.3s ease, transform 0.25s ease;
+}
+
+.sm-logo:hover .sm-logo-img {
+  transform: scale(1.03);
+}
+
+/* Invert logo when panel is open (white panel) */
+.staggered-menu-wrapper[data-open] .sm-logo-img {
+  filter: none;
+}
+
+/* ── Toggle Button ── */
+.sm-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(18, 50, 74, 0.78);
+  border: 1px solid rgba(9, 168, 181, 0.38);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.84rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  overflow: visible;
+  font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.sm-toggle:hover {
+  background: rgba(9, 168, 181, 0.25);
+  border-color: rgba(44, 216, 232, 0.65);
+  box-shadow: 0 6px 24px rgba(9, 168, 181, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.staggered-menu-wrapper[data-open] .sm-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sm-toggle:focus-visible {
+  outline: 2px solid #09A8B5;
+  outline-offset: 4px;
+  border-radius: 9999px;
+}
+
+.sm-toggle-textWrap {
+  position: relative;
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 3.8em;
+}
+
+.sm-toggle-textInner {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.sm-toggle-line {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+/* ── Plus / X Icon ── */
+.sm-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.sm-icon-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+/* ── Pre-layers (stagger backdrop) ── */
+.sm-prelayers {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(300px, 45vw, 520px);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 1;
+}
+
+[data-position='left'] .sm-prelayers {
+  right: auto;
+  left: 0;
+}
+
+.sm-prelayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+
+/* ── Main Panel ── */
+.staggered-menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(300px, 45vw, 520px);
+  height: 100%;
+  background: #071521;
+  border-left: 1px solid rgba(9, 168, 181, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 7rem 3rem 3rem 3rem;
+  overflow-y: auto;
+  z-index: 10;
+  pointer-events: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(9, 168, 181, 0.3) transparent;
+}
+
+.staggered-menu-panel::-webkit-scrollbar {
+  width: 4px;
+}
+.staggered-menu-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.staggered-menu-panel::-webkit-scrollbar-thumb {
+  background: rgba(9, 168, 181, 0.3);
+  border-radius: 2px;
+}
+
+[data-position='left'] .staggered-menu-panel {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1px solid rgba(9, 168, 181, 0.2);
+}
+
+/* ── Panel inner content ── */
+.sm-panel-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ── Menu Items ── */
+.sm-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.sm-panel-itemWrap {
+  position: relative;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.sm-panel-item {
+  position: relative;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3.8vw, 2.6rem);
+  cursor: pointer;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  text-decoration: none;
+  font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+  padding: 0.18rem 0;
+}
+
+.sm-panel-item:hover {
+  color: var(--sm-accent, #09A8B5);
+  transform: translateX(4px);
+}
+
+.sm-panel-itemLabel {
+  display: inline-block;
+  will-change: transform;
+  transform-origin: 50% 100%;
+}
+
+/* ── Clean Right-Aligned Item Numbering ── */
+.sm-panel-itemNum {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--sm-accent, #09A8B5);
+  letter-spacing: 0.08em;
+  font-family: 'Inter', monospace, sans-serif;
+  opacity: 0.7;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  will-change: opacity, transform;
+}
+
+.sm-panel-item:hover .sm-panel-itemNum {
+  opacity: 1;
+  text-shadow: 0 0 10px var(--sm-accent, #09A8B5);
+  transform: translateX(2px);
+}
+
+/* ── Divider between nav groups ── */
+.sm-panel-divider {
+  height: 1px;
+  background: rgba(9, 168, 181, 0.15);
+  margin: 1.2rem 0;
+}
+
+/* ── Subitem group label ── */
+.sm-panel-group-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #09A8B5;
+  margin-bottom: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Socials ── */
+.sm-socials {
+  margin-top: auto;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(9, 168, 181, 0.15);
+}
+
+.sm-socials-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #09A8B5;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.sm-socials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.sm-socials-link {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #8EABC0;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  transition: color 0.25s ease, opacity 0.25s ease;
+  letter-spacing: 0.01em;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.sm-socials-link:hover {
+  color: var(--sm-accent, #09A8B5);
+}
+
+.sm-socials-list:hover .sm-socials-link {
+  opacity: 0.4;
+}
+
+.sm-socials-list:hover .sm-socials-link:hover {
+  opacity: 1;
+}
+
+.sm-socials-link:focus-visible {
+  outline: 2px solid #09A8B5;
+  outline-offset: 3px;
+}
+
+/* ── CTA Footer inside panel ── */
+.sm-panel-cta {
+  margin-top: 0.75rem;
+}
+
+.sm-panel-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: #09A8B5;
+  border: none;
+  border-radius: 12px;
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.sm-panel-cta-btn:hover {
+  background: #2CD8E8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(9, 168, 181, 0.45);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .staggered-menu-panel,
+  .sm-prelayers {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .sm-panel-item {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .staggered-menu-panel {
+    padding: 6.5rem 2rem 2.5rem 2rem;
+    border-left: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .staggered-menu-panel,
+  .sm-prelayers {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .staggered-menu-panel {
+    padding: 6rem 1.5rem 2rem 1.5rem;
+  }
+
+  .staggered-menu-header {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .sm-panel-item {
+    font-size: clamp(1.6rem, 9vw, 2.4rem);
+  }
+
+  .sm-logo-img {
+    height: 52px;
+  }
+}

@@ -250,7 +250,7 @@ button {
   background: var(--gat-blue);
 }
 
-/* Mobile Optimization Utilities */
+/* Mobile Optimization Utilities & Breathing Room */
 @media (max-width: 768px) {
   html, body, #root, .app-container {
     overflow-x: hidden !important;
@@ -259,6 +259,15 @@ button {
 
   .container {
     padding: 0 18px !important;
+  }
+
+  .section-padding {
+    padding: clamp(60px, 9vh, 85px) 0 !important;
+  }
+
+  .section-tag {
+    font-size: 0.76rem !important;
+    margin-bottom: 12px !important;
   }
 
   .section-title {
@@ -273,8 +282,38 @@ button {
   }
 
   .btn-primary, .btn-secondary {
-    padding: 12px 20px !important;
-    font-size: 0.88rem !important;
+    padding: 13px 22px !important;
+    font-size: 0.9rem !important;
+    min-height: 48px !important;
+    border-radius: 14px !important;
   }
+
+  /* Form inputs: 16px minimum prevents iOS Safari automatic zoom */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Bento and card comfortable gaps on mobile */
+  .fullscreen-bento-section {
+    padding: 60px 16px !important;
+  }
+
+  .bento-grid-root {
+    gap: 16px !important;
+  }
+
+  .glass-card {
+    border-radius: 20px !important;
+  }
+}
+
+/* ──── HARDWARE-ACCELERATED ULTRA-SMOOTH RENDERING PIPELINE ──── */
+.glass-card,
+.fsh-stage,
+.fsh-card,
+.gat-flowing-bento-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 

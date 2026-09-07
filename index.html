@@ -84,9 +84,8 @@
           "description": "Consultoría tecnológica especializada en desarrollo web, aplicaciones móviles, inteligencia artificial, chatbots, automatización de procesos y ciberseguridad para empresas en Lima y Perú.",
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+51-925-229-293",
             "contactType": "customer service",
-            "contactOption": "TollFree",
+            "url": "https://gat-consulting.vercel.app/#contacto",
             "areaServed": "PE",
             "availableLanguage": "Spanish"
           },
@@ -101,7 +100,7 @@
             }
           ],
           "sameAs": [
-            "https://wa.me/51925229293"
+            "https://gat-consulting.vercel.app/#contacto"
           ]
         },
         {
@@ -111,7 +110,6 @@
           "alternateName": "GAT Consulting",
           "description": "Consultoría tecnológica en Lima, Perú. Ofrecemos desarrollo web, páginas web, tiendas virtuales, aplicaciones Android e iOS, chatbots con IA, automatización de procesos, asistentes de IA y ciberseguridad para empresas y negocios.",
           "url": "https://gat-consulting.vercel.app/",
-          "telephone": "+51925229293",
           "priceRange": "$$",
           "currenciesAccepted": "PEN, USD",
           "paymentAccepted": "Transferencia bancaria, PayPal",
@@ -223,10 +221,30 @@
     }
     </script>
 
-    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Preload Critical Logo & Assets -->
+    <link rel="preload" as="image" href="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png" type="image/png" fetchpriority="high" />
+
+    <!-- CDN Preconnects & DNS Prefetch for Ultra-Fast Asset Delivery -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
+    <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
+
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit (Non-blocking async load) -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

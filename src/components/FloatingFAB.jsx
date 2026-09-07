@@ -12,6 +12,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { getAiChatResponse } from "../services/aiChatService";
+import { getWhatsAppUrl } from "../config/contact";
 
 // WhatsApp Custom Icon
 function WhatsAppIcon({ size = 24, color = "#FFFFFF" }) {
@@ -80,11 +81,80 @@ const KNOWLEDGE_BASE = [
 
 const DEFAULT_ANSWER = `En **GAT Technology Consulting** somos tu partner estratégico en transformación digital y desarrollo de software de misión crítica.\n\nOfrecemos:\n• 🌐 Desarrollo Web & Móvil (iOS / Android)\n• 🤖 Automatizaciones e IA Aplicada\n• ☁️ Cloud, DevOps & Ciberseguridad Zero Trust\n\n¿Te gustaría que te preparemos una cotización o prefieres coordinar una llamada por WhatsApp?`;
 
-export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
+export default function FloatingFAB({
+  onNavigateContact,
+  onNavigateService,
+  isHidden = false,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isInHero, setIsInHero] = useState(true);
+  const [isInFeaturedMobile, setIsInFeaturedMobile] = useState(false);
+  const scrollTimeoutRef = useRef(null);
+
+  // Hide FAB in Hero section and in Soluciones Destacadas on mobile
+  useEffect(() => {
+    const updateScrollStatus = () => {
+      const currentScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      // In Hero section if scroll position is less than threshold
+      const heroThreshold = Math.min(window.innerHeight * 0.65, 420);
+      setIsInHero(currentScrollY < heroThreshold);
+
+      // Check if inside Soluciones Destacadas section on mobile
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        const featuredSection = document.getElementById("servicios-destacados");
+        if (featuredSection) {
+          const rect = featuredSection.getBoundingClientRect();
+          // Active if section is within the visible viewport range
+          const inView = rect.top <= window.innerHeight * 0.85 && rect.bottom >= window.innerHeight * 0.15;
+          setIsInFeaturedMobile(inView);
+        } else {
+          setIsInFeaturedMobile(false);
+        }
+      } else {
+        setIsInFeaturedMobile(false);
+      }
+    };
+
+    const handleScroll = () => {
+      updateScrollStatus();
+      setIsScrolling(true);
+      if (isOpen) {
+        setIsOpen(false);
+      }
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 600);
+    };
+
+    updateScrollStatus();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateScrollStatus);
+    window.addEventListener("hashchange", updateScrollStatus);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateScrollStatus);
+      window.removeEventListener("hashchange", updateScrollStatus);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
+  }, [isOpen]);
+
+  const isFabHidden = isHidden || isInHero || isInFeaturedMobile;
+
+  // Auto-close popup/chat if navbar is opened or back in hero / featured
+  useEffect(() => {
+    if (isFabHidden) {
+      setIsOpen(false);
+      setIsChatOpen(false);
+    }
+  }, [isFabHidden]);
 
   const [messages, setMessages] = useState([
     {
@@ -158,7 +228,7 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
       const fallbackReply = {
         id: `bot-${Date.now()}`,
         sender: "bot",
-        text: "¡Gracias por tu mensaje! En GAT Technology Consulting estamos listos para atenderte. Puedes contactar a un asesor ahora mismo por WhatsApp al **+51 925 229 293**.",
+        text: "¡Gracias por tu mensaje! En GAT Technology Consulting estamos listos para atenderte. Puedes contactar a un asesor ahora mismo haciendo clic en **Contactar por WhatsApp**.",
         hasWhatsappCTA: true,
         hasContactCTA: true,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
@@ -170,10 +240,10 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
   };
 
   const handleOpenWhatsapp = (customText) => {
-    const text = encodeURIComponent(
+    const url = getWhatsAppUrl(
       customText || "¡Hola GAT Technology Consulting! Me gustaría recibir asesoría tecnológica y cotizar un proyecto."
     );
-    window.open(`https://wa.me/51925229293?text=${text}`, "_blank", "noopener,noreferrer");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const handleOpenChat = () => {
@@ -192,9 +262,11 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
     ]);
   };
 
+  const [showHintPill, setShowHintPill] = useState(true);
+
   return (
     <>
-      {/* ──── FLOATING FAB WRAPPER (BOTTOM RIGHT) ──── */}
+      {/* ──── FLOATING FAB WRAPPER (BOTTOM RIGHT WITH SPRING POP ANIMATION) ──── */}
       <div
         aria-label="Acciones de Contacto y Asistencia"
         className="gat-fab-wrapper"
@@ -206,37 +278,124 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-end",
-          gap: "14px",
-          pointerEvents: "none",
+          gap: "12px",
+          pointerEvents: isFabHidden ? "none" : "auto",
+          opacity: isFabHidden ? 0 : 1,
+          transform: isFabHidden ? "scale(0.5) translateY(40px)" : "scale(1) translateY(0)",
+          transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s",
+          visibility: isFabHidden ? "hidden" : "visible",
         }}
       >
-        {/* ──── POPUP CARD (MATCHING USER'S EXACT DESIGN) ──── */}
+        {/* ──── FLOATING HINT PILL (WHEN CLOSED) ──── */}
+        {!isOpen && !isChatOpen && showHintPill && (
+          <div
+            onClick={() => setIsOpen(true)}
+            className={`gat-fab-hint-pill ${isScrolling ? "gat-fab-hint-scrolling" : ""}`}
+            style={{
+              pointerEvents: isScrolling ? "none" : "auto",
+              opacity: isScrolling ? 0 : 1,
+              transform: isScrolling ? "translateY(12px) scale(0.92)" : "translateY(0) scale(1)",
+              visibility: isScrolling ? "hidden" : "visible",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "8px 16px 8px 12px",
+              background: "linear-gradient(135deg, rgba(14, 38, 58, 0.94) 0%, rgba(7, 21, 33, 0.96) 100%)",
+              backdropFilter: "blur(20px) saturate(180%)",
+              WebkitBackdropFilter: "blur(20px) saturate(180%)",
+              border: "1px solid rgba(9, 168, 181, 0.4)",
+              borderTop: "1px solid rgba(44, 216, 232, 0.6)",
+              borderRadius: "9999px",
+              boxShadow: "0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(9, 168, 181, 0.25)",
+              color: "#FFFFFF",
+              fontSize: "0.82rem",
+              fontWeight: 600,
+              cursor: "pointer",
+              transition: "opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s",
+              animation: isScrolling ? "none" : "gat-fab-hint-float 3s ease-in-out infinite",
+            }}
+          >
+            <span
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                background: "#22C55E",
+                boxShadow: "0 0 10px #22C55E",
+                display: "inline-block",
+                animation: "gat-dot-pulse 1.8s infinite",
+              }}
+            />
+            <span style={{ color: "#E2F2F5" }}>¿Tienes un proyecto?</span>
+            <span style={{ color: "#2CD8E8", fontWeight: 700 }}>¡Hablemos!</span>
+            <Sparkles size={13} color="#2CD8E8" />
+          </div>
+        )}
+
+        {/* ──── POPUP CARD (PREMIUM CYBER GLASS) ──── */}
         {isOpen && !isChatOpen && (
           <div
             className="gat-fab-choice-card"
             style={{
               pointerEvents: "auto",
-              width: "330px",
+              width: "340px",
               maxWidth: "calc(100vw - 32px)",
-              background: "#FFFFFF",
+              background: "linear-gradient(145deg, rgba(14, 38, 58, 0.96) 0%, rgba(7, 21, 33, 0.98) 100%)",
+              backdropFilter: "blur(30px) saturate(190%)",
+              WebkitBackdropFilter: "blur(30px) saturate(190%)",
               borderRadius: "26px",
-              padding: "22px 20px",
-              boxShadow: "0 24px 60px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.12)",
-              border: "1px solid rgba(255, 255, 255, 0.8)",
+              padding: "20px 18px",
+              boxShadow: "0 30px 70px rgba(0, 0, 0, 0.75), 0 0 35px rgba(9, 168, 181, 0.25)",
+              border: "1px solid rgba(255, 255, 255, 0.16)",
+              borderTop: "1px solid rgba(44, 216, 232, 0.55)",
               display: "flex",
               flexDirection: "column",
-              gap: "14px",
+              gap: "12px",
               animation: "gat-fab-scale-up 0.28s cubic-bezier(0.16, 1, 0.3, 1)",
               transformOrigin: "bottom right",
             }}
           >
             {/* Header Text */}
             <div style={{ marginBottom: "2px" }}>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "4px 10px",
+                  borderRadius: "9999px",
+                  background: "rgba(34, 197, 94, 0.12)",
+                  border: "1px solid rgba(34, 197, 94, 0.3)",
+                  marginBottom: "8px",
+                }}
+              >
+                <span
+                  style={{
+                    width: "6px",
+                    height: "6px",
+                    borderRadius: "50%",
+                    background: "#22C55E",
+                    boxShadow: "0 0 8px #22C55E",
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                    color: "#22C55E",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Atención en Línea 24/7
+                </span>
+              </div>
+
               <h3
                 style={{
                   fontSize: "1.18rem",
                   fontWeight: 800,
-                  color: "#0F2636",
+                  color: "#FFFFFF",
                   margin: "0 0 4px 0",
                   letterSpacing: "-0.02em",
                   fontFamily: "var(--font-heading, sans-serif)",
@@ -246,13 +405,13 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
               </h3>
               <p
                 style={{
-                  fontSize: "0.86rem",
-                  color: "#6B7280",
+                  fontSize: "0.82rem",
+                  color: "#9FB5C4",
                   margin: 0,
                   fontWeight: 500,
                 }}
               >
-                Elige tu canal de atención preferido
+                Elige tu canal preferido para respuesta inmediata
               </p>
             </div>
 
@@ -262,35 +421,35 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
               <button
                 type="button"
                 onClick={handleOpenChat}
-                className="gat-fab-option-btn"
+                className="gat-fab-option-btn gat-fab-opt-ai"
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   width: "100%",
-                  padding: "14px 16px",
-                  background: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
+                  padding: "13px 14px",
+                  background: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(139, 92, 246, 0.35)",
                   borderRadius: "18px",
                   cursor: "pointer",
                   textAlign: "left",
-                  transition: "all 0.2s ease",
+                  transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
                   outline: "none",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  {/* Purple Gradient Icon Box */}
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  {/* Purple AI Gradient Icon Box */}
                   <div
                     style={{
-                      width: "48px",
-                      height: "48px",
+                      width: "46px",
+                      height: "46px",
                       borderRadius: "14px",
                       background: "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       color: "#FFFFFF",
-                      boxShadow: "0 8px 18px rgba(124, 58, 237, 0.38)",
+                      boxShadow: "0 8px 20px rgba(139, 92, 246, 0.45)",
                       flexShrink: 0,
                     }}
                   >
@@ -298,66 +457,80 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
                   </div>
 
                   <div>
-                    <div
-                      style={{
-                        fontSize: "0.95rem",
-                        fontWeight: 700,
-                        color: "#0F2636",
-                        letterSpacing: "-0.01em",
-                        marginBottom: "2px",
-                      }}
-                    >
-                      Consultar con el asistente
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "2px" }}>
+                      <span
+                        style={{
+                          fontSize: "0.93rem",
+                          fontWeight: 700,
+                          color: "#FFFFFF",
+                          letterSpacing: "-0.01em",
+                        }}
+                      >
+                        Asistente IA GAT
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "0.68rem",
+                          fontWeight: 700,
+                          color: "#A78BFA",
+                          background: "rgba(139, 92, 246, 0.22)",
+                          padding: "2px 6px",
+                          borderRadius: "9999px",
+                          border: "1px solid rgba(139, 92, 246, 0.4)",
+                        }}
+                      >
+                        ⚡ 24/7
+                      </span>
                     </div>
                     <div
                       style={{
-                        fontSize: "0.78rem",
-                        color: "#64748B",
+                        fontSize: "0.76rem",
+                        color: "#B4CAD6",
                         fontWeight: 500,
                         lineHeight: 1.3,
                       }}
                     >
-                      Respuestas inmediatas 24/7 con IA
+                      Respuestas técnicas y cotización inmediata
                     </div>
                   </div>
                 </div>
 
-                <ChevronRight size={18} color="#94A3B8" />
+                <ChevronRight size={18} color="#A78BFA" />
               </button>
 
               {/* Option 2: Hablar por WhatsApp */}
               <button
                 type="button"
                 onClick={() => handleOpenWhatsapp()}
-                className="gat-fab-option-btn"
+                className="gat-fab-option-btn gat-fab-opt-wa"
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   width: "100%",
-                  padding: "14px 16px",
-                  background: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
+                  padding: "13px 14px",
+                  background: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(34, 197, 94, 0.28)",
                   borderRadius: "18px",
                   cursor: "pointer",
                   textAlign: "left",
-                  transition: "all 0.2s ease",
+                  transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
                   outline: "none",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  {/* Green Gradient Icon Box */}
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  {/* Green WhatsApp Gradient Icon Box */}
                   <div
                     style={{
-                      width: "48px",
-                      height: "48px",
+                      width: "46px",
+                      height: "46px",
                       borderRadius: "14px",
                       background: "linear-gradient(135deg, #22C55E 0%, #16A34A 100%)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       color: "#FFFFFF",
-                      boxShadow: "0 8px 18px rgba(34, 197, 94, 0.38)",
+                      boxShadow: "0 8px 20px rgba(34, 197, 94, 0.45)",
                       flexShrink: 0,
                     }}
                   >
@@ -365,100 +538,153 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
                   </div>
 
                   <div>
-                    <div
-                      style={{
-                        fontSize: "0.95rem",
-                        fontWeight: 700,
-                        color: "#0F2636",
-                        letterSpacing: "-0.01em",
-                        marginBottom: "2px",
-                      }}
-                    >
-                      Hablar por WhatsApp
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "2px" }}>
+                      <span
+                        style={{
+                          fontSize: "0.93rem",
+                          fontWeight: 700,
+                          color: "#FFFFFF",
+                          letterSpacing: "-0.01em",
+                        }}
+                      >
+                        Hablar por WhatsApp
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "0.68rem",
+                          fontWeight: 700,
+                          color: "#22C55E",
+                          background: "rgba(34, 197, 94, 0.2)",
+                          padding: "2px 6px",
+                          borderRadius: "9999px",
+                          border: "1px solid rgba(34, 197, 94, 0.35)",
+                        }}
+                      >
+                        ● En Línea
+                      </span>
                     </div>
                     <div
                       style={{
-                        fontSize: "0.78rem",
-                        color: "#64748B",
+                        fontSize: "0.76rem",
+                        color: "#B4CAD6",
                         fontWeight: 500,
                         lineHeight: 1.3,
                       }}
                     >
-                      Atención directa con un asesor
+                      Atención directa con consultor senior
                     </div>
                   </div>
                 </div>
 
-                <ChevronRight size={18} color="#94A3B8" />
+                <ChevronRight size={18} color="#22C55E" />
               </button>
             </div>
           </div>
         )}
 
-        {/* ──── MAIN GREEN FAB BUTTON (MATCHING SCREENSHOT) ──── */}
-        <button
-          type="button"
-          className="gat-main-fab-btn"
-          onClick={() => {
-            if (isChatOpen) {
-              setIsChatOpen(false);
-            } else {
-              setIsOpen(!isOpen);
-            }
-          }}
-          aria-label={isOpen || isChatOpen ? "Cerrar menú" : "¿Cómo podemos ayudarte?"}
-          style={{
-            pointerEvents: "auto",
-            width: "60px",
-            height: "60px",
-            borderRadius: "50%",
-            background: isOpen || isChatOpen
-              ? "linear-gradient(135deg, #097759 0%, #05543E 100%)"
-              : "linear-gradient(135deg, #09A8B5 0%, #087F9F 50%, #097759 100%)",
-            border: "1.5px solid rgba(255, 255, 255, 0.35)",
-            boxShadow:
-              "0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(9, 119, 89, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.5)",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#FFFFFF",
-            transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease",
-            outline: "none",
-          }}
-        >
-          {/* Animated Glow Ring */}
-          {!isOpen && !isChatOpen && (
-            <span
-              className="gat-fab-ring"
-              style={{
-                position: "absolute",
-                inset: "-4px",
-                borderRadius: "50%",
-                border: "2px solid rgba(9, 168, 181, 0.6)",
-                animation: "gat-pulse-ring 2.5s infinite",
-                pointerEvents: "none",
-              }}
-            />
-          )}
-
-          {/* Icon Switcher */}
-          <div
+        {/* ──── MAIN SOLID COLOR FAB BUTTON ──── */}
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <button
+            type="button"
+            className="gat-main-fab-btn"
+            onClick={() => {
+              if (isChatOpen) {
+                setIsChatOpen(false);
+              } else {
+                setIsOpen(!isOpen);
+              }
+            }}
+            aria-label={isOpen || isChatOpen ? "Cerrar menú" : "¿Cómo podemos ayudarte?"}
             style={{
-              transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-              transform: isOpen || isChatOpen ? "rotate(90deg)" : "rotate(0deg)",
+              pointerEvents: "auto",
+              position: "relative",
+              width: "60px",
+              height: "60px",
+              borderRadius: "50%",
+              backgroundColor: isOpen || isChatOpen ? "#0F2636" : "#09A8B5",
+              border: "2px solid rgba(255, 255, 255, 0.4)",
+              boxShadow: isOpen || isChatOpen
+                ? "0 14px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(15, 38, 54, 0.6)"
+                : "0 16px 36px rgba(0, 0, 0, 0.45), 0 0 26px rgba(9, 168, 181, 0.55)",
+              cursor: "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              color: "#FFFFFF",
+              transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease",
+              outline: "none",
             }}
           >
-            {isOpen || isChatOpen ? (
-              <X size={28} strokeWidth={2.5} />
-            ) : (
-              <WhatsAppIcon size={26} color="#FFFFFF" />
+            {/* Animated Solid Glow Ring */}
+            {!isOpen && !isChatOpen && (
+              <span
+                className="gat-fab-ring-1"
+                style={{
+                  position: "absolute",
+                  inset: "-5px",
+                  borderRadius: "50%",
+                  border: "2px solid #09A8B5",
+                  animation: "gat-pulse-ring 2.2s infinite",
+                  pointerEvents: "none",
+                }}
+              />
             )}
-          </div>
-        </button>
+
+            {/* Icon Switcher with Smooth Rotation */}
+            <div
+              style={{
+                transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                transform: isOpen || isChatOpen ? "rotate(90deg)" : "rotate(0deg)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {isOpen || isChatOpen ? (
+                <X size={26} strokeWidth={2.5} />
+              ) : (
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                    fill="rgba(255, 255, 255, 0.2)"
+                    stroke="#FFFFFF"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="8" cy="11.5" r="1.25" fill="#FFFFFF" />
+                  <circle cx="12" cy="11.5" r="1.25" fill="#FFFFFF" />
+                  <circle cx="16" cy="11.5" r="1.25" fill="#FFFFFF" />
+                </svg>
+              )}
+            </div>
+          </button>
+
+          {/* Corner Status Online Badge */}
+          {!isOpen && !isChatOpen && (
+            <span
+              style={{
+                position: "absolute",
+                top: "0px",
+                right: "0px",
+                width: "13px",
+                height: "13px",
+                borderRadius: "50%",
+                background: "#22C55E",
+                border: "2px solid #071521",
+                boxShadow: "0 0 8px #22C55E",
+                pointerEvents: "none",
+                display: "block",
+              }}
+            />
+          )}
+        </div>
       </div>
 
       {/* ──── GAT AI CHATBOT INTERACTIVE MODAL ──── */}
@@ -775,35 +1001,38 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
               scrollbarWidth: "none",
             }}
           >
-            {QUICK_PROMPTS.map((p, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => handleSendMessage(p.query)}
-                style={{
-                  background: "rgba(255, 255, 255, 0.06)",
-                  border: "1px solid rgba(9, 168, 181, 0.3)",
-                  borderRadius: "14px",
-                  padding: "5px 10px",
-                  fontSize: "0.72rem",
-                  color: "#D5E8EC",
-                  cursor: "pointer",
-                  fontWeight: 600,
-                  transition: "background 0.2s ease, border-color 0.2s ease",
-                  flexShrink: 0,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(9, 168, 181, 0.2)";
-                  e.currentTarget.style.borderColor = "rgba(44, 216, 232, 0.6)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.06)";
-                  e.currentTarget.style.borderColor = "rgba(9, 168, 181, 0.3)";
-                }}
-              >
-                {p.label}
-              </button>
-            ))}
+            {QUICK_PROMPTS.map((p, i) => {
+              const chipColor = i === 0 ? "#F59E0B" : i === 1 ? "#8B5CF6" : i === 4 ? "#22C55E" : "#09A8B5";
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => handleSendMessage(p.query)}
+                  style={{
+                    background: "rgba(255, 255, 255, 0.06)",
+                    border: `1px solid ${chipColor}40`,
+                    borderRadius: "14px",
+                    padding: "5px 10px",
+                    fontSize: "0.72rem",
+                    color: "#D5E8EC",
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    transition: "background 0.2s ease, border-color 0.2s ease",
+                    flexShrink: 0,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = `${chipColor}20`;
+                    e.currentTarget.style.borderColor = chipColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255, 255, 255, 0.06)";
+                    e.currentTarget.style.borderColor = `${chipColor}40`;
+                  }}
+                >
+                  {p.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* Chat Input Field */}
@@ -903,16 +1132,49 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
           }
         }
 
-        .gat-fab-option-btn:hover {
-          background: #EEF2F6 !important;
-          border-color: #CBD5E1 !important;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+        @keyframes gat-fab-hint-float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-4px);
+          }
+        }
+
+        @keyframes gat-dot-pulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.3);
+            opacity: 0.7;
+          }
+        }
+
+        .gat-fab-hint-pill:hover {
+          transform: translateY(-2px) scale(1.03) !important;
+          border-color: #2CD8E8 !important;
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(9, 168, 181, 0.45) !important;
+        }
+
+        .gat-fab-opt-ai:hover {
+          background: rgba(9, 168, 181, 0.14) !important;
+          border-color: rgba(44, 216, 232, 0.7) !important;
+          transform: translateX(-3px) scale(1.01);
+          box-shadow: 0 8px 24px rgba(9, 168, 181, 0.25) !important;
+        }
+
+        .gat-fab-opt-wa:hover {
+          background: rgba(34, 197, 94, 0.14) !important;
+          border-color: rgba(34, 197, 94, 0.7) !important;
+          transform: translateX(-3px) scale(1.01);
+          box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25) !important;
         }
 
         .gat-main-fab-btn:hover {
-          transform: scale(1.06);
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 35px rgba(9, 119, 89, 0.6) !important;
+          transform: scale(1.08);
+          box-shadow: 0 22px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(9, 168, 181, 0.6), 0 0 20px rgba(34, 197, 94, 0.5) !important;
         }
 
         .gat-typing-dot {
@@ -941,8 +1203,8 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
           }
 
           .gat-main-fab-btn {
-            width: 54px !important;
-            height: 54px !important;
+            width: 56px !important;
+            height: 56px !important;
           }
 
           .gat-chat-modal {
@@ -956,6 +1218,10 @@ export default function FloatingFAB({ onNavigateContact, onNavigateService }) {
 
           .gat-fab-choice-card {
             width: calc(100vw - 32px) !important;
+          }
+
+          .gat-fab-hint-pill {
+            display: none !important;
           }
         }
       `}</style>

@@ -15,6 +15,7 @@ import {
   Layers,
   Shield,
   Zap,
+  MessageCircle,
 } from "lucide-react";
 
 export default function ServiceDetailPage({
@@ -43,6 +44,13 @@ export default function ServiceDetailPage({
     if (onSelectServiceForContact) {
       onSelectServiceForContact(service.title);
     }
+  };
+
+  const handleWhatsApp = () => {
+    const url = getWhatsAppUrl(
+      `¡Hola GAT Technology Consulting! Me gustaría agendar una asesoría sobre sus servicios de ${service.title}.`
+    );
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   // SEO: Inyectar JSON-LD de Service + BreadcrumbList por cada subpágina de servicio
@@ -111,142 +119,248 @@ export default function ServiceDetailPage({
 
   return (
     <div className="service-detail-root">
-      {/* ──── STICKY SUBPAGE TOP NAV BAR ──── */}
-      <header className="service-subnav-header">
-        <div className="service-subnav-container">
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <button
-              onClick={onNavigateHome}
-              className="service-back-btn"
-              title="Volver a la página principal"
-            >
-              <ArrowLeft size={16} />
-              <span>Volver al Inicio</span>
-            </button>
-            <div className="service-subnav-divider" />
-            <a
-              href="#hero"
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigateHome();
-              }}
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <img
-                src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
-                alt="GAT Consulting – Consultoría Tecnológica en Lima, Perú"
-                style={{ height: "32px", width: "auto", objectFit: "contain" }}
-              />
-            </a>
-          </div>
-
-          {/* Quick Service Switcher Tabs */}
-          <div className="service-tabs-scroll">
-            {Object.values(SERVICES_DATA).map((s) => {
-              const TabIcon = s.icon;
-              const isActive = s.slug === currentSlug;
-              return (
-                <button
-                  key={s.slug}
-                  onClick={() => handleSwitchService(s.slug)}
-                  className={`service-tab-btn ${isActive ? "service-tab-active" : ""}`}
-                  style={{
-                    borderColor: isActive ? s.accent : "rgba(213, 232, 236, 0.12)",
-                    color: isActive ? "#FFFFFF" : "#9FB5C4",
-                    background: isActive ? `${s.accent}25` : "rgba(7, 21, 33, 0.6)",
-                  }}
-                >
-                  <TabIcon size={14} color={isActive ? s.accent : "#9FB5C4"} />
-                  <span>{s.navLabel}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <button
-            onClick={handleQuoteClick}
-            className="btn-primary service-cta-header-btn"
-          >
-            <span>Cotizar</span>
-            <ArrowRight size={14} />
-          </button>
-        </div>
-      </header>
-
       {/* ──── MAIN SERVICE CONTENT ──── */}
       <main className="service-main-content">
-        {/* HERO SECTION */}
-        <section className="service-hero-section">
-          {/* Ambient Glows */}
+        {/* ──── HERO SECTION: 50% TEXTO / 50% VIDEO CUADRADO CON GLOW ──── */}
+        {/* ──── HERO SECTION: 100% WIDTH & FULL VIEWPORT HEIGHT (50% TEXTO / 50% VIDEO) ──── */}
+        <section
+          style={{
+            position: "relative",
+            width: "100%",
+            minHeight: "calc(100vh - 68px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "clamp(32px, 4.5vh, 60px) clamp(20px, 4vw, 64px)",
+            boxSizing: "border-box",
+            overflow: "hidden",
+          }}
+        >
+          {/* ──── HERO SECTION CONTENT: 50% TEXTO / 50% VIDEO ──── */}
           <div
-            className="ambient-glow-orb orb-cyan"
-            style={{ top: "10%", right: "-10%", width: "500px", height: "500px", opacity: 0.25 }}
-          />
-          <div
-            className="ambient-glow-orb orb-blue"
-            style={{ bottom: "0%", left: "-10%", width: "600px", height: "600px", opacity: 0.2 }}
-          />
+            style={{
+              width: "100%",
+              maxWidth: "1600px",
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 480px), 1fr))",
+              gap: "clamp(32px, 5vw, 64px)",
+              alignItems: "center",
+            }}
+          >
+            {/* LEFT COLUMN: TEXTO & PROPUESTA */}
+            <div style={{ width: "100%", maxWidth: "720px" }}>
+              <div className="tech-badge" style={{ marginBottom: "14px" }}>
+                <span className="tech-badge-dot" style={{ background: service.accent || "#09A8B5" }} />
+                <span>{service.badge.toUpperCase()} · GAT TECHNOLOGY CONSULTING</span>
+              </div>
 
-          <div className="container" style={{ position: "relative", zIndex: 10 }}>
-            {/* Tag & Category */}
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px" }}>
-              <div
-                className="section-tag"
+              <h1
                 style={{
-                  margin: 0,
-                  borderColor: `${service.accent}55`,
-                  color: service.accent,
-                  background: `${service.accent}15`,
+                  fontSize: "clamp(2rem, 3.4vw, 3.6rem)",
+                  fontWeight: 800,
+                  lineHeight: 1.12,
+                  letterSpacing: "-0.03em",
+                  marginBottom: "16px",
+                  color: "#FFFFFF",
                 }}
               >
-                <Icon size={14} />
-                <span>{service.badge}</span>
+                {service.title.includes("&") ? (
+                  <>
+                    {service.title.split("&")[0]} &{" "}
+                    <span className="text-gradient-brand">
+                      {service.title.split("&").slice(1).join("&")}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-gradient-brand">{service.title}</span>
+                )}
+              </h1>
+
+              <p
+                style={{
+                  fontSize: "clamp(1rem, 1.2vw, 1.18rem)",
+                  color: "#B4CAD6",
+                  lineHeight: 1.65,
+                  marginBottom: "24px",
+                }}
+              >
+                {service.tagline}
+              </p>
+
+              {/* CTAs */}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "14px",
+                  alignItems: "center",
+                  marginBottom: "28px",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={handleQuoteClick}
+                  className="btn-primary"
+                  style={{
+                    padding: "13px 28px",
+                    fontSize: "0.94rem",
+                    borderRadius: "9999px",
+                  }}
+                >
+                  <span>Solicitar Diagnóstico</span>
+                  <ArrowRight size={15} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleWhatsApp}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "13px 24px",
+                    borderRadius: "9999px",
+                    background: "rgba(34, 197, 94, 0.15)",
+                    border: "1px solid rgba(34, 197, 94, 0.4)",
+                    color: "#22C55E",
+                    fontSize: "0.92rem",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(34, 197, 94, 0.25)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(34, 197, 94, 0.15)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  <MessageCircle size={17} />
+                  <span>Contactar por WhatsApp</span>
+                </button>
               </div>
-              <span style={{ fontSize: "0.8rem", color: "#8CA5B5", fontFamily: "monospace" }}>
-                GAT // SERVICE SPECIFICATION
-              </span>
+
+              {/* Mini Trust / Metrics Badges */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${service.metrics ? Math.min(service.metrics.length, 4) : 4}, 1fr)`,
+                  gap: "12px",
+                }}
+              >
+                {service.metrics &&
+                  service.metrics.map((stat, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        background: "rgba(255, 255, 255, 0.04)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
+                        borderRadius: "14px",
+                        padding: "10px 14px",
+                        backdropFilter: "blur(12px)",
+                        textAlign: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "var(--font-heading)",
+                          fontSize: "1.25rem",
+                          fontWeight: 800,
+                          color: service.accent || "#09A8B5",
+                          lineHeight: 1.1,
+                          marginBottom: "4px",
+                        }}
+                      >
+                        {stat.value}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "0.76rem",
+                          color: "#8CA5B5",
+                          fontWeight: 500,
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                        title={stat.label}
+                      >
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
 
-            {/* Title & Tagline */}
-            <h1 className="service-hero-title">
-              {service.title.split("&")[0]} &{" "}
-              <span className="text-gradient-brand">
-                {service.title.split("&").slice(1).join("&") || "Soluciones a Medida"}
-              </span>
-            </h1>
+            {/* RIGHT COLUMN: VIDEO PANORÁMICO (EXPANDED TO FULL 50% WIDTH) */}
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                margin: "0 auto",
+              }}
+            >
+              <div
+                className="ambient-glow-orb orb-cyan"
+                style={{
+                  top: "10%",
+                  left: "15%",
+                  width: "550px",
+                  height: "550px",
+                  opacity: 0.7,
+                  zIndex: 0,
+                }}
+              />
 
-            <p className="service-hero-tagline">{service.tagline}</p>
-
-            {/* CTA Buttons */}
-            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "48px" }}>
-              <button
-                onClick={handleQuoteClick}
-                className="btn-primary"
-                style={{ padding: "14px 28px", fontSize: "0.95rem" }}
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 2,
+                  width: "100%",
+                  aspectRatio: "16 / 10",
+                  minHeight: "clamp(340px, 46vh, 540px)",
+                  borderRadius: "26px",
+                  overflow: "hidden",
+                  background: "linear-gradient(145deg, rgba(18, 50, 74, 0.95) 0%, rgba(7, 21, 33, 0.98) 100%)",
+                  border: `1px solid ${service.accent ? `${service.accent}77` : "rgba(9, 168, 181, 0.55)"}`,
+                  borderTop: "1px solid rgba(44, 216, 232, 0.8)",
+                  boxShadow: `0 24px 70px rgba(0, 0, 0, 0.85), 0 0 45px ${service.accent ? `${service.accent}40` : "rgba(9, 168, 181, 0.3)"}`,
+                }}
               >
-                <span>Solicitar Cotización de este Servicio</span>
-                <ArrowRight size={16} />
-              </button>
-              <a
-                href="#pilares"
-                className="btn-secondary"
-                style={{ padding: "14px 24px", fontSize: "0.95rem", textDecoration: "none" }}
-              >
-                <span>Ver Arquitectura & Stack</span>
-              </a>
-            </div>
-
-            {/* Metric Badges Grid */}
-            <div className="service-metrics-grid">
-              {service.metrics.map((m, i) => (
-                <div key={i} className="service-metric-card">
-                  <span className="service-metric-val" style={{ color: service.accent }}>
-                    {m.value}
-                  </span>
-                  <span className="service-metric-label">{m.label}</span>
-                  <span className="service-metric-sub">{m.sub}</span>
-                </div>
-              ))}
+                {service.heroVideo ? (
+                  <video
+                    key={service.heroVideo}
+                    src={service.heroVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                      filter: "brightness(0.94) contrast(1.05)",
+                    }}
+                  />
+                ) : (
+                  <img
+                    key={service.heroImage}
+                    src={service.heroImage}
+                    alt={service.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                      filter: "brightness(0.94) contrast(1.05)",
+                    }}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </section>

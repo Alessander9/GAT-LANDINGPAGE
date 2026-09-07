@@ -107,6 +107,16 @@
   background: radial-gradient(circle, rgba(18, 50, 74, 0.75) 0%, rgba(18, 50, 74, 0) 70%);
 }
 
+/* AI / Purple orb — para secciones de IA */
+.orb-ai {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(139, 92, 246, 0) 70%);
+}
+
+/* Amber orb — para highlights / métricas destacadas */
+.orb-amber {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.18) 0%, rgba(245, 158, 11, 0) 70%);
+}
+
 /* Tech Grid Pattern (Disabled for smooth gradient aesthetic) */
 .bg-tech-grid {
   background-image: none;
@@ -140,4 +150,67 @@
   box-shadow: 0 0 10px var(--gat-cyan);
   display: inline-block;
   animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes fsh-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* ──── GPU-ACCELERATED CIRCUIT BOARD ANIMATIONS (NATIVE 60/120 FPS) ──── */
+@keyframes circuitLaserFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -260;
+  }
+}
+
+@keyframes circuitNodeBreath {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+  }
+}
+
+@keyframes circuitHaloPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.7;
+  }
+}
+
+.circuit-laser-aura {
+  animation: circuitLaserFlow 2.4s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+.circuit-laser-core {
+  animation: circuitLaserFlow 2.4s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+.circuit-node-box {
+  animation: circuitNodeBreath 3.2s ease-in-out infinite;
+  will-change: transform, filter;
+  transform: translateZ(0);
+}
+
+.circuit-halo-ring {
+  animation: circuitHaloPulse 3.2s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }

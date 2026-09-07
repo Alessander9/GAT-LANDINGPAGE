@@ -18,8 +18,8 @@ export default function MetricsBar() {
       prefix: "",
       suffix: "%",
       decimals: 1,
-      label: "SLA de Resiliencia Cloud",
-      desc: "Disponibilidad garantizada y tolerancia a fallos en producción",
+      label: "Disponibilidad Garantizada",
+      desc: "Tus páginas y sistemas siempre activos sin interrupciones",
       accent: "#09A8B5",
     },
     {
@@ -28,8 +28,8 @@ export default function MetricsBar() {
       prefix: "-",
       suffix: "%",
       decimals: 0,
-      label: "Costos de Infraestructura",
-      desc: "Optimización FinOps continua y reducción de deuda técnica",
+      label: "Ahorro de Tiempo y Costos",
+      desc: "Procesos automatizados para que tu equipo sea más productivo",
       accent: "#2CD8E8",
     },
     {
@@ -38,9 +38,9 @@ export default function MetricsBar() {
       prefix: "+",
       suffix: "",
       decimals: 0,
-      label: "Proyectos Estratégicos",
-      desc: "Desplegados con éxito en corporaciones multinacionales",
-      accent: "#5C9DFF",
+      label: "Proyectos Entregados",
+      desc: "Soluciones digitales funcionando con clientes satisfechos",
+      accent: "#F59E0B",
     },
     {
       icon: Award,
@@ -48,9 +48,9 @@ export default function MetricsBar() {
       prefix: "+",
       suffix: " Años",
       decimals: 0,
-      label: "Liderazgo Tecnológico",
-      desc: "Consultoría de arquitectura e innovación digital continua",
-      accent: "#00E5FF",
+      label: "Experiencia Profesional",
+      desc: "Equipo especializado guiándote en cada paso de tu proyecto",
+      accent: "#8B5CF6",
     },
   ];
 
@@ -136,16 +136,8 @@ export default function MetricsBar() {
             }}
           />
 
-          {/* Grid of Individual Frosted Metric Cards */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-              gap: "20px",
-              position: "relative",
-              zIndex: 2,
-            }}
-          >
+          {/* Grid of Individual Frosted Metric Cards (2x2 on Mobile, 4x1 on Desktop) */}
+          <div className="metrics-grid-container" style={{ position: "relative", zIndex: 2 }}>
             {metrics.map((item, idx) => {
               const Icon = item.icon;
               return (
@@ -180,6 +172,7 @@ export default function MetricsBar() {
                 >
                   {/* Glass Icon Badge */}
                   <div
+                    className="metric-icon-box"
                     style={{
                       width: "44px",
                       height: "44px",
@@ -191,25 +184,27 @@ export default function MetricsBar() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      marginBottom: "18px",
+                      marginBottom: "14px",
                       color: item.accent,
                       boxShadow: `0 0 16px ${item.accent}35, inset 0 1px 1px rgba(255, 255, 255, 0.4)`,
                     }}
                   >
-                    <Icon size={22} />
+                    <Icon size={20} />
                   </div>
 
                   {/* Animated Metric Number */}
                   <div
                     ref={(el) => (countersRef.current[idx] = el)}
+                    className="metric-number-display"
                     style={{
                       fontFamily: "var(--font-heading)",
-                      fontSize: "clamp(2.1rem, 3.2vw, 2.75rem)",
+                      fontSize: "clamp(1.6rem, 2.6vw, 2.6rem)",
                       fontWeight: 800,
                       color: "#FFFFFF",
-                      lineHeight: 1,
-                      marginBottom: "10px",
+                      lineHeight: 1.1,
+                      marginBottom: "6px",
                       letterSpacing: "-0.03em",
+                      whiteSpace: "nowrap",
                       textShadow: "0 2px 14px rgba(0, 0, 0, 0.7), 0 0 20px rgba(9, 168, 181, 0.25)",
                     }}
                   >
@@ -218,12 +213,14 @@ export default function MetricsBar() {
 
                   {/* Title Label */}
                   <div
+                    className="metric-title-label"
                     style={{
-                      fontSize: "1rem",
+                      fontSize: "0.95rem",
                       fontWeight: 700,
                       color: "#E2F2F5",
                       marginBottom: "6px",
                       letterSpacing: "-0.01em",
+                      lineHeight: 1.25,
                     }}
                   >
                     {item.label}
@@ -231,8 +228,9 @@ export default function MetricsBar() {
 
                   {/* Description */}
                   <p
+                    className="metric-desc-text"
                     style={{
-                      fontSize: "0.84rem",
+                      fontSize: "0.82rem",
                       color: "#B4CAD6",
                       lineHeight: 1.45,
                       margin: 0,
@@ -256,11 +254,73 @@ export default function MetricsBar() {
           padding: 0 24px;
         }
 
+        .metrics-grid-container {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+        }
+
         @media (max-width: 1024px) {
           .metrics-section-root {
-            margin-top: clamp(70px, 10vh, 110px) !important;
-            margin-bottom: clamp(60px, 9vh, 90px) !important;
+            margin-top: 24px !important;
+            margin-bottom: 50px !important;
             padding: 0 16px !important;
+          }
+          .metrics-grid-container {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 14px !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .metrics-section-root {
+            padding: 0 12px !important;
+          }
+          .metrics-section-root > .container > div {
+            padding: 20px 14px !important;
+            border-radius: 22px !important;
+          }
+          .metrics-grid-container {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+          }
+          .metric-glass-card {
+            padding: 16px 12px !important;
+            border-radius: 16px !important;
+          }
+          .metric-icon-box {
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 10px !important;
+            margin-bottom: 10px !important;
+          }
+          .metric-number-display {
+            font-size: 1.45rem !important;
+            white-space: nowrap !important;
+            margin-bottom: 4px !important;
+            line-height: 1.1 !important;
+          }
+          .metric-title-label {
+            font-size: 0.82rem !important;
+            line-height: 1.25 !important;
+            margin-bottom: 4px !important;
+          }
+          .metric-desc-text {
+            font-size: 0.72rem !important;
+            line-height: 1.35 !important;
+            color: #9FB5C4 !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .metric-number-display {
+            font-size: 1.3rem !important;
+          }
+          .metric-title-label {
+            font-size: 0.76rem !important;
+          }
+          .metric-desc-text {
+            font-size: 0.68rem !important;
           }
         }
       `}</style>

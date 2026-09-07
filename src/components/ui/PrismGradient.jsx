@@ -298,7 +298,26 @@ export function PrismGradient({
     const startedAt = performance.now();
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    let isPaused = false;
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isPaused = true;
+        if (frameIdRef.current !== undefined) {
+          cancelAnimationFrame(frameIdRef.current);
+        }
+      } else {
+        isPaused = false;
+        if (!reduceMotion && speed > 0) {
+          frameIdRef.current = requestAnimationFrame(draw);
+        }
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     const draw = (time) => {
+      if (isPaused) return;
       const elapsed = (time - startedAt) / 1000;
       const prismSpeed = (PRISM_DEFAULT.speed / 100) * 5 * Math.max(0, speed);
       const color1 = hexToRgba(activeColors[0]);
@@ -321,7 +340,7 @@ export function PrismGradient({
       gl.uniform1f(uniforms.swirlIterations, swirlIterations);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-      if (!reduceMotion && speed > 0) {
+      if (!reduceMotion && speed > 0 && !isPaused) {
         frameIdRef.current = requestAnimationFrame(draw);
       }
     };
@@ -329,6 +348,7 @@ export function PrismGradient({
     frameIdRef.current = requestAnimationFrame(draw);
 
     return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       if (frameIdRef.current !== undefined) {
         cancelAnimationFrame(frameIdRef.current);
       }
