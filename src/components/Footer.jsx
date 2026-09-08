@@ -502,7 +502,8 @@ export default function Footer({ onNavigate }) {
           gap: "18px",
         }}
       >
-        {/* Social Icons Strip with Directional Flowing Marquee Hover */}
+        {/* Social Icons Strip with Directional Flowing Marquee Hover (comentado a petición) */}
+        {/*
         <div
           style={{
             display: "flex",
@@ -516,6 +517,7 @@ export default function Footer({ onNavigate }) {
             <SocialFlowCard key={soc.label} item={soc} />
           ))}
         </div>
+        */}
 
         {/* Central Scroll-to-Top Control Pill */}
         <div
