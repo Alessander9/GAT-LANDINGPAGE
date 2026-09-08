@@ -93,6 +93,7 @@ export default function FloatingFAB({
   const [isScrolling, setIsScrolling] = useState(false);
   const [isInHero, setIsInHero] = useState(true);
   const [isInFeaturedMobile, setIsInFeaturedMobile] = useState(false);
+  const [isInProprietarySystems, setIsInProprietarySystems] = useState(false);
   const scrollTimeoutRef = useRef(null);
 
   // Hide FAB in Hero section and in Soluciones Destacadas on mobile
@@ -117,6 +118,16 @@ export default function FloatingFAB({
         }
       } else {
         setIsInFeaturedMobile(false);
+      }
+
+      // Ocultar hint pill cuando el usuario está en la sección de Software Propio
+      const proprietarySection = document.getElementById('sistemas-propios');
+      if (proprietarySection) {
+        const rect = proprietarySection.getBoundingClientRect();
+        const inView = rect.top <= window.innerHeight * 0.75 && rect.bottom >= window.innerHeight * 0.25;
+        setIsInProprietarySystems(inView);
+      } else {
+        setIsInProprietarySystems(false);
       }
     };
 
@@ -287,7 +298,7 @@ export default function FloatingFAB({
         }}
       >
         {/* ──── FLOATING HINT PILL (WHEN CLOSED) ──── */}
-        {!isOpen && !isChatOpen && showHintPill && (
+        {!isOpen && !isChatOpen && showHintPill && !isInProprietarySystems && (
           <div
             onClick={() => setIsOpen(true)}
             className={`gat-fab-hint-pill ${isScrolling ? "gat-fab-hint-scrolling" : ""}`}

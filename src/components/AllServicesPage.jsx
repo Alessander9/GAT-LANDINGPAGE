@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { SERVICES_DATA } from "../data/servicesData";
 import { getWhatsAppUrl } from "../config/contact";
+import CaseStudies from "./CaseStudies";
 import {
   ArrowLeft,
   ArrowRight,
@@ -323,8 +324,8 @@ export default function AllServicesPage({
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
-              gap: "32px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
+              gap: "28px",
             }}
           >
             {filteredServices.map((service, index) => {
@@ -775,6 +776,9 @@ export default function AllServicesPage({
           </div>
         </div>
       </section>
+
+      {/* ──── SECCIÓN RESULTADOS REALES / CASOS DE ÉXITO ──── */}
+      <CaseStudies onSelectCase={onSelectServiceForContact} />
 
       {/* ──── BOTTOM CONVERSION BANNER ──── */}
       <section

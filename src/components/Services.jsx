@@ -403,6 +403,7 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
 
       {/* Header Bar */}
       <div
+        className="gat-services-header-bar"
         style={{
           position: "relative",
           zIndex: 10,
@@ -415,7 +416,7 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
           marginBottom: "clamp(24px, 4vh, 40px)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+        <div className="gat-services-title-wrap" style={{ display: "flex", alignItems: "center", gap: "14px", flexWrap: "wrap" }}>
           <div className="section-tag" style={{ margin: 0, padding: "4px 12px" }}>
             Soluciones para tu Negocio
           </div>
@@ -431,7 +432,7 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
           </h2>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+        <div className="gat-services-cta-wrap" style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
           <p
             style={{
               margin: 0,
@@ -844,6 +845,25 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
             min-height: auto !important;
             padding: clamp(35px, 5vh, 50px) 16px !important;
           }
+          .gat-services-header-bar {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            justify-content: center !important;
+          }
+          .gat-services-title-wrap {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            justify-content: center !important;
+          }
+          .gat-services-title-wrap .section-title {
+            text-align: center !important;
+          }
+          .gat-services-cta-wrap {
+            justify-content: center !important;
+            width: 100% !important;
+          }
           .gat-fullscreen-bento-grid {
             display: flex !important;
             flex-direction: column !important;
@@ -864,22 +884,30 @@ export default function Services({ onSelectService, onNavigateToServiceSubpage }
             gap: 8px !important;
             height: auto !important;
             justify-content: flex-start !important;
+            text-align: center !important;
+            align-items: center !important;
           }
           .gat-card-top-row {
             margin-bottom: 6px !important;
+            width: 100% !important;
+            justify-content: space-between !important;
           }
           .gat-card-title {
             font-size: 1.18rem !important;
             margin: 0 0 4px 0 !important;
+            text-align: center !important;
           }
           .gat-card-desc {
             font-size: 0.82rem !important;
             line-height: 1.4 !important;
             margin: 0 0 10px 0 !important;
+            text-align: center !important;
           }
           .gat-card-footer {
             padding-top: 8px !important;
             margin-top: 2px !important;
+            width: 100% !important;
+            justify-content: space-between !important;
           }
           .header-subtitle-desktop {
             display: none !important;

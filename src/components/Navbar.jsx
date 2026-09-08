@@ -283,7 +283,7 @@ export default function Navbar({ onNavigate, className = '' }) {
                   e.currentTarget.style.background = 'transparent';
                 }}
               >
-                Nosotros
+                Quiénes Somos
               </a>
             </div>
 
@@ -444,14 +444,6 @@ export default function Navbar({ onNavigate, className = '' }) {
             </a>
 
             <a
-              href="#metodologia"
-              onClick={(e) => { e.preventDefault(); handleNav('#metodologia'); }}
-              style={{ color: '#FFFFFF', fontSize: '1.2rem', fontWeight: 700, textDecoration: 'none', padding: '8px 0', borderBottom: '1px solid rgba(213, 232, 236, 0.1)' }}
-            >
-              Metodología Ágil
-            </a>
-
-            <a
               href="#casos"
               onClick={(e) => { e.preventDefault(); handleNav('#casos'); }}
               style={{ color: '#FFFFFF', fontSize: '1.2rem', fontWeight: 700, textDecoration: 'none', padding: '8px 0', borderBottom: '1px solid rgba(213, 232, 236, 0.1)' }}
@@ -464,7 +456,7 @@ export default function Navbar({ onNavigate, className = '' }) {
               onClick={(e) => { e.preventDefault(); handleNav('#nosotros'); }}
               style={{ color: '#09A8B5', fontSize: '1.2rem', fontWeight: 700, textDecoration: 'none', padding: '8px 0', borderBottom: '1px solid rgba(213, 232, 236, 0.1)' }}
             >
-              Sobre Nosotros
+              Quiénes Somos
             </a>
           </div>
 

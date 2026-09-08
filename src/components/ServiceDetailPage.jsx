@@ -55,7 +55,7 @@ export default function ServiceDetailPage({
 
   // SEO: Inyectar JSON-LD de Service + BreadcrumbList por cada subpágina de servicio
   useEffect(() => {
-    const SITE_URL = 'https://gat-consulting.vercel.app';
+    const SITE_URL = 'https://gatconsulting.tech';
     const schemaId = 'gat-service-jsonld';
     const existing = document.getElementById(schemaId);
     if (existing) existing.remove();
@@ -1085,7 +1085,8 @@ export default function ServiceDetailPage({
             display: flex !important;
             overflow-x: auto !important;
             scrollbar-width: none !important;
-            max-width: 180px;
+            max-width: 100% !important;
+            width: 100% !important;
           }
           .service-tabs-scroll::-webkit-scrollbar {
             display: none !important;

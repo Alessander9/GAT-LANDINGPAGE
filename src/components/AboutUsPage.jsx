@@ -17,6 +17,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { getWhatsAppUrl } from "../config/contact";
+import Methodology from "./Methodology";
 
 export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelectService }) {
   const handleWhatsApp = () => {
@@ -133,13 +134,7 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
             </div>
 
             {/* Mini Trust Badges in Single Compact Row */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "10px",
-              }}
-            >
+            <div className="about-mini-stats-grid">
               {[
                 { num: "+50", label: "Proyectos", accent: "#09A8B5" },
                 { num: "99.9%", label: "Cloud SLA", accent: "#2CD8E8" },
@@ -509,6 +504,11 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
         </div>
       </section>
 
+      {/* ──── NUESTRA FORMA DE TRABAJAR (METODOLOGÍA) ──── */}
+      <div style={{ position: "relative", zIndex: 10, margin: "20px 0" }}>
+        <Methodology onStartProject={onNavigateContact} />
+      </div>
+
       {/* ──── CALL TO ACTION BANNER ──── */}
       <section
         style={{
@@ -606,6 +606,21 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
           </div>
         </div>
       </section>
+
+      <style>{`
+        .about-mini-stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+        }
+
+        @media (max-width: 640px) {
+          .about-mini-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

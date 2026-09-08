@@ -12,8 +12,7 @@
 
 // ──────────────────────────────────────────────
 // CONFIGURACIÓN CENTRAL DE DOMINIO
-// Cambia este valor cuando obtengas el dominio definitivo:
-export const SITE_URL = 'https://gat-consulting.vercel.app';
+export const SITE_URL = 'https://gatconsulting.tech';
 // ──────────────────────────────────────────────
 
 const PAGE_META = {
@@ -34,6 +33,12 @@ const PAGE_META = {
     description:
       'Catálogo completo de servicios: desarrollo web, aplicaciones móviles iOS y Android, agentes de inteligencia artificial, chatbots, ciberseguridad y cloud computing en Lima, Perú.',
     canonical: `${SITE_URL}/#servicios-todos`,
+  },
+  contacto: {
+    title: 'Contacto & Asesoría Gratuita | GAT Consulting Lima',
+    description:
+      'Contáctanos para una asesoría tecnológica y diagnóstico gratuito para tu empresa en Lima y Perú. Cotiza tu proyecto web, app móvil o solución con IA.',
+    canonical: `${SITE_URL}/#contacto`,
   },
   services: {
     'landing-page': {

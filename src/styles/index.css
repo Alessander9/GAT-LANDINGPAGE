@@ -14,6 +14,8 @@ html {
   scroll-behavior: auto; /* Handled smoothly by Lenis */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -22,8 +24,9 @@ body {
   color: var(--gat-white);
   line-height: 1.6;
   overflow-x: hidden;
-  selection-background-color: var(--gat-cyan);
-  selection-color: var(--gat-navy-deep);
+  max-width: 100%;
+  width: 100%;
+  position: relative;
 }
 
 ::selection {
@@ -316,4 +319,72 @@ button {
   backface-visibility: hidden;
   perspective: 1000px;
 }
+
+/* ──── GLOBAL AMBIENT BACKGROUND (Seamless, Zero Diagonal Cuts) ──── */
+.global-ambient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 10%, #0B2538 0%, #071521 55%, #040E17 100%);
+}
+
+.global-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.28;
+  will-change: transform;
+  transform: translateZ(0); /* Activate GPU layer */
+  backface-visibility: hidden;
+}
+
+.global-ambient-orb-1 {
+  top: -15%;
+  left: -10%;
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle, #09A8B5 0%, rgba(9, 168, 181, 0.1) 65%, transparent 80%);
+  animation: floatOrb 20s ease-in-out infinite alternate;
+}
+
+.global-ambient-orb-2 {
+  top: 40%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #087F9F 0%, rgba(8, 127, 159, 0.1) 65%, transparent 80%);
+  animation: floatOrb 25s ease-in-out infinite alternate-reverse;
+}
+
+.global-ambient-orb-3 {
+  bottom: -15%;
+  left: 25%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, #0C3348 0%, rgba(12, 51, 72, 0.2) 65%, transparent 80%);
+  animation: floatOrb 30s ease-in-out infinite alternate;
+}
+
+.global-ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 85%);
+  pointer-events: none;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.06); }
+  100% { transform: translate(-20px, 30px) scale(0.96); }
+}
+
 

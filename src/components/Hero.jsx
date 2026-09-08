@@ -236,18 +236,10 @@ export default function Hero({ onNavigate }) {
             </p>
 
             {/* CTAs */}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "14px",
-                alignItems: "center",
-              }}
-            >
+            <div className="hero-cta-group">
               <button
                 onClick={() => onNavigate && onNavigate("#contacto")}
-                className="btn-primary"
-                style={{ fontSize: "0.92rem", padding: "13px 26px" }}
+                className="btn-primary hero-btn-primary"
               >
                 <span>Solicitar Asesoría Gratuita</span>
                 <ArrowRight size={17} />
@@ -255,25 +247,14 @@ export default function Hero({ onNavigate }) {
 
               <button
                 onClick={() => onNavigate && onNavigate("#servicios")}
-                className="btn-secondary"
-                style={{ fontSize: "0.92rem", padding: "13px 24px" }}
+                className="btn-secondary hero-btn-secondary"
               >
                 <span>Ver Soluciones</span>
               </button>
             </div>
 
             {/* Trust Micro-Badges */}
-            <div
-              style={{
-                marginTop: "26px",
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "wrap",
-                gap: "18px",
-                paddingTop: "18px",
-                borderTop: "1px solid rgba(213, 232, 236, 0.12)",
-              }}
-            >
+            <div className="hero-trust-badges">
               <div style={{ display: "flex", alignItems: "center", gap: "7px", color: "#9FB5C4", fontSize: "0.82rem" }}>
                 <CheckCircle2 size={16} color="#09A8B5" />
                 <span>Acompañamiento de Principio a Fin</span>
@@ -485,6 +466,33 @@ export default function Hero({ onNavigate }) {
       )}
 
       <style>{`
+        .hero-cta-group {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          align-items: center;
+        }
+
+        .hero-btn-primary {
+          font-size: 0.92rem;
+          padding: 13px 26px;
+        }
+
+        .hero-btn-secondary {
+          font-size: 0.92rem;
+          padding: 13px 24px;
+        }
+
+        .hero-trust-badges {
+          margin-top: 26px;
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 18px;
+          padding-top: 18px;
+          border-top: 1px solid rgba(213, 232, 236, 0.12);
+        }
+
         @media (max-width: 1024px) {
           #hero {
             padding-bottom: clamp(45px, 6vh, 75px) !important;
@@ -503,7 +511,10 @@ export default function Hero({ onNavigate }) {
           .hero-split-grid > div:first-child .tech-badge {
             margin: 0 auto !important;
           }
-          .hero-split-grid > div:first-child div[style*="display: flex"] {
+          .hero-cta-group {
+            justify-content: center !important;
+          }
+          .hero-trust-badges {
             justify-content: center !important;
           }
           .hero-split-grid > div:first-child p {
@@ -528,6 +539,22 @@ export default function Hero({ onNavigate }) {
             height: auto !important;
             aspect-ratio: 760 / 420 !important;
             border-radius: 18px !important;
+          }
+        }
+
+        @media (max-width: 540px) {
+          .hero-cta-group {
+            flex-direction: column !important;
+            width: 100% !important;
+          }
+          .hero-btn-primary, .hero-btn-secondary {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .hero-trust-badges {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 10px !important;
           }
         }
 

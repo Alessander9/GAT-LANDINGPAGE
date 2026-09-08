@@ -287,28 +287,35 @@ export default function MetricsBar() {
           .metric-glass-card {
             padding: 16px 12px !important;
             border-radius: 16px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
           }
           .metric-icon-box {
             width: 36px !important;
             height: 36px !important;
             border-radius: 10px !important;
-            margin-bottom: 10px !important;
+            margin: 0 auto 10px auto !important;
           }
           .metric-number-display {
             font-size: 1.45rem !important;
             white-space: nowrap !important;
             margin-bottom: 4px !important;
             line-height: 1.1 !important;
+            text-align: center !important;
           }
           .metric-title-label {
             font-size: 0.82rem !important;
             line-height: 1.25 !important;
             margin-bottom: 4px !important;
+            text-align: center !important;
           }
           .metric-desc-text {
             font-size: 0.72rem !important;
             line-height: 1.35 !important;
             color: #9FB5C4 !important;
+            text-align: center !important;
           }
         }
 

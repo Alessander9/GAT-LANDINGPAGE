@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ArrowUp, Heart, ExternalLink } from "lucide-react";
-import { getWhatsAppUrl } from "../config/contact";
+import { getWhatsAppUrl, getEmailUrl } from "../config/contact";
 
 // Official Authentic Brand SVG Vectors
 function EmailIcon({ size = 22, color = "currentColor" }) {
@@ -234,24 +234,24 @@ const NAVIGATION_SECTIONS = [
     ],
   },
   {
-    title: "Nuestra Forma de Trabajar",
+    title: "Quiénes Somos & Proceso",
     items: [
-      { name: "1. Te Escuchamos & Plan", href: "#metodologia" },
-      { name: "2. Diseño de Pantallas", href: "#metodologia" },
-      { name: "3. Construcción Profesional", href: "#metodologia" },
-      { name: "4. Lanzamiento & Soporte", href: "#metodologia" },
-      { name: "El Camino de tu Proyecto", href: "#hero" },
-      { name: "Garantía de Funcionamiento", href: "#contacto" },
+      { name: "Nuestra Forma de Trabajar", href: "#nosotros" },
+      { name: "Quiénes Somos", href: "#nosotros" },
+      { name: "Video Institucional", href: "#nosotros" },
+      { name: "Garantía de Calidad", href: "#nosotros" },
+      { name: "El Camino de tu Proyecto", href: "#nosotros" },
+      { name: "Soporte Continuo", href: "#contacto" },
     ],
   },
   {
-    title: "Compañía",
+    title: "Compañía & Soluciones",
     items: [
-      { name: "Sobre Nosotros", href: "#nosotros" },
-      { name: "Video Institucional", href: "#nosotros" },
-      { name: "Casos de Éxito", href: "#casos" },
       { name: "Catálogo de Soluciones", href: "#servicios-todos" },
-      { name: "Garantía de Calidad", href: "#nosotros" },
+      { name: "Resultados Reales & Casos", href: "#servicios-todos" },
+      { name: "Desarrollo Web & Apps", href: "#servicios-todos" },
+      { name: "Inteligencia Artificial", href: "#servicios-todos" },
+      { name: "Ciberseguridad & Cloud", href: "#servicios-todos" },
     ],
   },
   {
@@ -269,7 +269,7 @@ const SOCIAL_LINKS = [
   {
     label: "Email",
     shortLabel: "Mail",
-    href: "mailto:contacto@gatconsulting.com",
+    href: getEmailUrl(),
     icon: EmailIcon,
     customColor: "#2CD8E8",
     brandGlow: "rgba(44, 216, 232, 0.45)",
@@ -286,26 +286,8 @@ const SOCIAL_LINKS = [
     marqueeBg: "#22C55E",
     marqueeTextColor: "#041C0C",
   },
-  {
-    label: "LinkedIn",
-    shortLabel: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: LinkedInIcon,
-    customColor: "#0A66C2",
-    brandGlow: "rgba(10, 102, 194, 0.45)",
-    marqueeBg: "#0A66C2",
-    marqueeTextColor: "#FFFFFF",
-  },
-  {
-    label: "GitHub",
-    shortLabel: "GitHub",
-    href: "https://github.com",
-    icon: GitHubIcon,
-    customColor: "#F0F6FC",
-    brandGlow: "rgba(240, 246, 252, 0.35)",
-    marqueeBg: "linear-gradient(135deg, #18181B, #27272A)",
-    marqueeTextColor: "#2CD8E8",
-  },
+
+
   {
     label: "Instagram",
     shortLabel: "Insta",
@@ -426,6 +408,7 @@ export default function Footer({ onNavigate }) {
         <div style={{ borderBottom: "1px dotted rgba(9, 168, 181, 0.35)", marginBottom: "32px" }} />
 
         <div
+          className="gat-footer-categories-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -434,7 +417,7 @@ export default function Footer({ onNavigate }) {
           }}
         >
           {NAVIGATION_SECTIONS.map((section) => (
-            <div key={section.title}>
+            <div key={section.title} className="gat-footer-category-col">
               <h4
                 style={{
                   fontSize: "0.85rem",
@@ -599,6 +582,33 @@ export default function Footer({ onNavigate }) {
         <strong style={{ color: "#FFFFFF" }}>GAT Technology Consulting</strong>
         <span>· Todos los derechos reservados.</span>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .gat-footer-categories-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 20px !important;
+          }
+          .gat-footer-category-col {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+          }
+          .gat-footer-category-col h4 {
+            justify-content: center !important;
+          }
+          .gat-footer-category-col ul {
+            align-items: center !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .gat-footer-categories-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }
