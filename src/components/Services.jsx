@@ -46,7 +46,7 @@ const BENTO_SERVICES = [
     tag: "Inteligencia Artificial",
     title: "Asistentes con IA & Automatizaciones",
     icon: Brain,
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=480&q=60&fm=webp",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=360&q=45&fm=webp",
     video: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051624/AI_business_automation_commercia__202608282006.mp4",
     shortDesc: "Chatbots inteligentes que atienden a tus clientes por WhatsApp 24/7 y automatizan tareas para que ahorres horas de trabajo.",
     flowingText: "ASISTENTES CON IA · CHATBOT WHATSAPP 24/7 · AHORRO DE TIEMPO · AUTOMATIZACIÓN",
