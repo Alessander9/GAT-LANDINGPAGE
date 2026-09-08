@@ -406,22 +406,18 @@ export default function Footer({ onNavigate }) {
           gap: "18px",
         }}
       >
-        {/* Social Icons Strip with Directional Flowing Marquee Hover (comentado a petición) */}
-        {/*
+        {/* Email Direct Access Card (Restablecido únicamente el correo electrónico) */}
         <div
           style={{
             display: "flex",
-            flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "center",
-            gap: "13px",
           }}
         >
-          {SOCIAL_LINKS.map((soc) => (
+          {SOCIAL_LINKS.filter((soc) => soc.label === "Email").map((soc) => (
             <SocialFlowCard key={soc.label} item={soc} />
           ))}
         </div>
-        */}
 
         {/* Central Scroll-to-Top Control Pill */}
         <div
