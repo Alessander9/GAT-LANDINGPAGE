@@ -195,7 +195,11 @@ const CardNav = ({
           </button>
         </div>
 
-        <div className="card-nav-content" aria-hidden={!isExpanded}>
+        <div
+          className="card-nav-content"
+          aria-hidden={!isExpanded}
+          inert={!isExpanded ? "" : undefined}
+        >
           {(items || []).slice(0, 3).map((item, idx) => (
             <div
               key={`${item.label}-${idx}`}
@@ -210,6 +214,7 @@ const CardNav = ({
                     key={`${lnk.label}-${i}`}
                     className="nav-card-link"
                     href={lnk.href || '#'}
+                    tabIndex={isExpanded ? 0 : -1}
                     onClick={(e) => handleLinkClick(e, lnk.href)}
                     aria-label={lnk.ariaLabel || lnk.label}
                   >

@@ -382,6 +382,7 @@ export default function AllServicesPage({
                         muted
                         playsInline
                         preload="none"
+                        aria-label={`Demostración de ${service.title}`}
                         ref={(el) => {
                           if (el && el.paused) {
                             el.play().catch(() => {});
@@ -391,10 +392,12 @@ export default function AllServicesPage({
                           width: "100%",
                           height: "100%",
                           objectFit: "cover",
-                          filter: "brightness(0.96) contrast(1.05)",
                           display: "block",
+                          filter: "brightness(0.92) contrast(1.05)",
                         }}
-                      />
+                      >
+                        <track kind="captions" src="data:text/vtt;charset=utf-8,WEBVTT" label="Español" default={false} />
+                      </video>
                     ) : (
                       <img
                         src={service.heroImage}

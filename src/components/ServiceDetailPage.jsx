@@ -338,6 +338,7 @@ export default function ServiceDetailPage({
                     muted
                     playsInline
                     preload="auto"
+                    aria-label={`Demostración de ${service.title}`}
                     style={{
                       width: "100%",
                       height: "100%",
@@ -345,7 +346,9 @@ export default function ServiceDetailPage({
                       display: "block",
                       filter: "brightness(0.94) contrast(1.05)",
                     }}
-                  />
+                  >
+                    <track kind="captions" src="data:text/vtt;charset=utf-8,WEBVTT" label="Español" default={false} />
+                  </video>
                 ) : (
                   <img
                     key={service.heroImage}

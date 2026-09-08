@@ -200,7 +200,10 @@ const ScrollExpand = ({
       muted
       loop
       playsInline
-    />
+      aria-label={alt || 'Demostración en video'}
+    >
+      <track kind="captions" src="data:text/vtt;charset=utf-8,WEBVTT" label="Español" default={false} />
+    </video>
   ) : (
     <img ref={mediaRef} className="scroll-expand__media" src={src} alt={alt} draggable={false} />
   );

@@ -10,6 +10,7 @@ import {
   Layers,
 } from "lucide-react";
 import { SERVICES_DATA } from "../data/servicesData";
+import LazyVideo from "./ui/LazyVideo";
 import "./FeaturedServices.css";
 
 // Extract all service items from data
@@ -203,16 +204,12 @@ export default function FeaturedServices({ onSelectService, onNavigateToServiceS
             <div className="split-video-col mobile-only">
               <div className="split-video-frame">
                 <div className="split-video-viewport">
-                  <video
+                  <LazyVideo
                     key={`mob-vid-${currentSlide.slug}`}
                     className="split-screen-video active"
                     src={currentSlide.heroVideo}
                     poster={currentSlide.heroImage}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
+                    ariaLabel={`Demostración en video de ${currentSlide.title}`}
                   />
                 </div>
               </div>
@@ -258,16 +255,12 @@ export default function FeaturedServices({ onSelectService, onNavigateToServiceS
           <div className="split-video-col desktop-only">
             <div className="split-video-frame">
               <div className="split-video-viewport">
-                <video
+                <LazyVideo
                   key={`desk-vid-${currentSlide.slug}`}
                   className="split-screen-video active"
                   src={currentSlide.heroVideo}
                   poster={currentSlide.heroImage}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
+                  ariaLabel={`Demostración en video de ${currentSlide.title}`}
                 />
               </div>
             </div>

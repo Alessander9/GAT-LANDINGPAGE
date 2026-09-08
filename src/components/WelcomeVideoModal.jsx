@@ -187,6 +187,7 @@ export default function WelcomeVideoModal({ videoUrl = "https://res.cloudinary.c
             playsInline
             controls
             muted={isMuted}
+            aria-label="Video institucional de bienvenida"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
             onEnded={handleClose}
@@ -196,7 +197,9 @@ export default function WelcomeVideoModal({ videoUrl = "https://res.cloudinary.c
               objectFit: "contain",
               display: "block",
             }}
-          />
+          >
+            <track kind="captions" src="data:text/vtt;charset=utf-8,WEBVTT" label="Español" default={false} />
+          </video>
 
           {/* Quick Sound Overlay Button (if muted on start) */}
           {isMuted && (

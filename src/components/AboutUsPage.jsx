@@ -216,6 +216,7 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                 muted
                 playsInline
                 preload="metadata"
+                aria-label="Video institucional de GAT Technology Consulting"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -223,7 +224,9 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                   display: "block",
                   filter: "brightness(0.92) contrast(1.05)",
                 }}
-              />
+              >
+                <track kind="captions" src="data:text/vtt;charset=utf-8,WEBVTT" label="Español" default={false} />
+              </video>
 
               {/* Top Video Badge */}
               <div

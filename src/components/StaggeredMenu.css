@@ -216,9 +216,15 @@
   padding: 7rem 3rem 3rem 3rem;
   overflow-y: auto;
   z-index: 10;
-  pointer-events: auto;
+  pointer-events: none;
+  visibility: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(9, 168, 181, 0.3) transparent;
+}
+
+.staggered-menu-wrapper[data-open] .staggered-menu-panel {
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .staggered-menu-panel::-webkit-scrollbar {

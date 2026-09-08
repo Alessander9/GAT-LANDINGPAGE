@@ -118,35 +118,41 @@ export default function Hero({ onNavigate }) {
   }, [isCircuitModalOpen]);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    let ctx;
+    const timer = setTimeout(() => {
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(leftColRef.current, {
-        opacity: 0,
-        x: -40,
-        duration: 1,
-      }).from(
-        circuitColRef.current,
-        {
+        tl.from(leftColRef.current, {
           opacity: 0,
-          scale: 0.93,
-          x: 40,
-          duration: 1.1,
-        },
-        "-=0.6"
-      );
+          x: -30,
+          duration: 0.8,
+        }).from(
+          circuitColRef.current,
+          {
+            opacity: 0,
+            scale: 0.95,
+            x: 30,
+            duration: 0.9,
+          },
+          "-=0.5"
+        );
 
-      // Subtle float animation on circuit board
-      gsap.to(circuitColRef.current, {
-        y: -10,
-        duration: 3.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-    }, heroRef);
+        // Subtle float animation on circuit board
+        gsap.to(circuitColRef.current, {
+          y: -8,
+          duration: 3.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }, heroRef);
+    }, 40);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

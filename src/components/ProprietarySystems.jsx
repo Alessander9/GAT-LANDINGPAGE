@@ -18,6 +18,7 @@ import {
   Laptop
 } from 'lucide-react';
 import { getWhatsAppUrl } from '../config/contact';
+import LazyVideo from './ui/LazyVideo';
 import './ProprietarySystems.css';
 
 const SYSTEMS_DATA = [
@@ -367,14 +368,10 @@ export default function ProprietarySystems({ onSelectService }) {
 
               {/* Contenedor de Video 100% Limpio sin nada encima */}
               <div className="gat-mockup-video-container">
-                <video
+                <LazyVideo
                   key={activeSystem.video}
                   src={activeSystem.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
+                  ariaLabel={`Demostración en video de ${activeSystem.title}`}
                   className="gat-system-showcase-video"
                 />
               </div>

@@ -395,7 +395,13 @@ export const StaggeredMenu = ({
       </header>
 
       {/* Slide Panel */}
-      <aside id="staggered-menu-panel" ref={panelRef} className="staggered-menu-panel" aria-hidden={!open}>
+      <aside
+        id="staggered-menu-panel"
+        ref={panelRef}
+        className="staggered-menu-panel"
+        aria-hidden={!open}
+        inert={!open ? "" : undefined}
+      >
         <div className="sm-panel-inner">
           {/* Main Nav Items */}
           <ul className="sm-panel-list" role="list">
@@ -407,6 +413,7 @@ export const StaggeredMenu = ({
                     href={it.link}
                     aria-label={it.ariaLabel}
                     data-index={idx + 1}
+                    tabIndex={open ? 0 : -1}
                     onClick={e => {
                       e.preventDefault();
                       closeMenu();
@@ -427,7 +434,7 @@ export const StaggeredMenu = ({
                 </li>
               ))
             ) : (
-              <li className="sm-panel-itemWrap" aria-hidden="true">
+              <li className="sm-panel-itemWrap">
                 <span className="sm-panel-item">
                   <span className="sm-panel-itemLabel">Sin items</span>
                 </span>
@@ -441,6 +448,7 @@ export const StaggeredMenu = ({
               <button
                 type="button"
                 className="sm-panel-cta-btn"
+                tabIndex={open ? 0 : -1}
                 onClick={() => {
                   closeMenu();
                   setTimeout(onCtaClick, 380);
@@ -459,7 +467,14 @@ export const StaggeredMenu = ({
               <ul className="sm-socials-list" role="list">
                 {socialItems.map((s, i) => (
                   <li key={s.label + i} className="sm-socials-item">
-                    <a href={s.link} target="_blank" rel="noopener noreferrer" className="sm-socials-link">
+                    <a
+                      href={s.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="sm-socials-link"
+                      tabIndex={open ? 0 : -1}
+                      aria-label={`Seguir en ${s.label}`}
+                    >
                       {s.label}
                     </a>
                   </li>
