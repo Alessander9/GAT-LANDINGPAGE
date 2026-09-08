@@ -324,7 +324,7 @@ export default function App() {
               openMenuButtonColor="#FFFFFF"
               displayItemNumbering={true}
               displaySocials={true}
-              logoUrl="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+              logoUrl="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
               onMenuOpen={() => setIsNavOpen(true)}
               onMenuClose={() => setIsNavOpen(false)}
               onCtaClick={() => handleNavigate('#contacto')}

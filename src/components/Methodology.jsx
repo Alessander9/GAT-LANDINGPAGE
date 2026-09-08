@@ -26,7 +26,7 @@ const METHODOLOGY_STEPS = [
     flowingText:
       "PASO 01: TE ESCUCHAMOS · ANÁLISIS DE TU NEGOCIO · PLAN A MEDIDA · SIN COMPLICACIONES",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=65",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=420&q=60&fm=webp",
     marqueeBg:
       "linear-gradient(135deg, rgba(9, 168, 181, 0.82) 0%, rgba(0, 194, 209, 0.76) 50%, rgba(8, 127, 159, 0.86) 100%)",
     accent: "#09A8B5",
@@ -49,7 +49,7 @@ const METHODOLOGY_STEPS = [
     flowingText:
       "PASO 02: DISEÑO VISUAL · ADAPTADO A CELULARES · TU APROBACIÓN · EXPERIENCIA FÁCIL",
     image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=65",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=420&q=60&fm=webp",
     marqueeBg:
       "linear-gradient(135deg, rgba(139, 92, 246, 0.76) 0%, rgba(109, 40, 217, 0.86) 100%)",
     accent: "#8B5CF6",
@@ -72,7 +72,7 @@ const METHODOLOGY_STEPS = [
     flowingText:
       "PASO 03: CONSTRUCCIÓN PROFESIONAL · CONEXIÓN A WHATSAPP · PRUEBAS DE VELOCIDAD",
     image:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=500&q=65",
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=420&q=60&fm=webp",
     marqueeBg:
       "linear-gradient(135deg, rgba(44, 216, 232, 0.8) 0%, rgba(9, 168, 181, 0.88) 100%)",
     accent: "#2CD8E8",
@@ -95,7 +95,7 @@ const METHODOLOGY_STEPS = [
     flowingText:
       "PASO 04: LANZAMIENTO OFICIAL · APARICIÓN EN GOOGLE · SOPORTE & GARANTÍA CONSTANTE",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=65",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=420&q=60&fm=webp",
     marqueeBg:
       "linear-gradient(135deg, rgba(245, 158, 11, 0.78) 0%, rgba(217, 119, 6, 0.88) 100%)",
     accent: "#F59E0B",

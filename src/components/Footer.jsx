@@ -373,7 +373,7 @@ export default function Footer({ onNavigate }) {
           aria-label="GAT Technology Consulting"
         >
           <img
-            src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+            src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
             alt="GAT Technology Consulting"
             width="128"
             height="128"

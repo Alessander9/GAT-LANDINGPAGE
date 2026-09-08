@@ -105,7 +105,7 @@ export default function ErrorPage({ onGoHome, errorCode = '404', errorMessage = 
           {/* Logo Brand Header */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '36px' }}>
             <img
-              src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+              src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
               alt="GAT Technology Consulting"
               style={{
                 height: '52px',

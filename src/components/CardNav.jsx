@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import './CardNav.css';
 
 const CardNav = ({
-  logo = '/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png',
+  logo = '/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp',
   logoAlt = 'GAT Technology Consulting Logo',
   items,
   className = '',

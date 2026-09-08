@@ -1,37 +1,21 @@
 # GAT Technology Consulting
-> Consultoría tecnológica especializada en desarrollo web de alta velocidad, software empresarial a medida, inteligencia artificial, asistentes y chatbots con IA, aplicaciones móviles nativas y ciberseguridad Zero Trust.
 
-## Información de la Empresa
-- **Nombre**: GAT Technology Consulting
-- **Ubicación**: Lima, Perú
-- **Sitio Web Oficial**: https://gatconsulting.tech
-- **Contacto Directo**: WhatsApp (+51 927 493 089) / info@gatconsulting.pe
-- **Horario de Atención**: Lunes a Sábado de 09:00 a 20:00 (GMT-5)
+> Consultoría tecnológica líder en Lima, Perú: desarrollo web de alto rendimiento, sistemas empresariales a medida, inteligencia artificial y ciberseguridad Zero Trust.
 
-## Soluciones y Servicios Principales
-1. **Páginas Web & Landing Pages de Alta Conversión**:
-   - Diseño moderno, optimizado para celulares y motores de búsqueda (Google SEO).
-   - Velocidad de carga ultrarrápida (< 1s), integración directa con WhatsApp y pasarelas de pago.
+## Soluciones y Servicios
 
-2. **Desarrollo de Software & Plataformas Web a Medida**:
-   - Sistemas de gestión empresarial (ERP, CRM, control de inventario, facturación electrónica y ventas).
-   - Arquitecturas escalables en la nube sin costos de intermediarios.
+- [Páginas Web y Landing Pages](https://gatconsulting.tech/#servicio/landing-page): Sitios web modernos de alta conversión y velocidad sub-segundo.
+- [Sistemas y Plataformas Web](https://gatconsulting.tech/#servicio/app-web): Software de gestión en la nube (ERP, CRM, inventarios) a medida.
+- [Inteligencia Artificial y Automatizaciones](https://gatconsulting.tech/#servicio/automatizaciones-ia): Chatbots con IA en WhatsApp 24/7 y automatización de procesos.
+- [Aplicaciones Móviles](https://gatconsulting.tech/#servicio/app-android): Apps nativas y multiplataforma para Android e iOS.
+- [Ciberseguridad Zero Trust](https://gatconsulting.tech/#servicio/ciberseguridad): Auditorías, pentesting y protección de datos corporativos.
 
-3. **Inteligencia Artificial & Automatización de Procesos**:
-   - Chatbots autónomos de atención y ventas en WhatsApp 24/7.
-   - Integración con modelos LLM y automatización de flujos de trabajo empresariales.
+## Software Propio
 
-4. **Aplicaciones Móviles (Android & iOS)**:
-   - Apps nativas y multiplataforma con interfaces intuitivas y conectividad en tiempo real.
+- [SISVET](https://gatconsulting.tech/#sistemas-propios): Plataforma de gestión veterinaria y clínica de mascotas.
+- [Cole Platform](https://gatconsulting.tech/#sistemas-propios): Software integral académico y financiero para colegios.
 
-5. **Ciberseguridad & Protección Digital (Zero Trust)**:
-   - Pentesting ético, auditoría de código, protección de datos y cumplimiento normativo.
+## Información y Contacto
 
-## Sistemas Propios Listos para Implementar
-- **SISVET**: Sistema de Gestión Veterinaria y Clínica de Mascotas.
-- **Cole Platform**: Gestión Académica, Administrativa y Financiera para Colegios.
-- **GAT Commerce**: Plataforma Ecommerce de Alto Rendimiento.
-- **GAT Med**: Software de Citas y Expedientes Médicos.
-- **GAT Logistics**: Control de Despachos, Rutas e Inventario.
-
-Para solicitar una cotización o diagnóstico gratuito, visita https://gatconsulting.tech/#contacto o contacta vía WhatsApp.
+- [Contacto y Diagnóstico Gratuito](https://gatconsulting.tech/#contacto): Solicita asesoría técnica y cotización de proyectos sin costo.
+- [Nosotros](https://gatconsulting.tech/#nosotros): Conoce al equipo de ingeniería y metodología de trabajo de GAT Technology.

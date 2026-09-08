@@ -29,18 +29,18 @@ export default function LoadingScreen({ onLoadingComplete }) {
       sessionStorage.setItem('gat_visited', '1');
     } catch (_) {}
 
-    // Fast, lightweight progress simulation for first-time human visitors
+    // Ultra-fast progress simulation so first paint & LCP are never delayed
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           return 100;
         }
-        const increment = Math.max(12, Math.floor((100 - prev) * 0.38 + 6));
+        const increment = Math.max(25, Math.floor((100 - prev) * 0.6 + 15));
         const next = Math.min(100, prev + increment);
         return next;
       });
-    }, 25);
+    }, 15);
 
     return () => clearInterval(interval);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -198,7 +198,7 @@ export default function LoadingScreen({ onLoadingComplete }) {
                 }}
               >
                 <img
-                  src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+                  src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
                   alt="GAT Technology Consulting Logo"
                   width="400"
                   height="120"

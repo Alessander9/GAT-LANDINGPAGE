@@ -115,7 +115,7 @@ export default function DesktopNavbar({ onNavigate, currentRoute = '' }) {
           aria-label="GAT Technology Consulting - Inicio"
         >
           <img
-            src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+            src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
             alt="GAT Technology Consulting"
             className="gat-nav-logo-img"
             width="38"

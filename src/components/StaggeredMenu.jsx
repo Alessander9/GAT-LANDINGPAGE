@@ -11,7 +11,7 @@ export const StaggeredMenu = ({
   displaySocials = true,
   displayItemNumbering = true,
   className,
-  logoUrl = '/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png',
+  logoUrl = '/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp',
   menuButtonColor = '#FFFFFF',
   openMenuButtonColor = '#FFFFFF',
   accentColor = '#09A8B5',

@@ -121,23 +121,6 @@ export default function Hero({ onNavigate }) {
     let ctx;
     const timer = setTimeout(() => {
       ctx = gsap.context(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        tl.from(leftColRef.current, {
-          opacity: 0,
-          x: -30,
-          duration: 0.8,
-        }).from(
-          circuitColRef.current,
-          {
-            opacity: 0,
-            scale: 0.95,
-            x: 30,
-            duration: 0.9,
-          },
-          "-=0.5"
-        );
-
         // Subtle float animation on circuit board
         gsap.to(circuitColRef.current, {
           y: -8,
@@ -147,7 +130,7 @@ export default function Hero({ onNavigate }) {
           ease: "sine.inOut",
         });
       }, heroRef);
-    }, 40);
+    }, 50);
 
     return () => {
       clearTimeout(timer);

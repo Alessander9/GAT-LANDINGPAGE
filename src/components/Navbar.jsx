@@ -88,7 +88,7 @@ export default function Navbar({ onNavigate, className = '' }) {
               }}
             >
               <img
-                src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+                src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
                 alt="GAT Technology Consulting"
                 style={{
                   height: '36px',

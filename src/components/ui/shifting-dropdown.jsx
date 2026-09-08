@@ -115,7 +115,7 @@ export function ShiftingDropDown({
               aria-label="GAT Technology Consulting"
             >
               <img
-                src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+                src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
                 alt="GAT Technology Consulting"
                 style={{
                   height: "clamp(34px, 3.8vw, 42px)",

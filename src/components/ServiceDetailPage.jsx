@@ -615,7 +615,7 @@ export default function ServiceDetailPage({
         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <img
-              src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
+              src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
               alt="GAT"
               style={{ height: "28px" }}
             />

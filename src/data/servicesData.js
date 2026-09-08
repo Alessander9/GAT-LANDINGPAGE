@@ -34,7 +34,7 @@ export const SERVICES_DATA = {
     accent: "#09A8B5",
     gradient: "linear-gradient(135deg, #09A8B5 0%, #087F9F 100%)",
     icon: Globe,
-    heroImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=480&q=60&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051397/landing_page.mp4",
     videoBadge: "Página Web de Alta Velocidad · En Vivo",
     metrics: [
@@ -93,7 +93,7 @@ export const SERVICES_DATA = {
     accent: "#2CD8E8",
     gradient: "linear-gradient(135deg, #2CD8E8 0%, #09A8B5 100%)",
     icon: Layers,
-    heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=480&q=60&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051881/Developer_building_web_applicati__202608281943.mp4",
     videoBadge: "Sistema Empresarial en la Nube · En Vivo",
     metrics: [
@@ -151,7 +151,7 @@ export const SERVICES_DATA = {
     accent: "#F59E0B",
     gradient: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
     icon: Smartphone,
-    heroImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=480&q=60&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051987/Building_Android_mobile_applicat__202608281944.mp4",
     videoBadge: "App Android en Google Play · En Vivo",
     metrics: [
@@ -209,7 +209,7 @@ export const SERVICES_DATA = {
     accent: "#00E5FF",
     gradient: "linear-gradient(135deg, #00E5FF 0%, #087F9F 100%)",
     icon: Apple,
-    heroImage: "https://images.unsplash.com/photo-1510519138171-c70d76b640a4?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1510519138171-c70d76b640a4?auto=format&fit=crop&w=480&q=60&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1788052027/Creating_iOS_mobile_applications__202608282036.mp4",
     videoBadge: "App iOS en App Store · En Vivo",
     metrics: [
@@ -267,7 +267,7 @@ export const SERVICES_DATA = {
     accent: "#8B5CF6",
     gradient: "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
     icon: Brain,
-    heroImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=480&q=60&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051624/AI_business_automation_commercia__202608282006.mp4",
     videoBadge: "Automatización & Procesos IA · En Vivo",
     metrics: [
@@ -325,7 +325,7 @@ export const SERVICES_DATA = {
     accent: "#10B981",
     gradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
     icon: Bot,
-    heroImage: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=480&q=60&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1787990201/Zapia.mp4",
     videoBadge: "Asistente Inteligente en Vivo · Demo",
     metrics: [
@@ -383,7 +383,7 @@ export const SERVICES_DATA = {
     accent: "#EC4899",
     gradient: "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
     icon: Shield,
-    heroImage: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=480&q=60&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1787990632/Cybersecurity_system_blocking_cy__202608282025.mp4",
     videoBadge: "Escudo Digital Anti-Ataques · En Vivo",
     metrics: [
@@ -441,7 +441,7 @@ export const SERVICES_DATA = {
     accent: "#38BDF8",
     gradient: "linear-gradient(135deg, #38BDF8 0%, #0284C7 100%)",
     icon: Cloud,
-    heroImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=65",
+    heroImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=480&q=60&fm=webp",
     metrics: [
       { label: "Disponibilidad", value: "99.99%", sub: "Tus sistemas nunca se caen" },
       { label: "Ahorro en Servidores", value: "-35%", sub: "Paga solo lo que consumes" },
