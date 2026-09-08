@@ -96,43 +96,22 @@ export default function FloatingFAB({
   const [isInProprietarySystems, setIsInProprietarySystems] = useState(false);
   const scrollTimeoutRef = useRef(null);
 
-  // Hide FAB in Hero section and in Soluciones Destacadas on mobile
+  // Efficient Zero-Reflow Section Visibility with IntersectionObserver & RAF
   useEffect(() => {
-    const updateScrollStatus = () => {
-      const currentScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      // In Hero section if scroll position is less than threshold
-      const heroThreshold = Math.min(window.innerHeight * 0.65, 420);
-      setIsInHero(currentScrollY < heroThreshold);
+    let ticking = false;
 
-      // Check if inside Soluciones Destacadas section on mobile
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) {
-        const featuredSection = document.getElementById("servicios-destacados");
-        if (featuredSection) {
-          const rect = featuredSection.getBoundingClientRect();
-          // Active if section is within the visible viewport range
-          const inView = rect.top <= window.innerHeight * 0.85 && rect.bottom >= window.innerHeight * 0.15;
-          setIsInFeaturedMobile(inView);
-        } else {
-          setIsInFeaturedMobile(false);
-        }
-      } else {
-        setIsInFeaturedMobile(false);
-      }
-
-      // Ocultar hint pill cuando el usuario está en la sección de Software Propio
-      const proprietarySection = document.getElementById('sistemas-propios');
-      if (proprietarySection) {
-        const rect = proprietarySection.getBoundingClientRect();
-        const inView = rect.top <= window.innerHeight * 0.75 && rect.bottom >= window.innerHeight * 0.25;
-        setIsInProprietarySystems(inView);
-      } else {
-        setIsInProprietarySystems(false);
-      }
+    const checkHero = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      const heroThreshold = 380;
+      setIsInHero(scrollY < heroThreshold);
+      ticking = false;
     };
 
     const handleScroll = () => {
-      updateScrollStatus();
+      if (!ticking) {
+        requestAnimationFrame(checkHero);
+        ticking = true;
+      }
       setIsScrolling(true);
       if (isOpen) {
         setIsOpen(false);
@@ -142,17 +121,35 @@ export default function FloatingFAB({
       }
       scrollTimeoutRef.current = setTimeout(() => {
         setIsScrolling(false);
-      }, 600);
+      }, 500);
     };
 
-    updateScrollStatus();
+    checkHero();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", updateScrollStatus);
-    window.addEventListener("hashchange", updateScrollStatus);
+
+    // IntersectionObserver for Featured and Proprietary sections (0 layout thrashing)
+    const featuredEl = document.getElementById("servicios-destacados");
+    const proprietaryEl = document.getElementById("sistemas-propios");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === "servicios-destacados") {
+            setIsInFeaturedMobile(entry.isIntersecting && window.innerWidth < 768);
+          } else if (entry.target.id === "sistemas-propios") {
+            setIsInProprietarySystems(entry.isIntersecting);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    if (featuredEl) observer.observe(featuredEl);
+    if (proprietaryEl) observer.observe(proprietaryEl);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateScrollStatus);
-      window.removeEventListener("hashchange", updateScrollStatus);
+      observer.disconnect();
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, [isOpen]);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { getWhatsAppUrl } from '../config/contact';
 import './DesktopNavbar.css';
@@ -38,7 +37,6 @@ const NAV_ITEMS = [
 
 export default function DesktopNavbar({ onNavigate, currentRoute = '' }) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState(null);
   const [activeSection, setActiveSection] = useState('hero');
 
   // Handle Scroll Spy & Compact state
@@ -100,11 +98,8 @@ export default function DesktopNavbar({ onNavigate, currentRoute = '' }) {
   };
 
   return (
-    <motion.header
+    <header
       className={`gat-desktop-navbar ${isScrolled ? 'is-scrolled' : ''}`}
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="gat-nav-inner">
         {/* Left: Brand Logo */}
@@ -128,40 +123,19 @@ export default function DesktopNavbar({ onNavigate, currentRoute = '' }) {
         {/* Center: Perfectly Centered Minimalist Floating Capsule */}
         <nav
           className="gat-nav-links"
-          onMouseLeave={() => setHoveredItem(null)}
           aria-label="Navegación Desktop"
         >
           {NAV_ITEMS.map((item) => {
             const isActive = getIsActive(item);
-            const isHovered = hoveredItem === item.id;
 
             return (
               <a
                 key={item.id}
                 href={item.link}
                 onClick={(e) => handleItemClick(e, item.link)}
-                onMouseEnter={() => setHoveredItem(item.id)}
                 className={`gat-nav-item ${isActive ? 'is-active' : ''}`}
               >
-                {/* Active glowing pill */}
-                {isActive && (
-                  <motion.span
-                    layoutId="gat-navbar-active-pill"
-                    className="gat-nav-item-active-pill"
-                    transition={{ type: 'spring', stiffness: 440, damping: 34 }}
-                  />
-                )}
-
-                {/* Hover subtle pill indicator */}
-                {isHovered && !isActive && (
-                  <motion.span
-                    layoutId="gat-navbar-hover-pill"
-                    className="gat-nav-item-hover-pill"
-                    transition={{ type: 'spring', stiffness: 500, damping: 38 }}
-                  />
-                )}
-
-                <span style={{ position: 'relative', zIndex: 2 }}>{item.label}</span>
+                <span className="gat-nav-item-text">{item.label}</span>
               </a>
             );
           })}
@@ -191,6 +165,6 @@ export default function DesktopNavbar({ onNavigate, currentRoute = '' }) {
           </a>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 }

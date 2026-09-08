@@ -60,97 +60,19 @@ function YouTubeIcon({ size = 24, color = "currentColor" }) {
   );
 }
 
-// ──── DIRECTIONAL FLOWING MARQUEE SOCIAL CARD (REACT BITS STYLE) ────
+// ──── DIRECTIONAL FLOWING MARQUEE SOCIAL CARD (PURE CSS, 0 REFLOWS) ────
 function SocialFlowCard({ item }) {
-  const itemRef = useRef(null);
-  const marqueeRef = useRef(null);
-  const marqueeInnerRef = useRef(null);
-  const animationRef = useRef(null);
-
-  const animationDefaults = { duration: 0.45, ease: "expo.out" };
-
-  const findClosestEdge = (mouseX, mouseY, width, height) => {
-    const topEdgeDist = Math.pow(mouseX - width / 2, 2) + Math.pow(mouseY - 0, 2);
-    const bottomEdgeDist = Math.pow(mouseX - width / 2, 2) + Math.pow(mouseY - height, 2);
-    return topEdgeDist < bottomEdgeDist ? "top" : "bottom";
-  };
-
-  useEffect(() => {
-    if (!marqueeInnerRef.current) return;
-    const content = marqueeInnerRef.current.querySelector(".social-flow-marquee-part");
-    if (!content) return;
-
-    const contentWidth = content.offsetWidth;
-    if (contentWidth > 0) {
-      animationRef.current = gsap.to(marqueeInnerRef.current, {
-        x: -contentWidth,
-        duration: 3,
-        ease: "none",
-        repeat: -1,
-      });
-    }
-
-    return () => {
-      animationRef.current?.kill();
-    };
-  }, [item]);
-
-  const handleMouseEnter = (ev) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
-    const rect = itemRef.current.getBoundingClientRect();
-    const x = ev.clientX - rect.left;
-    const y = ev.clientY - rect.top;
-    const edge = findClosestEdge(x, y, rect.width, rect.height);
-
-    gsap
-      .timeline({ defaults: animationDefaults })
-      .set(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0)
-      .set(marqueeInnerRef.current, { y: edge === "top" ? "101%" : "-101%" }, 0)
-      .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" }, 0);
-  };
-
-  const handleMouseLeave = (ev) => {
-    if (!itemRef.current || !marqueeRef.current || !marqueeInnerRef.current) return;
-    const rect = itemRef.current.getBoundingClientRect();
-    const x = ev.clientX - rect.left;
-    const y = ev.clientY - rect.top;
-    const edge = findClosestEdge(x, y, rect.width, rect.height);
-
-    gsap
-      .timeline({ defaults: animationDefaults })
-      .to(marqueeRef.current, { y: edge === "top" ? "-101%" : "101%" }, 0)
-      .to(marqueeInnerRef.current, { y: edge === "top" ? "101%" : "-101%" }, 0);
-  };
-
   const Icon = item.icon;
 
   return (
     <a
-      ref={itemRef}
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={item.label}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="social-flow-card"
       style={{
-        position: "relative",
-        overflow: "hidden",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "60px",
-        height: "60px",
-        borderRadius: "17px",
-        border: "1px solid rgba(44, 216, 232, 0.28)",
-        background: "linear-gradient(145deg, rgba(20, 52, 78, 0.75) 0%, rgba(8, 24, 38, 0.95) 100%)",
         color: item.customColor || "#E6F5F8",
-        textDecoration: "none",
-        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.16)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-        cursor: "pointer",
       }}
     >
       {/* Base Icon */}
@@ -165,38 +87,18 @@ function SocialFlowCard({ item }) {
         <Icon size={25} />
       </div>
 
-      {/* Directional Flowing Marquee Overlay */}
+      {/* Pure CSS Hover Marquee Overlay */}
       <div
-        ref={marqueeRef}
+        className="social-flow-overlay"
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          transform: "translate3d(0, 101%, 0)",
           background: item.marqueeBg || "#09A8B5",
           color: item.marqueeTextColor || "#071521",
-          borderRadius: "16px",
-          display: "flex",
-          alignItems: "center",
-          overflow: "hidden",
         }}
       >
-        <div
-          ref={marqueeInnerRef}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            width: "max-content",
-            willChange: "transform",
-          }}
-        >
-          {[...Array(4)].map((_, idx) => (
+        <div className="social-flow-marquee-track">
+          {[...Array(6)].map((_, idx) => (
             <div
               key={idx}
-              className="social-flow-marquee-part"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -380,8 +282,9 @@ export default function Footer({ onNavigate }) {
             loading="lazy"
             decoding="async"
             style={{
-              height: "clamp(92px, 10vw, 128px)",
-              width: "auto",
+              width: "128px",
+              height: "128px",
+              maxWidth: "100%",
               aspectRatio: "1 / 1",
               objectFit: "contain",
               filter: "drop-shadow(0 8px 24px rgba(9, 168, 181, 0.55))",

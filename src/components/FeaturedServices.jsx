@@ -61,8 +61,9 @@ export default function FeaturedServices({ onSelectService, onNavigateToServiceS
     });
   }, [currentIndex]);
 
-  // Scroll horizontal del tab activo en móvil — sin afectar el scroll de la página
+  // Scroll horizontal del tab activo en móvil — sin afectar el scroll de la página (omitido en carga inicial)
   useEffect(() => {
+    if (currentIndex === 0) return;
     const tab = tabRefs.current[currentIndex];
     const strip = tabsStripRef.current;
     if (!tab || !strip) return;

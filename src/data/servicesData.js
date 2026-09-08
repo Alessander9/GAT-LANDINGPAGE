@@ -267,7 +267,7 @@ export const SERVICES_DATA = {
     accent: "#8B5CF6",
     gradient: "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
     icon: Brain,
-    heroImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=360&q=45&fm=webp",
+    heroImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=280&q=30&fm=webp",
     heroVideo: "https://res.cloudinary.com/piun1mwb/video/upload/v1788051624/AI_business_automation_commercia__202608282006.mp4",
     videoBadge: "Automatización & Procesos IA · En Vivo",
     metrics: [

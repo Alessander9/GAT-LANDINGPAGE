@@ -52,7 +52,7 @@ export const StaggeredMenu = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const ctx = gsap.context(() => {
       const panel = panelRef.current;
       const preContainer = preLayersRef.current;
