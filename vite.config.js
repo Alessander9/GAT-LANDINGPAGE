@@ -11,6 +11,7 @@ export default defineConfig({
     },
   },
   build: {
+    cssCodeSplit: false,
     chunkSizeWarningLimit: 900,
     rollupOptions: {
       output: {

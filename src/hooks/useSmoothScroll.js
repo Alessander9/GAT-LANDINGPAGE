@@ -22,6 +22,9 @@ export function useSmoothScroll() {
 
         if (isCancelled) return;
 
+        const isMobile = typeof window !== 'undefined' && (window.innerWidth < 1024 || window.matchMedia('(pointer: coarse)').matches);
+        if (isMobile) return;
+
         const Lenis = LenisModule.default || LenisModule;
         const gsap = gsapModule.default || gsapModule;
         const ScrollTrigger = ScrollTriggerModule.ScrollTrigger || ScrollTriggerModule.default;
@@ -29,11 +32,9 @@ export function useSmoothScroll() {
         gsap.registerPlugin(ScrollTrigger);
         gsapInstance = gsap;
 
-        const isMobile = typeof window !== 'undefined' && (window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches);
-
         lenis = new Lenis({
-          lerp: isMobile ? 0.15 : 0.1,
-          smoothWheel: !isMobile,
+          lerp: 0.1,
+          smoothWheel: true,
           wheelMultiplier: 1,
           touchMultiplier: 1.5,
           infinite: false,

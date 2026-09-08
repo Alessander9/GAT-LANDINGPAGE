@@ -9,7 +9,6 @@ import FeaturedServices from './components/FeaturedServices';
 import Services from './components/Services';
 import ProprietarySystems from './components/ProprietarySystems';
 import Footer from './components/Footer';
-import LoadingScreen from './components/LoadingScreen';
 import FloatingFAB from './components/FloatingFAB';
 import { ShiftingDropDown } from './components/ui/shifting-dropdown';
 import { getWhatsAppUrl } from './config/contact';
@@ -22,22 +21,12 @@ const ContactPage = lazy(() => import('./components/ContactPage'));
 
 export default function App() {
   const { scrollTo, scrollToTop } = useSmoothScroll();
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedService, setSelectedService] = useState('');
   const [prefilledRoi, setPrefilledRoi] = useState(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [currentRoute, setCurrentRoute] = useState(
     typeof window !== 'undefined' ? window.location.hash : ''
   );
-
-  // Lock scroll while loading screen is active
-  useEffect(() => {
-    if (isLoading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [isLoading]);
 
   React.useEffect(() => {
     const handleHashChange = () => {
@@ -274,11 +263,6 @@ export default function App() {
 
   return (
     <div className="app-container">
-      {/* Brand Loading Screen Preloader — isolated at the highest level */}
-      {isLoading && (
-        <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />
-      )}
-
       {/* Global Persistent Fullscreen Ambient Background */}
       <div className="global-ambient-bg">
         <div className="global-ambient-orb global-ambient-orb-1" />
@@ -291,55 +275,53 @@ export default function App() {
           • Dedicated Service Subpages (#servicio/:slug) => Uses ShiftingDropDown Navbar
           • Index, Metodología, Casos, Nosotros, Contacto, Soluciones => Uses StaggeredMenu
       */}
-      {!isLoading && (
-        currentRoute.startsWith('#servicio/') ? (
-          <ShiftingDropDown
-            currentSlug={currentRoute.replace('#servicio/', '').split('?')[0]}
-            onNavigateHome={() => {
-              window.location.hash = '';
-              setCurrentRoute('');
-              scrollToTop(true);
-            }}
-            onNavigateService={handleNavigateToServiceSubpage}
-            onNavigateContact={() => handleNavigate('#contacto')}
-            onNavigateCatalog={() => handleNavigate('#servicios-todos')}
-            onNavigateAbout={() => handleNavigate('#nosotros')}
-            onNavigateMethodology={() => handleNavigate('#metodologia')}
+      {currentRoute.startsWith('#servicio/') ? (
+        <ShiftingDropDown
+          currentSlug={currentRoute.replace('#servicio/', '').split('?')[0]}
+          onNavigateHome={() => {
+            window.location.hash = '';
+            setCurrentRoute('');
+            scrollToTop(true);
+          }}
+          onNavigateService={handleNavigateToServiceSubpage}
+          onNavigateContact={() => handleNavigate('#contacto')}
+          onNavigateCatalog={() => handleNavigate('#servicios-todos')}
+          onNavigateAbout={() => handleNavigate('#nosotros')}
+          onNavigateMethodology={() => handleNavigate('#metodologia')}
+        />
+      ) : (
+        <>
+          {/* Desktop Classic Minimalist Navbar (Active on screens >= 1024px) */}
+          <DesktopNavbar
+            onNavigate={handleNavigate}
+            currentRoute={currentRoute}
           />
-        ) : (
-          <>
-            {/* Desktop Classic Minimalist Navbar (Active on screens >= 1024px) */}
-            <DesktopNavbar
-              onNavigate={handleNavigate}
-              currentRoute={currentRoute}
-            />
 
-            {/* Mobile Staggered Menu (Unchanged, Active on screens < 1024px) */}
-            <StaggeredMenu
-              className="gat-mobile-only"
-              position="right"
-              colors={['#087F9F', '#0C1E2E', '#09A8B5']}
-              accentColor="#09A8B5"
-              menuButtonColor="#FFFFFF"
-              openMenuButtonColor="#FFFFFF"
-              displayItemNumbering={true}
-              displaySocials={true}
-              logoUrl="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
-              onMenuOpen={() => setIsNavOpen(true)}
-              onMenuClose={() => setIsNavOpen(false)}
-              onCtaClick={() => handleNavigate('#contacto')}
-              items={[
-                { label: 'Inicio', ariaLabel: 'Ir al inicio', link: '#hero', onNavigate: handleNavigate },
-                { label: 'Soluciones', ariaLabel: 'Ver todas las soluciones', link: '#servicios-todos', onNavigate: handleNavigate },
-                { label: 'Nosotros', ariaLabel: 'Nosotros - GAT Technology', link: '#nosotros', onNavigate: handleNavigate },
-                { label: 'Contacto', ariaLabel: 'Contáctanos', link: '#contacto', onNavigate: handleNavigate },
-              ]}
-              socialItems={[
-                { label: 'WhatsApp', link: getWhatsAppUrl() },
-              ]}
-            />
-          </>
-        )
+          {/* Mobile Staggered Menu (Unchanged, Active on screens < 1024px) */}
+          <StaggeredMenu
+            className="gat-mobile-only"
+            position="right"
+            colors={['#087F9F', '#0C1E2E', '#09A8B5']}
+            accentColor="#09A8B5"
+            menuButtonColor="#FFFFFF"
+            openMenuButtonColor="#FFFFFF"
+            displayItemNumbering={true}
+            displaySocials={true}
+            logoUrl="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.webp"
+            onMenuOpen={() => setIsNavOpen(true)}
+            onMenuClose={() => setIsNavOpen(false)}
+            onCtaClick={() => handleNavigate('#contacto')}
+            items={[
+              { label: 'Inicio', ariaLabel: 'Ir al inicio', link: '#hero', onNavigate: handleNavigate },
+              { label: 'Soluciones', ariaLabel: 'Ver todas las soluciones', link: '#servicios-todos', onNavigate: handleNavigate },
+              { label: 'Nosotros', ariaLabel: 'Nosotros - GAT Technology', link: '#nosotros', onNavigate: handleNavigate },
+              { label: 'Contacto', ariaLabel: 'Contáctanos', link: '#contacto', onNavigate: handleNavigate },
+            ]}
+            socialItems={[
+              { label: 'WhatsApp', link: getWhatsAppUrl() },
+            ]}
+          />
+        </>
       )}
 
       {/* Dynamic Page Content */}
@@ -355,13 +337,11 @@ export default function App() {
       </div>
 
       {/* Floating Action Button (Chatbot IA & WhatsApp) */}
-      {!isLoading && (
-        <FloatingFAB
-          isHidden={isNavOpen}
-          onNavigateContact={() => handleNavigate('#contacto')}
-          onNavigateService={handleNavigateToServiceSubpage}
-        />
-      )}
+      <FloatingFAB
+        isHidden={isNavOpen}
+        onNavigateContact={() => handleNavigate('#contacto')}
+        onNavigateService={handleNavigateToServiceSubpage}
+      />
     </div>
   );
 }
