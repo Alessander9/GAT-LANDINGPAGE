@@ -366,8 +366,9 @@ export const StaggeredMenu = ({
             alt="GAT Technology Consulting"
             className="sm-logo-img"
             draggable={false}
-            width={140}
-            height={32}
+            width={76}
+            height={76}
+            style={{ aspectRatio: "1 / 1" }}
           />
         </a>
 

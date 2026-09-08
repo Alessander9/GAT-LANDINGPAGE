@@ -375,13 +375,14 @@ export default function Footer({ onNavigate }) {
           <img
             src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
             alt="GAT Technology Consulting"
-            width="400"
-            height="120"
+            width="128"
+            height="128"
             loading="lazy"
             decoding="async"
             style={{
               height: "clamp(92px, 10vw, 128px)",
               width: "auto",
+              aspectRatio: "1 / 1",
               objectFit: "contain",
               filter: "drop-shadow(0 8px 24px rgba(9, 168, 181, 0.55))",
             }}

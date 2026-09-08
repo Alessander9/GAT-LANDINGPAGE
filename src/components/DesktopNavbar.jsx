@@ -118,8 +118,9 @@ export default function DesktopNavbar({ onNavigate, currentRoute = '' }) {
             src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
             alt="GAT Technology Consulting"
             className="gat-nav-logo-img"
-            width="160"
-            height="48"
+            width="38"
+            height="38"
+            style={{ aspectRatio: '1 / 1' }}
             decoding="async"
           />
         </a>

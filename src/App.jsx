@@ -5,16 +5,16 @@ import StaggeredMenu from './components/StaggeredMenu';
 import DesktopNavbar from './components/DesktopNavbar';
 import Hero from './components/Hero';
 import MetricsBar from './components/MetricsBar';
+import FeaturedServices from './components/FeaturedServices';
+import Services from './components/Services';
+import ProprietarySystems from './components/ProprietarySystems';
+import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
 import FloatingFAB from './components/FloatingFAB';
 import { ShiftingDropDown } from './components/ui/shifting-dropdown';
 import { getWhatsAppUrl } from './config/contact';
 
-// Lazy load below-the-fold components and subpages for lightning-fast initial load
-const FeaturedServices = lazy(() => import('./components/FeaturedServices'));
-const Services = lazy(() => import('./components/Services'));
-const ProprietarySystems = lazy(() => import('./components/ProprietarySystems'));
-const Footer = lazy(() => import('./components/Footer'));
+// Lazy load dedicated subpage routes only
 const ServiceDetailPage = lazy(() => import('./components/ServiceDetailPage'));
 const AboutUsPage = lazy(() => import('./components/AboutUsPage'));
 const AllServicesPage = lazy(() => import('./components/AllServicesPage'));
@@ -351,9 +351,7 @@ export default function App() {
         </div>
 
         {/* ──── GLOBAL COMPONENTIZED FOOTER (PERSISTENT ACROSS HOME & ALL SUBPAGES) ──── */}
-        <Suspense fallback={null}>
-          <Footer onNavigate={handleNavigate} />
-        </Suspense>
+        <Footer onNavigate={handleNavigate} />
       </div>
 
       {/* Floating Action Button (Chatbot IA & WhatsApp) */}

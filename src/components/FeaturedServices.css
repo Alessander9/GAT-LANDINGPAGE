@@ -588,7 +588,7 @@
   font-weight: 800;
 }
 
-/* Progress bar inside active tab */
+/* Progress bar inside active tab (100% GPU Composited) */
 .split-tab-progress {
   position: absolute;
   bottom: 0;
@@ -596,7 +596,10 @@
   height: 2.5px;
   background: linear-gradient(90deg, #09A8B5, #2CD8E8);
   box-shadow: 0 0 8px #2CD8E8;
-  width: 0%;
+  width: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
 }
 
 .split-tab-pill.active .split-tab-progress {
@@ -604,8 +607,8 @@
 }
 
 @keyframes splitProgress {
-  0% { width: 0%; }
-  100% { width: 100%; }
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
 }
 
 /* ──── MOBILE RESPONSIVE CENTERING & JUSTIFICATION ──── */
