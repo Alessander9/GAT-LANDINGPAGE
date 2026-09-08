@@ -180,26 +180,21 @@ function FlowingBentoCard({ card, onSelectService, onNavigateToServiceSubpage })
     >
       {/* ──── BASE DEFAULT CONTENT ──── */}
       <div className="gat-card-base">
-        {/* Ambient Base Video or Image Texture */}
-        {card.video ? (
+        {/* Ambient Base Image Texture */}
+        {card.image && (
           <div className="gat-card-bg-img-wrap">
-            <video
-              src={card.video}
-              autoPlay
-              loop
-              muted
-              playsInline
+            <img
+              src={card.image}
+              alt={card.title}
               className="gat-card-bg-img"
-              style={{ objectFit: "cover", width: "100%", height: "100%", opacity: 0.72 }}
+              loading="lazy"
+              decoding="async"
+              width={800}
+              height={500}
             />
             <div className="gat-card-bg-overlay" />
           </div>
-        ) : card.image ? (
-          <div className="gat-card-bg-img-wrap">
-            <img src={card.image} alt={card.title} className="gat-card-bg-img" />
-            <div className="gat-card-bg-overlay" />
-          </div>
-        ) : null}
+        )}
 
         {/* Top Header Row */}
         <div className="gat-card-top-row">
@@ -251,24 +246,20 @@ function FlowingBentoCard({ card, onSelectService, onNavigateToServiceSubpage })
 
       {/* ──── TRANSLUCENT CHROMATIC FLOWING MARQUEE HOVER LAYER ──── */}
       <div className="gat-flowing-marquee" ref={marqueeRef}>
-        {/* Translucent Background Video / Image */}
-        {card.video ? (
+        {/* Translucent Background Image */}
+        {card.image && (
           <div className="gat-hover-bg-img-wrap">
-            <video
-              src={card.video}
-              autoPlay
-              loop
-              muted
-              playsInline
+            <img
+              src={card.image}
+              alt=""
               className="gat-hover-bg-img"
-              style={{ objectFit: "cover", width: "100%", height: "100%", opacity: 0.85 }}
+              loading="lazy"
+              decoding="async"
+              width={800}
+              height={500}
             />
           </div>
-        ) : card.image ? (
-          <div className="gat-hover-bg-img-wrap">
-            <img src={card.image} alt="" className="gat-hover-bg-img" />
-          </div>
-        ) : null}
+        )}
 
         {/* Translucent Chromatic Tint */}
         <div

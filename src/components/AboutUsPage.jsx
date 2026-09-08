@@ -215,7 +215,7 @@ export default function AboutUsPage({ onNavigateHome, onNavigateContact, onSelec
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 style={{
                   width: "100%",
                   height: "100%",

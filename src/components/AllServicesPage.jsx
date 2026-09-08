@@ -381,7 +381,7 @@ export default function AllServicesPage({
                         loop
                         muted
                         playsInline
-                        preload="auto"
+                        preload="none"
                         ref={(el) => {
                           if (el && el.paused) {
                             el.play().catch(() => {});

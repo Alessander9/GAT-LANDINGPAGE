@@ -375,6 +375,10 @@ export default function Footer({ onNavigate }) {
           <img
             src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
             alt="GAT Technology Consulting"
+            width="400"
+            height="120"
+            loading="lazy"
+            decoding="async"
             style={{
               height: "clamp(92px, 10vw, 128px)",
               width: "auto",

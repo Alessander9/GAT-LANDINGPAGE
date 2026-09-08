@@ -33,6 +33,9 @@ export default function HeaderBar({ onNavigate }) {
           <img
             src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
             alt="GAT Technology Consulting"
+            width="140"
+            height="42"
+            decoding="async"
             style={{
               height: '42px',
               width: 'auto',

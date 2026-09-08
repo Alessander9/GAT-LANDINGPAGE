@@ -200,6 +200,8 @@ export default function LoadingScreen({ onLoadingComplete }) {
                 <img
                   src="/assets/GAT_Logo_Fondo_Oscuro_Transparente_HD.png"
                   alt="GAT Technology Consulting Logo"
+                  width="400"
+                  height="120"
                   style={{
                     height: 'clamp(125px, 20vw, 175px)',
                     width: 'auto',
